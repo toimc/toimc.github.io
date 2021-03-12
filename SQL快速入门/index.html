@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon-16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.geekzu.org/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.toimc.com","root":"/","images":"/images","scheme":"Mist","version":"8.2.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":{"gitalk":{"order":-1},"disqusjs":{"order":-2}}},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"F0BT9J7IQF","apiKey":"fc8f8ea23cfb91aa998b6dd1ac6d2c87","indexName":"myblog","hits":{"per_page":10}}};
+  </script>
+<meta name="description" content="SQL 是用于访问和处理数据库的标准的计算机语言。在本教程中，您将学到如何使用 SQL 访问和处理数据系统中的数据，这类数据库包括：MySQL、SQL Server、Access、Oracle、Sybase、DB2 等等。本篇博客告诉大家如果快速入门，学习SQL的增(Insert)、删(Delete)、改(Update)、查(Select)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL快速入门">
+<meta property="og:url" content="https://www.toimc.com/SQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="Coding World">
+<meta property="og:description" content="SQL 是用于访问和处理数据库的标准的计算机语言。在本教程中，您将学到如何使用 SQL 访问和处理数据系统中的数据，这类数据库包括：MySQL、SQL Server、Access、Oracle、Sybase、DB2 等等。本篇博客告诉大家如果快速入门，学习SQL的增(Insert)、删(Delete)、改(Update)、查(Select)。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-02-26T16:26:48.000Z">
+<meta property="article:modified_time" content="2019-08-03T17:05:42.000Z">
+<meta property="article:author" content="var author&#x3D;&#39;Brian&#39;">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.toimc.com/SQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>SQL快速入门 | Coding World</title>
+  
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1e336df3c9b33283b6b6067eae9dc201";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Coding World" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Coding World</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay hungry, stay foolish</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL%E9%85%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">SQL配置学习环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT%E8%AF%AD%E5%8F%A5"><span class="nav-number">4.</span> <span class="nav-text">SELECT语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WHERE%E5%AD%90%E5%8F%A5"><span class="nav-number">5.</span> <span class="nav-text">WHERE子句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AND-amp-OR%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">6.</span> <span class="nav-text">AND &amp; OR运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INSERT-INTO%E8%AF%AD%E5%8F%A5"><span class="nav-number">7.</span> <span class="nav-text">INSERT INTO语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UPDATE%E8%AF%AD%E5%8F%A5"><span class="nav-number">8.</span> <span class="nav-text">UPDATE语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE%E8%AF%AD%E5%8F%A5"><span class="nav-number">9.</span> <span class="nav-text">DELETE语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT-TOP%E5%AD%90%E5%8F%A5"><span class="nav-number">10.</span> <span class="nav-text">SELECT TOP子句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LIKE%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">11.</span> <span class="nav-text">LIKE操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">12.</span> <span class="nav-text">SQL通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IN%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">13.</span> <span class="nav-text">IN操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BETWEEN%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">14.</span> <span class="nav-text">BETWEEN操作符</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="var author='Brian'"
+      src="/assets/img/header.jpg">
+  <p class="site-author-name" itemprop="name">var author='Brian'</p>
+  <div class="site-description" itemprop="description">指尖改变世界</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/toimc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;toimc" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@wayearn.com" title="E-Mail → mailto:admin@wayearn.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/toimc" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.toimc.com/SQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/img/header.jpg">
+      <meta itemprop="name" content="var author='Brian'">
+      <meta itemprop="description" content="指尖改变世界">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL快速入门
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-02-27 00:26:48" itemprop="dateCreated datePublished" datetime="2016-02-27T00:26:48+08:00">2016-02-27</time>
+    </span>
+
+  
+    <span id="/SQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" class="post-meta-item leancloud_visitors" data-flag-title="SQL快速入门" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>SQL 是用于访问和处理数据库的标准的计算机语言。在本教程中，您将学到如何使用 SQL 访问和处理数据系统中的数据，这类数据库包括：MySQL、SQL Server、Access、Oracle、Sybase、DB2 等等。本篇博客告诉大家如果快速入门，学习SQL的增(Insert)、删(Delete)、改(Update)、查(Select)。</p>
+<span id="more"></span>
+
+<h3 id="SQL配置学习环境"><a href="#SQL配置学习环境" class="headerlink" title="SQL配置学习环境"></a>SQL配置学习环境</h3><p>我的策略是：WAMP中的MySQL+ Navicat</p>
+<p>如何配置：</p>
+<p>可以先参考：<a target="_blank" rel="noopener" href="http://toimc.com/2016/01/wamp/">使用WampServer搭建本地PHP环境，绑定域名，配置伪静态</a>先自己搭建一个WAMP环境，</p>
+<p>然后，安装Navicat软件，网上一大堆。</p>
+<p>打开 -&gt; 选择”连接” -&gt; “MySQL” -&gt; </p>
+<pre><code>连接名：MyStudy
+主机名或IP地址：localhost
+端口：3306
+用户名：root
+密码：（如果设置了，请输入）
+</code></pre>
+<p>-&gt; 连接测试 “OK” -&gt; “确定”</p>
+<p>-&gt; 选择表 -&gt; 点击”查询” -&gt; “新建查询” -&gt;就可以开始学习了。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>SQL指结构化查询语言，全称是（Structured Query Language）是用于访问和处理数据库的标准的计算机语言。SQL 让您可以访问和处理数据库。SQL 是一种 ANSI（American National Standards Institute 美国国家标准化组织）标准的计算机语言。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>数据表：</p>
+<p>[table id=18 /]</p>
+<p>上面的表包含五条记录（每一条对应一个客户）和七个列（CustomerID、CustomerName、ContactName、Address、City、PostalCode 和 Country）。</p>
+<p>下面的 SQL 语句从 “Customers” 表中选取所有记录：</p>
+<pre><code>SELECT * FROM Customers;
+</code></pre>
+<blockquote>
+<ul>
+<li>SQL 对大小写不敏感：<code>SELECT</code> 与 <code>select</code> 是相同的。</li>
+<li>某些数据库系统要求在每条 SQL 语句的末端使用分号。</li>
+<li>分号是在数据库系统中分隔每条 SQL 语句的标准方法，这样就可以在对服务器的相同请求中执行一条以上的 SQL 语句。</li>
+</ul>
+</blockquote>
+<p>重要的SQL命令一览：</p>
+<ul>
+<li>SELECT - 从数据库中提取数据</li>
+<li>UPDATE - 更新数据库中的数据</li>
+<li>DELETE - 从数据库中删除数据</li>
+<li>INSERT INTO - 向数据库中插入新数据</li>
+<li>CREATE DATABASE - 创建新数据库</li>
+<li>ALTER DATABASE - 修改数据库</li>
+<li>CREATE TABLE - 创建新表</li>
+<li>ALTER TABLE - 变更（改变）数据库表</li>
+<li>DROP TABLE - 删除表</li>
+<li>CREATE INDEX - 创建索引（搜索键）</li>
+<li>DROP INDEX - 删除索引</li>
+</ul>
+<h3 id="SELECT语句"><a href="#SELECT语句" class="headerlink" title="SELECT语句"></a>SELECT语句</h3><p>语法：<code>SELECT column_name,column_name FROM table_name;</code></p>
+<p>下面的 SQL 语句从 “Customers” 表中选取 “CustomerName” 和 “City” 列：</p>
+<pre><code>SELECT CustomerName,City FROM Customers;
+</code></pre>
+<p>如果需要选中所有的列，使用<code>*</code>：</p>
+<pre><code>SELECT * FROM Customers;
+</code></pre>
+<p>###SELECT DISTINCT语句</p>
+<p>语法：<code>SELECT DISTINCT column_name,column_name FROM table_name;</code></p>
+<p>例如：<br>    SELECT DISTINCT City FROM Customers;</p>
+<p>需要说明的是：<code>DISTINCT</code>与<code>GROUP BY</code>的区别：</p>
+<p><code>GROUP BY</code>可以使用一些其它的聚合函数：<code>AVG</code>, <code>MAX</code>, <code>MIN</code>, <code>SUM</code> 和 <code>COUNT</code>。而<code>DISTINCT</code>只是简单的移除重复项。</p>
+<h3 id="WHERE子句"><a href="#WHERE子句" class="headerlink" title="WHERE子句"></a>WHERE子句</h3><p>子句，是作为SELECT语句来说的。</p>
+<p>语法：<code>SELECT column_name,column_name FROM table_name WHERE column_name operator value;</code></p>
+<p>例子:</p>
+<pre><code>SELECT * FROM Customers WHERE Country=&#39;Mexico&#39;;
+</code></pre>
+<p>取得Customers表中，Country为Mexico的所有列。</p>
+<blockquote>
+<p>SQL 使用单引号来环绕文本值（大部分数据库系统也接受双引号）。<br>如果是数值字段，请不要使用引号。</p>
+</blockquote>
+<p>例子：</p>
+<pre><code>SELECT * FROM Customers WHERE CustomerID=1;
+</code></pre>
+<p>下面的运算符可以在 WHERE 子句中使用：</p>
+<p>[table id=19 /]</p>
+<h3 id="AND-amp-OR运算符"><a href="#AND-amp-OR运算符" class="headerlink" title="AND &amp; OR运算符"></a>AND &amp; OR运算符</h3><p>如果第一个条件和第二个条件都成立，则 <code>AND</code> 运算符显示一条记录。</p>
+<p>如果第一个条件和第二个条件中只要有一个成立，则 <code>OR</code> 运算符显示一条记录。</p>
+<p><code>AND</code>例子：</p>
+<pre><code>SELECT * FROM Customers
+WHERE Country=&#39;Germany&#39;
+AND City=&#39;Berlin&#39;;
+</code></pre>
+<p><code>OR</code>例子：</p>
+<pre><code>SELECT * FROM Customers
+WHERE City=&#39;Berlin&#39;
+OR City=&#39;München&#39;;
+</code></pre>
+<p>结合 <code>AND</code> &amp; <code>OR</code>：</p>
+<pre><code>SELECT * FROM Customers
+WHERE Country=&#39;Germany&#39;
+AND (City=&#39;Berlin&#39; OR City=&#39;München&#39;);
+</code></pre>
+<h3 id="INSERT-INTO语句"><a href="#INSERT-INTO语句" class="headerlink" title="INSERT INTO语句"></a>INSERT INTO语句</h3><p>语法1：<br>    INSERT INTO table_name<br>    VALUES (value1,value2,value3,…);</p>
+<p>语法2：</p>
+<pre><code>INSERT INTO table_name (column1,column2,column3,...)
+VALUES (value1,value2,value3,...);
+</code></pre>
+<p>比如插入新的一行：</p>
+<pre><code>INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES (&#39;Cardinal&#39;,&#39;Tom B. Erichsen&#39;,&#39;Skagen 21&#39;,&#39;Stavanger&#39;,&#39;4006&#39;,&#39;Norway&#39;);
+</code></pre>
+<p>在指定的列插入数据：</p>
+<pre><code>INSERT INTO Customers (CustomerName, City, Country)
+VALUES (&#39;Cardinal&#39;, &#39;Stavanger&#39;, &#39;Norway&#39;);
+</code></pre>
+<h3 id="UPDATE语句"><a href="#UPDATE语句" class="headerlink" title="UPDATE语句"></a>UPDATE语句</h3><p><code>UPDATE</code> 语句用于更新表中已存在的记录。</p>
+<p>语法：<code>UPDATE table_name SET column1=value1,column2=value2,...WHERE some_column=some_value;</code></p>
+<p>实例：</p>
+<pre><code>UPDATE Customers
+SET ContactName=&#39;Alfred Schmidt&#39;, City=&#39;Hamburg&#39;
+WHERE CustomerName=&#39;Alfreds Futterkiste&#39;;
+</code></pre>
+<blockquote>
+<p>一定要注意，不能省略<code>WHERE</code>子句，否则数据库所有列都会被重写。</p>
+</blockquote>
+<h3 id="DELETE语句"><a href="#DELETE语句" class="headerlink" title="DELETE语句"></a>DELETE语句</h3><p>语法：<code>DELETE FROM table_name WHERE some_column=some_value;</code></p>
+<p>实例：</p>
+<pre><code>DELETE FROM Customers
+WHERE CustomerName=&#39;Alfreds Futterkiste&#39; AND ContactName=&#39;Maria Anders&#39;;
+</code></pre>
+<p>删除所有数据：</p>
+<pre><code>DELETE FROM table_name;
+
+or
+
+DELETE * FROM table_name;
+</code></pre>
+<h3 id="SELECT-TOP子句"><a href="#SELECT-TOP子句" class="headerlink" title="SELECT TOP子句"></a>SELECT TOP子句</h3><p>语法：</p>
+<pre><code>SELECT TOP number|percent column_name(s)
+FROM table_name;
+</code></pre>
+<p>下面的 SQL 语句从 “Customers” 表中选取头两条记录，实例：</p>
+<pre><code>SELECT TOP 2 * FROM Customers;
+</code></pre>
+<h3 id="LIKE操作符"><a href="#LIKE操作符" class="headerlink" title="LIKE操作符"></a>LIKE操作符</h3><p>语法：</p>
+<pre><code>SELECT column_name(s)
+FROM table_name
+WHERE column_name LIKE pattern;
+</code></pre>
+<p>下面的 SQL 语句选取 City 以字母 “L” 开始的所有客户，例子：</p>
+<pre><code>SELECT * FROM Customers
+WHERE City LIKE &#39;L%&#39;;
+</code></pre>
+<p>下面的 SQL 语句选取 Country 包含模式 “me” 的所有客户：</p>
+<pre><code>SELECT * FROM Customers
+WHERE Country LIKE &#39;%me%&#39;;
+</code></pre>
+<p>通过使用 <code>NOT</code> 关键字，您可以选取不匹配模式的记录。<br>下面的 SQL 语句选取 Country 不包含模式 “me” 的所有客户：</p>
+<pre><code>SELECT * FROM Customers
+WHERE Country NOT LIKE &#39;%me%&#39;;
+</code></pre>
+<h3 id="SQL通配符"><a href="#SQL通配符" class="headerlink" title="SQL通配符"></a>SQL通配符</h3><p>[table id=20 /]</p>
+<p>主要讲[charlist]通配符，下面的 SQL 语句选取 City 以 “b”、”s” 或 “p” 开始的所有客户：</p>
+<pre><code>SELECT * FROM Customers
+WHERE City LIKE &#39;[bsp]%&#39;;
+</code></pre>
+<p>下面的 SQL 语句选取 City 以 “a”、”b” 或 “c” 开始的所有客户：</p>
+<pre><code>SELECT * FROM Customers
+WHERE City LIKE &#39;[a-c]%&#39;;
+</code></pre>
+<p>下面的 SQL 语句选取 City 不以 “b”、”s” 或 “p” 开始的所有客户：</p>
+<pre><code>SELECT * FROM Customers
+WHERE City LIKE &#39;[!bsp]%&#39;;
+</code></pre>
+<p>可以在线测试一下：<a target="_blank" rel="noopener" href="http://www.w3schools.com/sql/trysql.asp?filename=trysql_select_wildcard_charlist&ss=-1">http://www.w3schools.com/sql/trysql.asp?filename=trysql_select_wildcard_charlist&amp;ss=-1</a></p>
+<h3 id="IN操作符"><a href="#IN操作符" class="headerlink" title="IN操作符"></a>IN操作符</h3><p>IN操作符主要是在WHERE子句中去设定多个值</p>
+<pre><code>SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (value1,value2,...);
+</code></pre>
+<p>下面的 SQL 语句选取 City 为 “Paris” 或 “London” 的所有客户，例如：</p>
+<pre><code>SELECT * FROM Customers
+WHERE City IN (&#39;Paris&#39;,&#39;London&#39;);
+</code></pre>
+<p>与下面的句子等价：</p>
+<pre><code>SELECT * FROM Customers
+WHERE City = &#39;Paris&#39; OR City=&#39;London&#39;;
+</code></pre>
+<h3 id="BETWEEN操作符"><a href="#BETWEEN操作符" class="headerlink" title="BETWEEN操作符"></a>BETWEEN操作符</h3><p>BETWEEN 操作符选取介于两个值之间的数据范围内的值。这些值可以是数值、文本或者日期。</p>
+<p>语法：</p>
+<pre><code>SELECT column_name(s)
+FROM table_name
+WHERE column_name BETWEEN value1 AND value2;
+</code></pre>
+<p>下面的 SQL 语句选取CustomerID介于 1 和 3 之间的所有用户：</p>
+<pre><code>SELECT * FROM customers
+WHERE CustomerID BETWEEN 1 AND 3;
+</code></pre>
+<p>与下面的语句等价：</p>
+<pre><code>SELECT * FROM customers
+WHERE CustomerID &gt;=1 AND CustomerID&lt;=3;
+</code></pre>
+<p><strong>1.NOT BETWEEN 操作符</strong></p>
+<p>同样对于BETWEEN，我们可以使用NOT非操作符：</p>
+<pre><code>SELECT * FROM customers
+WHERE CustomerID NOT BETWEEN 1 AND 3;
+</code></pre>
+<p><strong>2.带有 IN 的 BETWEEN 操作符</strong></p>
+<p>下面的 SQL 语句选取CustomerID为1到3之间，并且CITY为Berlin的客户：</p>
+<pre><code>SELECT * FROM customers
+WHERE CustomerID BETWEEN 1 AND 3
+AND CITY IN (&#39;Berlin&#39;);
+</code></pre>
+<p><strong>3.带有文本值的 BETWEEN 操作符</strong><br>下面的SQL语句选取了customers中CustomerName介于’A’和’B’之间字母开始的所有用户：</p>
+<pre><code>SELECT * FROM customers
+WHERE CustomerName BETWEEN &#39;A&#39; AND &#39;B&#39;;
+</code></pre>
+<blockquote>
+<p>请注意，在不同的数据库中，BETWEEN 操作符会产生不同的结果！</p>
+</blockquote>
+<blockquote>
+<p>在某些数据库中，BETWEEN 选取介于两个值之间但不包括两个测试值的字段。</p>
+</blockquote>
+<blockquote>
+<p>在某些数据库中，BETWEEN 选取介于两个值之间且包括两个测试值的字段。</p>
+</blockquote>
+<blockquote>
+<p>在某些数据库中，BETWEEN 选取介于两个值之间且包括第一个测试值但不包括最后一个测试值的字段。</p>
+</blockquote>
+<blockquote>
+<p>因此，请检查您的数据库是如何处理 BETWEEN 操作符！    </p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>var author='Brian'
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.toimc.com/SQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="SQL快速入门">https://www.toimc.com/SQL快速入门/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/HTTP%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81/" rel="prev" title="HTTP状态码200、301、302、304、403、410、500的含义？">
+                  <i class="fa fa-chevron-left"></i> HTTP状态码200、301、302、304、403、410、500的含义？
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E6%B7%BB%E5%8A%A0Swap/" rel="next" title="如何在Linux中添加Swap">
+                  如何在Linux中添加Swap <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqusjs">disqusjs</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqusjs" id="comment-disqusjs">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备19018123号-1 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">toimc前端技术</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+
+
+  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+
+
+<script>
+var options = {
+  bottom: '64px', // default: '32px'
+  right: 'unset', // default: '32px'
+  left: '32px', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: true // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.8.5/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.15.0/dist/instantsearch.production.min.js"></script><script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<script data-pjax>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            const counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            const target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"YvgheVT82eRRYHM6xtvaEL6l-gzGzoHsz","app_key":"uwmRd9pGJeDmqKQNmalNsosO","server_url":"https://blog.toimc.com","security":true};
+    function fetchData(api_server) {
+      const Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+    <div class="pjax">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments('#disqus_thread', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
+      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
+      shortname : 'toimc',
+      url       : "https://www.toimc.com/SQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/",
+      identifier: "SQL快速入门/",
+      title     : "SQL快速入门",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'c2514f07e902bf3f9af6',
+      clientSecret: '4a1a05479a3ca34095cb13fccc48245674407ba7',
+      repo        : 'toimc.github.io',
+      owner       : 'toimc',
+      admin       : [''],
+      id          : '772f311f2c0a8fd6983bdddccb646a70',
+      proxy       : 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>
