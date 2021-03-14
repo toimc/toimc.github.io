@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://www.toimc.com/tags/web%E6%A1%86%E6%9E%B6/</loc>
+        <lastmod>2021-03-14T12:22:34.045Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.toimc.com/tags/nestjs/</loc>
+        <lastmod>2021-03-14T12:22:34.045Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.toimc.com/tags/node-js/</loc>
+        <lastmod>2021-03-14T12:22:34.045Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.toimc.com/tags/%E6%9E%B6%E6%9E%84%E6%80%9D%E7%BB%B4/</loc>
         <lastmod>2021-03-12T09:48:11.539Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -26,27 +47,6 @@
     <url>
         <loc>https://www.toimc.com/tags/Dependecy-Injection-DI/</loc>
         <lastmod>2021-03-12T09:48:11.539Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.toimc.com/tags/web%E6%A1%86%E6%9E%B6/</loc>
-        <lastmod>2021-03-12T03:40:49.702Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.toimc.com/tags/nestjs/</loc>
-        <lastmod>2021-03-12T03:40:49.702Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://www.toimc.com/tags/node-js/</loc>
-        <lastmod>2021-03-12T03:40:49.702Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

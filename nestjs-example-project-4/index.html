@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon-16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.geekzu.org/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.toimc.com","root":"/","images":"/images","scheme":"Mist","version":"8.2.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-2},"disqusjs":{"text":"Load Disqus","order":-1}},"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"F0BT9J7IQF","apiKey":"fc8f8ea23cfb91aa998b6dd1ac6d2c87","indexName":"myblog","hits":{"per_page":10}}};
+  </script>
+<meta name="description" content="这是《nestjs搭建通用业务框架》系列的第4篇，进入开发具体的功能之前，学习nest框架本身提供的CLI工具与规划合理的工程目录，对于要实现的内容进行架构与计划，这是实现健壮高可用的框架的前提。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nestjs-example-project-4">
+<meta property="og:url" content="https://www.toimc.com/nestjs-example-project-4/index.html">
+<meta property="og:site_name" content="Coding World">
+<meta property="og:description" content="这是《nestjs搭建通用业务框架》系列的第4篇，进入开发具体的功能之前，学习nest框架本身提供的CLI工具与规划合理的工程目录，对于要实现的内容进行架构与计划，这是实现健壮高可用的框架的前提。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.www.toimc.com/blog/img/2021/nestjs-example-project-4/nestjs-1.jpg?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/200">
+<meta property="article:published_time" content="2021-03-13T03:02:33.000Z">
+<meta property="article:modified_time" content="2021-03-14T12:22:34.045Z">
+<meta property="article:author" content="var author&#x3D;&#39;Brian&#39;">
+<meta property="article:tag" content="node.js">
+<meta property="article:tag" content="nestjs">
+<meta property="article:tag" content="web框架">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.www.toimc.com/blog/img/2021/nestjs-example-project-4/nestjs-1.jpg?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/200">
+
+
+<link rel="canonical" href="https://www.toimc.com/nestjs-example-project-4/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>nestjs-example-project-4 | Coding World</title>
+  
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1e336df3c9b33283b6b6067eae9dc201";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Coding World" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Coding World</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay hungry, stay foolish</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A4%E8%AF%86CLI"><span class="nav-number">2.</span> <span class="nav-text">认识CLI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E7%90%86%E7%9A%84%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95"><span class="nav-number">3.</span> <span class="nav-text">合理的工程目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E8%80%85%E6%8E%A8%E8%8D%90"><span class="nav-number">3.1.</span> <span class="nav-text">作者推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.2.</span> <span class="nav-text">参考项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.3.</span> <span class="nav-text">最佳实践</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83-%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97"><span class="nav-number">4.</span> <span class="nav-text">代码规范(风格指南)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E5%88%99"><span class="nav-number">4.1.</span> <span class="nav-text">总则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E5%90%8D"><span class="nav-number">4.2.</span> <span class="nav-text">命名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%82%B9%E5%92%8C%E6%A8%AA%E6%9D%A0%E6%9D%A5%E5%88%86%E9%9A%94%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-number">4.2.1.</span> <span class="nav-text">使用点和横杠来分隔文件名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E5%90%8D%E4%B8%8E%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-number">4.2.2.</span> <span class="nav-text">符号名与文件名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%90%8D-amp-%E7%AE%A1%E9%81%93%E5%90%8D"><span class="nav-number">4.2.3.</span> <span class="nav-text">服务名&amp;管道名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%AF%BC"><span class="nav-number">4.2.4.</span> <span class="nav-text">引导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-number">4.2.5.</span> <span class="nav-text">测试文件名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8E%9F%E5%88%99"><span class="nav-number">4.3.</span> <span class="nav-text">其他原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%95%B4%E5%90%88"><span class="nav-number">5.</span> <span class="nav-text">技术整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.1.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ORM%E5%B7%A5%E5%85%B7%E5%BA%93"><span class="nav-number">5.1.1.</span> <span class="nav-text">ORM工具库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8docker-compose%E5%88%9B%E5%BB%BAprogres%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.1.2.</span> <span class="nav-text">使用docker-compose创建progres数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E6%88%90TypeORM%E5%92%8CPostgre%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.1.3.</span> <span class="nav-text">集成TypeORM和Postgre数据库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%98%E6%96%B9-nestjs-config"><span class="nav-number">5.2.1.</span> <span class="nav-text">官方@nestjs&#x2F;config</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E7%94%A8%E6%B3%95%EF%BC%9A"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">最简单的用法：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6%E7%8E%A9%E6%B3%95"><span class="nav-number">5.2.1.2.</span> <span class="nav-text">进阶玩法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90yaml%E6%A0%BC%E5%BC%8F%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.1.3.</span> <span class="nav-text">解析yaml格式的配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8config%E5%BA%93%E8%A7%A3%E6%9E%90"><span class="nav-number">5.2.2.</span> <span class="nav-text">使用config库解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%AA%8C%E8%AF%81"><span class="nav-number">5.2.3.</span> <span class="nav-text">配置验证</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Joi%E7%94%A8%E6%B3%95"><span class="nav-number">5.2.3.1.</span> <span class="nav-text">Joi用法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8class-validator"><span class="nav-number">5.2.3.2.</span> <span class="nav-text">使用class-validator</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">5.2.4.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="var author='Brian'"
+      src="/assets/img/header.jpg">
+  <p class="site-author-name" itemprop="name">var author='Brian'</p>
+  <div class="site-description" itemprop="description">指尖改变世界</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/toimc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;toimc" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@wayearn.com" title="E-Mail → mailto:admin@wayearn.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/toimc" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.toimc.com/nestjs-example-project-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/img/header.jpg">
+      <meta itemprop="name" content="var author='Brian'">
+      <meta itemprop="description" content="指尖改变世界">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          nestjs-example-project-4
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-13 11:02:33" itemprop="dateCreated datePublished" datetime="2021-03-13T11:02:33+08:00">2021-03-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/nestjs%E6%90%AD%E5%BB%BA%E9%80%9A%E7%94%A8%E4%B8%9A%E5%8A%A1%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">nestjs搭建通用业务框架</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/nestjs-example-project-4/" class="post-meta-item leancloud_visitors" data-flag-title="nestjs-example-project-4" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>这是《nestjs搭建通用业务框架》系列的第4篇，进入开发具体的功能之前，学习nest框架本身提供的CLI工具与规划合理的工程目录，对于要实现的内容进行架构与计划，这是实现健壮高可用的框架的前提。</p>
+<span id="more"></span>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>大多数前端同学拿到一个新的任务的时候，或者要做一个新的技术设计的时候，往往无从下手。知乎、掘金上问人可能是一种方案，还可以找一个社交渠道(推特、电报、微博、朋友圈、学校论坛)，通过别人的现实例子来进行架构的设计是一个很好切入点。其实，大家可能忽视了以下的渠道：技术框架的官方+示例、公司&amp;团队的历史项目库、找比较厉害的同事取经和发有偿技术咨询的单（程序员各种接单平台）等。</p>
+<p>那么，对于nestjs，它的官方提供了很多现成的技术解决方案，所以我们可以借鉴(拿来即用)。</p>
+<h2 id="认识CLI"><a href="#认识CLI" class="headerlink" title="认识CLI"></a>认识CLI</h2><p>先从官方的CLI开始：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/nestjs/nest-cli">Nest CLI</a>是一个命令行界面工具，以帮助您初始化、开发和维护 <code>Nest</code> 应用程序。它以多种方式提供帮助，包括搭建项目、以开发模式为其提供服务，以及为生产分发构建和打包应用程序。它体现了最佳实践的架构模式，以构建良好的应用程序。</p>
+</blockquote>
+<p>大多命令行工具可以使用<code>--help</code>来查看帮助：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">➜ nest --<span class="built_in">help</span></span><br><span class="line">Usage: nest &lt;<span class="built_in">command</span>&gt; [options]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -v, --version                                   Output the current version.</span><br><span class="line">  -h, --<span class="built_in">help</span>                                      Output usage information.</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">  new|n [options] [name]                          Generate Nest application.</span><br><span class="line">  build [options] [app]                           Build Nest application.</span><br><span class="line">  start [options] [app]                           Run Nest application.</span><br><span class="line">  info|i                                          Display Nest project details.</span><br><span class="line">  update|u [options]                              Update Nest dependencies.</span><br><span class="line">  add [options] &lt;library&gt;                         Adds support <span class="keyword">for</span> an external library to your project.</span><br><span class="line">  generate|g [options] &lt;schematic&gt; [name] [path]  Generate a Nest element.</span><br><span class="line">    Available schematics:</span><br><span class="line">      ┌───────────────┬─────────────┬──────────────────────────────────────────────┐</span><br><span class="line">      │ name          │ <span class="built_in">alias</span>       │ description                                  │</span><br><span class="line">      │ application   │ application │ Generate a new application workspace         │</span><br><span class="line">      │ class         │ cl          │ Generate a new class                         │</span><br><span class="line">      │ configuration │ config      │ Generate a CLI configuration file            │</span><br><span class="line">      │ controller    │ co          │ Generate a controller declaration            │</span><br><span class="line">      │ decorator     │ d           │ Generate a custom decorator                  │</span><br><span class="line">      │ filter        │ f           │ Generate a filter declaration                │</span><br><span class="line">      │ gateway       │ ga          │ Generate a gateway declaration               │</span><br><span class="line">      │ guard         │ gu          │ Generate a guard declaration                 │</span><br><span class="line">      │ interceptor   │ <span class="keyword">in</span>          │ Generate an interceptor declaration          │</span><br><span class="line">      │ interface     │ interface   │ Generate an interface                        │</span><br><span class="line">      │ middleware    │ mi          │ Generate a middleware declaration            │</span><br><span class="line">      │ module        │ mo          │ Generate a module declaration                │</span><br><span class="line">      │ pipe          │ pi          │ Generate a pipe declaration                  │</span><br><span class="line">      │ provider      │ pr          │ Generate a provider declaration              │</span><br><span class="line">      │ resolver      │ r           │ Generate a GraphQL resolver declaration      │</span><br><span class="line">      │ service       │ s           │ Generate a service declaration               │</span><br><span class="line">      │ library       │ lib         │ Generate a new library within a monorepo     │</span><br><span class="line">      │ sub-app       │ app         │ Generate a new application within a monorepo │</span><br><span class="line">      │ resource      │ res         │ Generate a new CRUD resource                 │</span><br><span class="line">      └───────────────┴─────────────┴──────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p>然后，如果想知道其中某一个子命令的用法，可以使用<code>nest &lt;command&gt; --help</code>的形式来进行查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 例如：</span></span><br><span class="line">➜ nest generate --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<p>特别说明：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>缩写</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>application</td>
+<td>application</td>
+<td>生成一个新的应用工作区</td>
+</tr>
+<tr>
+<td>class</td>
+<td>cl</td>
+<td>生成一个新的class</td>
+</tr>
+<tr>
+<td>configuration</td>
+<td>config</td>
+<td>生成 CLI 配置文件</td>
+</tr>
+<tr>
+<td>controller</td>
+<td>co</td>
+<td>生成一个控制器声明</td>
+</tr>
+<tr>
+<td>decorator</td>
+<td>d</td>
+<td>生成一个自定义的装饰者</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>f</td>
+<td>生成一个过滤器声明</td>
+</tr>
+<tr>
+<td>gateway</td>
+<td>ga</td>
+<td>生成网关</td>
+</tr>
+<tr>
+<td>guard</td>
+<td>gu</td>
+<td>生成守卫</td>
+</tr>
+<tr>
+<td>interceptor</td>
+<td>in</td>
+<td>生成拦截器</td>
+</tr>
+<tr>
+<td>interface</td>
+<td>interface</td>
+<td>生成接口声明</td>
+</tr>
+<tr>
+<td>middleware</td>
+<td>mi</td>
+<td>生成中间件声明</td>
+</tr>
+<tr>
+<td>module</td>
+<td>mo</td>
+<td>生成一个模块声明</td>
+</tr>
+<tr>
+<td>pipe</td>
+<td>pi</td>
+<td>生成管道声明</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>pr</td>
+<td>生成提供者声明</td>
+</tr>
+<tr>
+<td>resolver</td>
+<td>r</td>
+<td>生成GraphQL resolver声明</td>
+</tr>
+<tr>
+<td>service</td>
+<td>s</td>
+<td>生成服务</td>
+</tr>
+<tr>
+<td>library</td>
+<td>lib</td>
+<td>生成一个monorepo库</td>
+</tr>
+<tr>
+<td>sub-app</td>
+<td>App</td>
+<td>生成一个monorepo的应用</td>
+</tr>
+<tr>
+<td>resource</td>
+<td>Res</td>
+<td>生成一个新的CURD资源</td>
+</tr>
+</tbody></table>
+<p>我们最开始使用了一个<code>new</code>命令，后面最常用的即是<code>generator</code>或<code>g</code>（简写）命令，可以对照着上表进行熟悉。</p>
+<h2 id="合理的工程目录"><a href="#合理的工程目录" class="headerlink" title="合理的工程目录"></a>合理的工程目录</h2><p>为了去理解Python的语言设计之美，其实更要理解这样的一句话“约定大于配置”，好的工程化目录（约定）能够很好的提升项目的可维护性。</p>
+<h3 id="作者推荐"><a href="#作者推荐" class="headerlink" title="作者推荐"></a>作者推荐</h3><p>在官方的issues中，我们可以找到一些提示：<a target="_blank" rel="noopener" href="https://github.com/nestjs/nest/issues/2249#issuecomment-494734673">Best scalable project structure #2249</a> 这里有作者的回复。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> src</span><br><span class="line"><span class="bullet">  -</span> core</span><br><span class="line"><span class="bullet">  -</span> common</span><br><span class="line"><span class="bullet">    -</span> middleware</span><br><span class="line"><span class="bullet">    -</span> interceptors</span><br><span class="line"><span class="bullet">    -</span> guards</span><br><span class="line"><span class="bullet">  -</span> user</span><br><span class="line"><span class="bullet">      -</span> interceptors (scoped interceptors)</span><br><span class="line"><span class="bullet">    -</span> user.controller.ts</span><br><span class="line"><span class="bullet">    -</span> user.model.ts</span><br><span class="line"><span class="bullet">  -</span> store</span><br><span class="line"><span class="bullet">    -</span> store.controller.ts</span><br><span class="line"><span class="bullet">    -</span> store.model.ts</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>可以使用monorepo的方法——在一个repo中创建两个项目，并在它们之间共享共同的东西，如库/包。</p>
+</li>
+<li><p>没有模块目录，按照功能进行划分。</p>
+</li>
+<li><p>把通用/核心的东西归为单独的目录：common，比如：拦截器/守卫/管道</p>
+</li>
+</ul>
+<h3 id="参考项目"><a href="#参考项目" class="headerlink" title="参考项目"></a>参考项目</h3><p><strong>第一个参考项目</strong></p>
+<p>技术栈：Nest + sequelize-typescript + JWT + Jest + Swagger</p>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/kentloog/nestjs-sequelize-typescript">kentloog/nestjs-sequelize-typescript</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── assets</span><br><span class="line">│   └── logo.png</span><br><span class="line">├── config</span><br><span class="line">│   ├── config.development.ts</span><br><span class="line">│   └── config.production.ts</span><br><span class="line">├── config.ts</span><br><span class="line">├── db</span><br><span class="line">│   ├── config.ts</span><br><span class="line">│   ├── migrations</span><br><span class="line">│   │   └── 20190128160000-create-table-user.js</span><br><span class="line">│   └── seeders-dev</span><br><span class="line">│       └── 20190129093300-test-data-users.js</span><br><span class="line">├── nest-cli.json</span><br><span class="line">├── nodemon-debug.json</span><br><span class="line">├── nodemon.json</span><br><span class="line">├── package-lock.json</span><br><span class="line">├── package.json</span><br><span class="line">├── src</span><br><span class="line">│   ├── app.module.ts</span><br><span class="line">│   ├── database</span><br><span class="line">│   │   ├── database.module.ts</span><br><span class="line">│   │   └── database.providers.ts</span><br><span class="line">│   ├── main.ts</span><br><span class="line">│   ├── posts</span><br><span class="line">│   │   ├── dto</span><br><span class="line">│   │   │   ├── create-post.dto.ts</span><br><span class="line">│   │   │   ├── post.dto.ts</span><br><span class="line">│   │   │   └── update-post.dto.ts</span><br><span class="line">│   │   ├── post.entity.ts</span><br><span class="line">│   │   ├── posts.controller.ts</span><br><span class="line">│   │   ├── posts.module.ts</span><br><span class="line">│   │   ├── posts.providers.ts</span><br><span class="line">│   │   └── posts.service.ts</span><br><span class="line">│   ├── shared</span><br><span class="line">│   │   ├── config</span><br><span class="line">│   │   │   └── config.service.ts</span><br><span class="line">│   │   ├── enum</span><br><span class="line">│   │   │   └── gender.ts</span><br><span class="line">│   │   └── shared.module.ts</span><br><span class="line">│   ├── swagger.ts</span><br><span class="line">│   └── users</span><br><span class="line">│       ├── auth</span><br><span class="line">│       │   ├── jwt-payload.model.ts</span><br><span class="line">│       │   └── jwt-strategy.ts</span><br><span class="line">│       ├── dto</span><br><span class="line">│       │   ├── create-user.dto.ts</span><br><span class="line">│       │   ├── update-user.dto.ts</span><br><span class="line">│       │   ├── user-login-request.dto.ts</span><br><span class="line">│       │   ├── user-login-response.dto.ts</span><br><span class="line">│       │   └── user.dto.ts</span><br><span class="line">│       ├── user.entity.ts</span><br><span class="line">│       ├── users.controller.ts</span><br><span class="line">│       ├── users.module.ts</span><br><span class="line">│       ├── users.providers.ts</span><br><span class="line">│       └── users.service.ts</span><br><span class="line">├── <span class="built_in">test</span></span><br><span class="line">│   ├── app.e2e-spec.ts</span><br><span class="line">│   ├── jest-e2e.json</span><br><span class="line">│   └── test-data.ts</span><br><span class="line">├── tsconfig.build.json</span><br><span class="line">├── tsconfig.json</span><br><span class="line">└── tslint.json</span><br></pre></td></tr></table></figure>
+
+<p>特点：</p>
+<ul>
+<li> 项目文档及相关的资源在根目录</li>
+<li>数据库及项目配置会放在根目录（细节：数据库升级文件）</li>
+<li><code>src</code>中会对功能进行划分建不同的文件夹<code>users</code>、<code>posts</code></li>
+<li>单个功能文件夹中，会包括一个完整CURD的相关文件(dto/controller/module/providers/service)</li>
+<li>抽离公共配置到<code>shared</code>文件夹</li>
+</ul>
+<p><strong>第二个参考项目</strong></p>
+<p>技术栈：具有AWS Lambda，DynamoDB，DynamoDB Streams的完全无服务器生产应用程序</p>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/International-Slackline-Association/Rankings-Backend">International-Slackline-Association/Rankings-Backend</a></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── LICENSE</span><br><span class="line">├── README.md</span><br><span class="line">├── docs</span><br><span class="line">│   ├── AWS_Architecture.png</span><br><span class="line">│   ├── Development\ Notes.md</span><br><span class="line">│   └── GourceOutput.png</span><br><span class="line">├── jest<span class="selector-class">.config</span>.js</span><br><span class="line">├── package-lock.json</span><br><span class="line">├── package.json</span><br><span class="line">├── serverless</span><br><span class="line">│   ├── environment.yml</span><br><span class="line">│   └── secrets<span class="selector-class">.example</span>.yml</span><br><span class="line">├── serverless.yml</span><br><span class="line">├── <span class="attribute">src</span></span><br><span class="line">│   ├── api</span><br><span class="line">│   │   ├── admin</span><br><span class="line">│   │   │   ├── api<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │   │   ├── athlete</span><br><span class="line">│   │   │   ├── contest</span><br><span class="line">│   │   │   ├── database<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │   │   ├── index.ts</span><br><span class="line">│   │   │   ├── results</span><br><span class="line">│   │   │   └── submit</span><br><span class="line">│   │   └── webapp</span><br><span class="line">│   │       ├── api<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │       ├── athlete</span><br><span class="line">│   │       ├── contest</span><br><span class="line">│   │       ├── country</span><br><span class="line">│   │       ├── database<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │       ├── index.ts</span><br><span class="line">│   │       ├── nestjsTest<span class="selector-class">.controller</span>.ts</span><br><span class="line">│   │       └── rankings</span><br><span class="line">│   ├── core</span><br><span class="line">│   │   ├── athlete</span><br><span class="line">│   │   │   ├── athlete<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │   │   ├── entity</span><br><span class="line">│   │   │   ├── interfaces</span><br><span class="line">│   │   │   └── rankings<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │   ├── aws</span><br><span class="line">│   │   │   ├── aws<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │   │   ├── aws<span class="selector-class">.services</span><span class="selector-class">.interface</span>.ts</span><br><span class="line">│   │   │   └── aws<span class="selector-class">.services</span>.ts</span><br><span class="line">│   │   ├── category</span><br><span class="line">│   │   │   └── categories<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │   ├── contest</span><br><span class="line">│   │   │   ├── contest<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │   │   ├── entity</span><br><span class="line">│   │   │   └── points-calculator<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │   └── database</span><br><span class="line">│   │       ├── database<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │       ├── database<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │       ├── dynamodb</span><br><span class="line">│   │       ├── redis</span><br><span class="line">│   │       └── test</span><br><span class="line">│   ├── cron-job</span><br><span class="line">│   │   ├── cron-job<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │   ├── cron-job<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │   ├── cron-job<span class="selector-class">.spec</span>.ts</span><br><span class="line">│   │   ├── database<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │   └── index.ts</span><br><span class="line">│   ├── dynamodb-streams</span><br><span class="line">│   │   ├── athlete</span><br><span class="line">│   │   │   ├── athlete-contest-record<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │   │   ├── athlete-details-record<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │   │   └── athlete-records<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │   ├── contest</span><br><span class="line">│   │   │   ├── contest-record<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │   │   └── contest-records<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │   ├── database<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │   ├── dynamodb-streams<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │   ├── dynamodb-streams<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │   ├── index.ts</span><br><span class="line">│   │   ├── test</span><br><span class="line">│   │   │   ├── contest-modifications<span class="selector-class">.spec</span>.ts</span><br><span class="line">│   │   │   └── lambda-trigger.ts</span><br><span class="line">│   │   └── utils.ts</span><br><span class="line">│   ├── image-resizer</span><br><span class="line">│   │   ├── S3Events<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │   ├── S3Events<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │   ├── database<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │   ├── index.ts</span><br><span class="line">│   │   ├── test</span><br><span class="line">│   │   │   ├── lambda-trigger.ts</span><br><span class="line">│   │   │   └── s3-image-put<span class="selector-class">.spec</span>.ts</span><br><span class="line">│   │   └── thumbnail-creator</span><br><span class="line">│   │       ├── imagemagick.ts</span><br><span class="line">│   │       ├── s3<span class="selector-class">.service</span>.ts</span><br><span class="line">│   │       ├── thumbnail-creator<span class="selector-class">.module</span>.ts</span><br><span class="line">│   │       └── thumbnail-creator<span class="selector-class">.service</span>.ts</span><br><span class="line">│   └── shared</span><br><span class="line">│       ├── constants.ts</span><br><span class="line">│       ├── decorators</span><br><span class="line">│       │   └── roles<span class="selector-class">.decorator</span>.ts</span><br><span class="line">│       ├── enums</span><br><span class="line">│       │   ├── contestType-utility.ts</span><br><span class="line">│       │   ├── discipline-utility.ts</span><br><span class="line">│       │   ├── enums-utility.ts</span><br><span class="line">│       │   └── index.ts</span><br><span class="line">│       ├── env_variables.ts</span><br><span class="line">│       ├── exceptions</span><br><span class="line">│       │   ├── api<span class="selector-class">.error</span>.ts</span><br><span class="line">│       │   └── api<span class="selector-class">.exceptions</span>.ts</span><br><span class="line">│       ├── extensions.ts</span><br><span class="line">│       ├── filters</span><br><span class="line">│       │   └── exception<span class="selector-class">.filter</span>.ts</span><br><span class="line">│       ├── generators</span><br><span class="line">│       │   └── id<span class="selector-class">.generator</span>.ts</span><br><span class="line">│       ├── guards</span><br><span class="line">│       │   └── roles<span class="selector-class">.guard</span>.ts</span><br><span class="line">│       ├── index.ts</span><br><span class="line">│       ├── logger.ts</span><br><span class="line">│       ├── pipes</span><br><span class="line">│       │   └── JoiValidation<span class="selector-class">.pipe</span>.ts</span><br><span class="line">│       ├── types</span><br><span class="line">│       │   ├── express<span class="selector-class">.d</span>.ts</span><br><span class="line">│       │   ├── extensions<span class="selector-class">.d</span>.ts</span><br><span class="line">│       │   └── shared<span class="selector-class">.d</span>.ts</span><br><span class="line">│       └── utils.ts</span><br><span class="line">├── test</span><br><span class="line">│   ├── jest-e2e.json</span><br><span class="line">│   └── test-setup.ts</span><br><span class="line">├── tsconfig.json</span><br><span class="line">├── tslint.json</span><br><span class="line">└── webpack</span><br><span class="line">    ├── webpack<span class="selector-class">.config</span><span class="selector-class">.Dev</span>.js</span><br><span class="line">    ├── webpack<span class="selector-class">.config</span><span class="selector-class">.Prod</span>.js</span><br><span class="line">    ├── webpack<span class="selector-class">.config</span><span class="selector-class">.Test</span>.js</span><br><span class="line">    └── webpack<span class="selector-class">.config</span><span class="selector-class">.base</span>.js</span><br></pre></td></tr></table></figure>
+
+<p>特点：</p>
+<ul>
+<li>根目录中存放webpack、微服务配置 + 项目文档</li>
+<li><code>src</code>中会对功能进行划分建不同的文件夹： <code>api</code>、<code>core</code>、<code>dynamodb-stream</code>、<code>image-resizer</code></li>
+<li>在核心模块中，按照功能模块进划分，与之相关的entity、service放置在同一文件夹中</li>
+<li>抽离公共配置到<code>shared</code>文件夹：常量、自定义的装饰器、统一错误处理、过滤器、生成器、守卫、日志服务</li>
+</ul>
+<p>第三个参考项目：</p>
+<p>技术栈：使用 NestJS 的 Blog/CMS， RESTful API 服务端应用</p>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/surmon-china/nodepress">surmon-china/nodepressTemplate</a></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── API_DOC.md</span><br><span class="line">├── CHANGELOG.md</span><br><span class="line">├── LICENSE</span><br><span class="line">├── README.md</span><br><span class="line">├── classified</span><br><span class="line">├── cspell.json</span><br><span class="line">├── dbbackup</span><br><span class="line">├── logo.png</span><br><span class="line">├── logo.psd</span><br><span class="line">├── nest-cli.json</span><br><span class="line">├── package.json</span><br><span class="line">├── scripts</span><br><span class="line">│   ├── README.md</span><br><span class="line">│   ├── dbbackup.<span class="keyword">sh</span></span><br><span class="line">│   ├── dbrecover.<span class="keyword">sh</span></span><br><span class="line">│   └── deploy.<span class="keyword">sh</span></span><br><span class="line">├── src</span><br><span class="line">│   ├── app.config.<span class="keyword">ts</span></span><br><span class="line">│   ├── app.controller.spec.<span class="keyword">ts</span></span><br><span class="line">│   ├── app.controller.<span class="keyword">ts</span></span><br><span class="line">│   ├── app.environment.<span class="keyword">ts</span></span><br><span class="line">│   ├── app.module.<span class="keyword">ts</span></span><br><span class="line">│   ├── constants</span><br><span class="line">│   │   ├── cache.constant.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── meta.constant.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── <span class="built_in">system</span>.constant.<span class="keyword">ts</span></span><br><span class="line">│   │   └── text.constant.<span class="keyword">ts</span></span><br><span class="line">│   ├── decorators</span><br><span class="line">│   │   ├── cache.decorator.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── http.decorator.<span class="keyword">ts</span></span><br><span class="line">│   │   └── query-params.decorator.<span class="keyword">ts</span></span><br><span class="line">│   ├── errors</span><br><span class="line">│   │   ├── <span class="keyword">bad</span>-request.error.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── custom.error.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── forbidden.error.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── unauthorized.error.<span class="keyword">ts</span></span><br><span class="line">│   │   └── validation.error.<span class="keyword">ts</span></span><br><span class="line">│   ├── filters</span><br><span class="line">│   │   └── error.<span class="built_in">filter</span>.<span class="keyword">ts</span></span><br><span class="line">│   ├── guards</span><br><span class="line">│   │   ├── auth.guard.<span class="keyword">ts</span></span><br><span class="line">│   │   └── humanized-auth.guard.<span class="keyword">ts</span></span><br><span class="line">│   ├── interceptors</span><br><span class="line">│   │   ├── cache.interceptor.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── error.interceptor.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── logging.interceptor.<span class="keyword">ts</span></span><br><span class="line">│   │   └── transform.interceptor.<span class="keyword">ts</span></span><br><span class="line">│   ├── interfaces</span><br><span class="line">│   │   ├── http.interface.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── mongoose.interface.<span class="keyword">ts</span></span><br><span class="line">│   │   └── state.interface.<span class="keyword">ts</span></span><br><span class="line">│   ├── main.<span class="keyword">ts</span></span><br><span class="line">│   ├── middlewares</span><br><span class="line">│   │   ├── cors.middleware.<span class="keyword">ts</span></span><br><span class="line">│   │   └── origin.middleware.<span class="keyword">ts</span></span><br><span class="line">│   ├── models</span><br><span class="line">│   │   └── <span class="built_in">extend</span>.model.<span class="keyword">ts</span></span><br><span class="line">│   ├── modules</span><br><span class="line">│   │   ├── announcement</span><br><span class="line">│   │   │   ├── announcement.controller.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── announcement.model.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── announcement.module.<span class="keyword">ts</span></span><br><span class="line">│   │   │   └── announcement.service.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── article</span><br><span class="line">│   │   │   ├── article.controller.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── article.model.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── article.module.<span class="keyword">ts</span></span><br><span class="line">│   │   │   └── article.service.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── auth</span><br><span class="line">│   │   │   ├── auth.controller.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── auth.interface.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── auth.model.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── auth.module.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── auth.service.<span class="keyword">ts</span></span><br><span class="line">│   │   │   └── jwt.strategy.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── category</span><br><span class="line">│   │   │   ├── category.controller.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── category.model.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── category.module.<span class="keyword">ts</span></span><br><span class="line">│   │   │   └── category.service.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── comment</span><br><span class="line">│   │   │   ├── comment.controller.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── comment.model.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── comment.module.<span class="keyword">ts</span></span><br><span class="line">│   │   │   └── comment.service.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── expansion</span><br><span class="line">│   │   │   ├── expansion.controller.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── expansion.module.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── expansion.service.dbbackup.<span class="keyword">ts</span></span><br><span class="line">│   │   │   └── expansion.service.statistic.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── like</span><br><span class="line">│   │   │   ├── like.controller.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── like.module.<span class="keyword">ts</span></span><br><span class="line">│   │   │   └── like.service.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── option</span><br><span class="line">│   │   │   ├── option.controller.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── option.model.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── option.module.<span class="keyword">ts</span></span><br><span class="line">│   │   │   └── option.service.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── syndication</span><br><span class="line">│   │   │   ├── syndication.controller.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── syndication.module.<span class="keyword">ts</span></span><br><span class="line">│   │   │   └── syndication.service.<span class="keyword">ts</span></span><br><span class="line">│   │   └── <span class="keyword">tag</span></span><br><span class="line">│   │       ├── <span class="keyword">tag</span>.controller.<span class="keyword">ts</span></span><br><span class="line">│   │       ├── <span class="keyword">tag</span>.model.<span class="keyword">ts</span></span><br><span class="line">│   │       ├── <span class="keyword">tag</span>.module.<span class="keyword">ts</span></span><br><span class="line">│   │       └── <span class="keyword">tag</span>.service.<span class="keyword">ts</span></span><br><span class="line">│   ├── pipes</span><br><span class="line">│   │   └── validation.pipe.<span class="keyword">ts</span></span><br><span class="line">│   ├── processors</span><br><span class="line">│   │   ├── cache</span><br><span class="line">│   │   │   ├── cache.config.service.<span class="keyword">ts</span></span><br><span class="line">│   │   │   ├── cache.module.<span class="keyword">ts</span></span><br><span class="line">│   │   │   └── cache.service.<span class="keyword">ts</span></span><br><span class="line">│   │   ├── database</span><br><span class="line">│   │   │   ├── database.module.<span class="keyword">ts</span></span><br><span class="line">│   │   │   └── database.provider.<span class="keyword">ts</span></span><br><span class="line">│   │   └── helper</span><br><span class="line">│   │       ├── helper.module.<span class="keyword">ts</span></span><br><span class="line">│   │       ├── helper.service.akismet.<span class="keyword">ts</span></span><br><span class="line">│   │       ├── helper.service.<span class="keyword">cs</span>.<span class="keyword">ts</span></span><br><span class="line">│   │       ├── helper.service.email.<span class="keyword">ts</span></span><br><span class="line">│   │       ├── helper.service.google.<span class="keyword">ts</span></span><br><span class="line">│   │       ├── helper.service.ip.<span class="keyword">ts</span></span><br><span class="line">│   │       └── helper.service.seo.<span class="keyword">ts</span></span><br><span class="line">│   └── transformers</span><br><span class="line">│       ├── codec.transformer.<span class="keyword">ts</span></span><br><span class="line">│       ├── error.transformer.<span class="keyword">ts</span></span><br><span class="line">│       ├── model.transformer.<span class="keyword">ts</span></span><br><span class="line">│       ├── mongoose.transformer.<span class="keyword">ts</span></span><br><span class="line">│       └── urlmap.transformer.<span class="keyword">ts</span></span><br><span class="line">├── test</span><br><span class="line">│   ├── app.e2e-spec.<span class="keyword">ts</span></span><br><span class="line">│   └── jest-e2e.json</span><br><span class="line">├── tsconfig.build.json</span><br><span class="line">├── tsconfig.json</span><br><span class="line">├── tsconfig.spec.json</span><br><span class="line">└── yarn.lock</span><br></pre></td></tr></table></figure>
+
+<p>特点：</p>
+<ul>
+<li> 项目文档及相关的资源在根目录</li>
+<li><code>src</code>中<code>modules</code>会对功能进行划分建不同的文件夹</li>
+<li>单个功能文件夹中，会包括一个完整CURD的相关文件(model/controller/module/service)</li>
+<li>把公共的代码（按照nestjs逻辑分层）拆成单独的文件夹<code>guards</code>、<code>filters</code>、<code>decorators</code>、<code>interceptors</code>、<code>interfaces</code>、<code>errors</code></li>
+</ul>
+<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><p>项目：<a target="_blank" rel="noopener" href="https://github.com/CatsMiaow/node-nestjs-structure">CatsMiaow/node-nestjs-structure</a></p>
+<p>下面的项目结构：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">+-- bin                  <span class="regexp">//</span> Custom tasks</span><br><span class="line">+-- dist                 <span class="regexp">//</span> Source build</span><br><span class="line">+-- public               <span class="regexp">//</span> Static Files</span><br><span class="line">+-- src</span><br><span class="line">|   +-- config           <span class="regexp">//</span> Environment Configuration</span><br><span class="line">|   +-- entity           <span class="regexp">//</span> TypeORM Entities generated by `typeorm-model-generator` module</span><br><span class="line">|   +-- auth             <span class="regexp">//</span> Authentication</span><br><span class="line">|   +-- common           <span class="regexp">//</span> Global Nest Module</span><br><span class="line">|   |   +-- constants    <span class="regexp">//</span> Constant value and Enum</span><br><span class="line">|   |   +-- controllers  <span class="regexp">//</span> Nest Controllers</span><br><span class="line">|   |   +-- decorators   <span class="regexp">//</span> Nest Decorators</span><br><span class="line">|   |   +-- dto          <span class="regexp">//</span> DTO (Data Transfer Object) Schema, Validation</span><br><span class="line">|   |   +-- filters      <span class="regexp">//</span> Nest Filters</span><br><span class="line">|   |   +-- guards       <span class="regexp">//</span> Nest Guards</span><br><span class="line">|   |   +-- interceptors <span class="regexp">//</span> Nest Interceptors</span><br><span class="line">|   |   +-- interfaces   <span class="regexp">//</span> TypeScript Interfaces</span><br><span class="line">|   |   +-- middleware   <span class="regexp">//</span> Nest Middleware</span><br><span class="line">|   |   +-- pipes        <span class="regexp">//</span> Nest Pipes</span><br><span class="line">|   |   +-- providers    <span class="regexp">//</span> Nest Providers</span><br><span class="line">|   |   +-- *            <span class="regexp">//</span> models, repositories, services...</span><br><span class="line">|   +-- shared           <span class="regexp">//</span> Shared Nest Modules</span><br><span class="line">|   +-- gql              <span class="regexp">//</span> GraphQL Structure Sample</span><br><span class="line">|   +-- *                <span class="regexp">//</span> Other Nest Modules, non-global, same as common structure above</span><br><span class="line">+-- test                 <span class="regexp">//</span> Jest testing</span><br><span class="line">+-- typings              <span class="regexp">//</span> Modules and global type definitions</span><br></pre></td></tr></table></figure>
+
+<p>如果是功能模块：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Module structure</span><br><span class="line">// <span class="keyword">Add</span> folders according <span class="keyword">to</span> module scale. <span class="keyword">If</span> it<span class="string">&#x27;s small, you don&#x27;</span>t need <span class="keyword">to</span> <span class="keyword">add</span> folders.</span><br><span class="line">+<span class="comment">-- src/greeter</span></span><br><span class="line">|   +<span class="comment">-- *                // folders</span></span><br><span class="line">|   +<span class="comment">-- greeter.constant.ts</span></span><br><span class="line">|   +<span class="comment">-- greeter.controller.ts</span></span><br><span class="line">|   +<span class="comment">-- greeter.service.ts</span></span><br><span class="line">|   +<span class="comment">-- greeter.module.ts</span></span><br><span class="line">|   +<span class="comment">-- greeter.*.ts</span></span><br><span class="line">|   +<span class="comment">-- index.ts</span></span><br></pre></td></tr></table></figure>
+
+<p>特点：</p>
+<ul>
+<li>项目文档及相关的资源在根目录，包括<code>typings</code>、<code>test</code>、<code>bin</code></li>
+<li><code>src</code>中会对功能进行划分建不同的文件夹</li>
+<li>抽离公共代码到<code>common</code>文件夹，配置文件放在<code>config</code>文件夹，实体类放置在<code>entity</code>中</li>
+<li>鉴权相关的逻辑放在<code>auth</code></li>
+<li>把同类的<code>guards</code>、<code>filters</code>、<code>decorators</code>、<code>interceptors</code>、<code>interfaces</code>、<code>errors</code>存放在<code>common</code>文件夹中</li>
+</ul>
+<h2 id="代码规范-风格指南"><a href="#代码规范-风格指南" class="headerlink" title="代码规范(风格指南)"></a>代码规范(风格指南)</h2><p>我们对Angular风格指南进行了摘抄，如下：</p>
+<blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://angular.cn/guide/styleguide">Angular风格指南</a></p>
+</blockquote>
+<h3 id="总则"><a href="#总则" class="headerlink" title="总则"></a>总则</h3><p><strong>坚持</strong>每个文件只定义一样东西（例如服务或组件）</p>
+<p><strong>考虑</strong>把文件大小限制在 400 行代码以内</p>
+<p><strong>坚持</strong>定义简单函数</p>
+<p><strong>考虑</strong>限制在 75 行之内</p>
+<h3 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h3><p><strong>坚持</strong>所有符号使用一致的命名规则</p>
+<p><strong>坚持</strong>遵循同一个模式来描述符号的特性和类型</p>
+<h4 id="使用点和横杠来分隔文件名"><a href="#使用点和横杠来分隔文件名" class="headerlink" title="使用点和横杠来分隔文件名"></a>使用点和横杠来分隔文件名</h4><p><strong>坚持</strong> 在描述性名字中，用横杠来分隔单词。</p>
+<p><strong>坚持</strong>使用点来分隔描述性名字和类型。</p>
+<p><strong>坚持</strong>遵循先描述组件特性，再描述它的类型的模式，对所有组件使用一致的类型命名规则。推荐的模式为 <code>feature.type.ts</code>。</p>
+<p><strong>坚持</strong>使用惯用的后缀来描述类型，包括 <code>*.service</code>、<code>*.component</code>、<code>*.pipe</code>、<code>.module</code>、<code>.directive</code>。 必要时可以创建更多类型名，但必须注意，不要创建太多。</p>
+<h4 id="符号名与文件名"><a href="#符号名与文件名" class="headerlink" title="符号名与文件名"></a>符号名与文件名</h4><p><strong>坚持</strong>为所有东西使用一致的命名约定，以它们所代表的东西命名。</p>
+<p><strong>坚持</strong>使用<strong>大写驼峰命名法来命名类</strong></p>
+<p><strong>坚持</strong>匹配符号名与它所在的文件名</p>
+<p><strong>坚持</strong>在符号名后面追加约定的类型后缀（例如 <code>Component</code>、<code>Directive</code>、<code>Module</code>、<code>Pipe</code>、<code>Service</code>）。</p>
+<p><strong>坚持</strong>在文件名后面追加约定的类型后缀（例如 <code>.component.ts</code>、<code>.directive.ts</code>、<code>.module.ts</code>、<code>.pipe.ts</code>、<code>.service.ts</code>）</p>
+<p><strong>坚持</strong>使用<em>中线命名法（dashed-case）</em>或叫<em>烤串命名法（kebab-case）</em>来命名组件的元素选择器。</p>
+<h4 id="服务名-amp-管道名"><a href="#服务名-amp-管道名" class="headerlink" title="服务名&amp;管道名"></a>服务名&amp;管道名</h4><p><strong>坚持</strong>使用一致的规则命名服务，以它们的特性来命名</p>
+<p><strong>坚持</strong>为服务的类名加上 <code>Service</code> 后缀。 例如，获取数据或英雄列表的服务应该命名为 <code>DataService</code> 或 <code>HeroService</code></p>
+<p><strong>坚持</strong>为所有管道使用一致的命名约定，用它们的特性来命名。 管道类名应该使用 <a target="_blank" rel="noopener" href="https://angular.cn/guide/glossary#case-types">UpperCamelCase</a>（类名的通用约定），而相应的 <code>name</code> 字符串应该使用 lowerCamelCase。 <code>name</code> 字符串中不应该使用中线（“中线格式”或“烤串格式”）。例如：</p>
+<p><code>ellipsis.pipe.ts</code></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pipe</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;ellipsis&#x27;</span> &#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">EllipsisPipe</span> <span class="title">implements</span> <span class="title">PipeTransform</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>和</p>
+<p><code>init-caps.pipe.ts</code></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pipe</span>(&#123; <span class="attr">name</span>: <span class="string">&#x27;initCaps&#x27;</span> &#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">InitCapsPipe</span> <span class="title">implements</span> <span class="title">PipeTransform</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>坚持</strong>在模块中只包含模块间的依赖关系，所有其它逻辑都应该放到服务中</p>
+<p><strong>坚持</strong>把可复用的逻辑放到服务中，保持组件简单，聚焦于它们预期目的</p>
+<p><strong>坚持</strong>在同一个注入器内，把服务当做单例使用，用它们来共享数据和功能</p>
+<p><strong>坚持</strong>创建封装在上下文中的单一职责的服务</p>
+<p><strong>坚持</strong>当服务成长到超出单一用途时，创建一个新服务</p>
+<p><strong>坚持</strong>把数据操作和与数据交互的逻辑重构到服务里。</p>
+<h4 id="引导"><a href="#引导" class="headerlink" title="引导"></a>引导</h4><p><strong>坚持</strong>把应用的引导程序和平台相关的逻辑放到名为 <code>main.ts</code> 的文件里</p>
+<p><strong>坚持</strong>在引导逻辑中包含错误处理代码</p>
+<p><strong>避免</strong>把应用逻辑放在 <code>main.ts</code> 中，而应放在组件或服务里</p>
+<h4 id="测试文件名"><a href="#测试文件名" class="headerlink" title="测试文件名"></a>测试文件名</h4><p><strong>单元测试：</strong></p>
+<p><strong>坚持</strong>测试规格文件名与被测试组件文件名相同</p>
+<p><strong>坚持</strong>测试规格文件名添加 <code>.spec</code> 后缀</p>
+<p><strong>端到端的测试：</strong></p>
+<p><strong>坚持</strong>端到端测试规格文件和它们所测试的特性同名，添加 <code>.e2e-spec</code> 后缀，或者放在特定的文件夹中。</p>
+<h3 id="其他原则"><a href="#其他原则" class="headerlink" title="其他原则"></a>其他原则</h3><ul>
+<li><p>定位：</p>
+<p><strong>坚持</strong>直观、简单和快速地定位代码。</p>
+</li>
+<li><p>识别：</p>
+<p><strong>坚持</strong>命名文件到这个程度：看到名字立刻知道它包含了什么，代表了什么。</p>
+<p><strong>坚持</strong>文件名要具有说明性，确保文件中只包含一个组件。</p>
+<p><strong>避免</strong>创建包含多个组件、服务或者混合体的文件。</p>
+</li>
+<li><p>扁平</p>
+<p><strong>坚持</strong>尽可能保持扁平的目录结构。</p>
+<p><strong>考虑</strong>当同一目录下达到 7 个或更多个文件时创建子目录。</p>
+<p><strong>考虑</strong>配置 IDE，以隐藏无关的文件，例如生成出来的 <code>.js</code> 文件和 <code>.js.map</code> 文件等。</p>
+</li>
+<li><p>T-DRY</p>
+<p><strong>坚持</strong> DRY（Don’t Repeat Yourself，不重复自己）。</p>
+<p><strong>避免</strong>过度 DRY，以致牺牲了阅读性</p>
+</li>
+<li><p>代码结构</p>
+<p><strong>坚持</strong>从零开始，但要考虑应用程序接下来的路往哪儿走</p>
+<p><strong>坚持</strong>有一个近期实施方案和一个长期的愿景</p>
+<p><strong>坚持</strong>把所有源代码都放到名为 <code>src</code> 的目录里</p>
+<p><strong>坚持</strong>如果组件具有多个伴生文件 (<code>.ts</code>、<code>.html</code>、<code>.css</code> 和 <code>.spec</code>)，就为它创建一个文件夹</p>
+</li>
+<li><p>ESLint</p>
+<p><strong>坚持</strong>使用VSCode等IDE、配合ESLint + Prettier等工具来整理代码格式、检查代码风格问题。</p>
+</li>
+</ul>
+<h2 id="技术整合"><a href="#技术整合" class="headerlink" title="技术整合"></a>技术整合</h2><p>会从三个层次进行介绍：</p>
+<ul>
+<li><p>数据库 -&gt; 配置(多环境) -&gt; 配置验证 -&gt; 系统日志（本篇）</p>
+</li>
+<li><p>跨域 -&gt; 错误拦截器 -&gt; 缓存Redis</p>
+</li>
+<li><p>数据校验 -&gt; 日志拦截 -&gt; 鉴权</p>
+</li>
+</ul>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><h4 id="ORM工具库"><a href="#ORM工具库" class="headerlink" title="ORM工具库"></a>ORM工具库</h4><p>通过数据库集成库或 <code>ORM</code> ，例如 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/sequelize">Sequelize (recipe)</a>和 <a target="_blank" rel="noopener" href="https://github.com/typeorm/typeorm">TypeORM</a> ，以在更高的抽象级别上进行操作。</p>
+<blockquote>
+<p>ORM：对象关系映射（英语：Object Relational Mapping）是一种程序设计技术，用于实现面向对象编程语言里不同类型系统的数据之间的转换。 从效果上说，它其实是创建了一个可在编程语言里使用的“虚拟对象数据库”。</p>
+</blockquote>
+<p>应用场景：</p>
+<ul>
+<li>SQL -&gt; DB：我们写一套配置，针对不同的数据库，都可以方便的接入</li>
+<li>DB -&gt; SQL：针对不同的数据库，都可以通过抽象层进行联接</li>
+</ul>
+<blockquote>
+<p><code>Nest</code> 还提供了与现成的 <code>TypeORM</code> 与 <code>@nestjs/typeorm</code> 的紧密集成，我们将在本章中对此进行介绍，而与 <code>@nestjs/mongoose</code> 的紧密集成将在官方的<a target="_blank" rel="noopener" href="https://docs.nestjs.cn/7/techniques?id=mongo">这一章</a>中介绍</p>
+</blockquote>
+<p>目前主要的ORM工具库与特点：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/typeorm">typeorm</a>：跨库查询，事务、TS支持，支持数据库：MySQL, MariaDB, Postgres, CockroachDB, SQLite, MSSQL, Oracle, SAPHana, sql.js, MongoDB</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/objection">objection</a>： TS、事务、饥饿加载、数据效验，基于<a target="_blank" rel="noopener" href="http://knexjs.org/">knexjs</a>，支持数据库：Postgres**, <strong>MSSQL</strong>, <strong>MySQL</strong>, <strong>MariaDB</strong>, <strong>SQLite3</strong>, **Oracle, Amazon Redshift</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/sequelize">sequelize</a>： 有非官方的中文文档，目前缺少核心的维护与开发。支持：PostgreSQL, MySQL, MariaDB, SQLite, MSSQL</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/prisma">prisma</a>：后起之秀(官方文档写的很不错)，SQL自动合并，对接GraphQL，客户端、服务端+数据管理GUI，支持：PostgreSQL, MSSQL, MySQL, SQLite</p>
+</li>
+</ul>
+<p>通过上面的简单对比，目前来看TypeORM是<code>nest</code>官方支持且推荐的，可以来<a target="_blank" rel="noopener" href="https://typeorm.biunav.com/zh/#%E5%AE%89%E8%A3%85">这里</a>看看它的特性。</p>
+<h4 id="使用docker-compose创建progres数据库"><a href="#使用docker-compose创建progres数据库" class="headerlink" title="使用docker-compose创建progres数据库"></a>使用<code>docker-compose</code>创建progres数据库</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.5&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">postgres:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">postgres_container</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">postgres</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">POSTGRES_USER:</span> <span class="string">$&#123;POSTGRES_USER:-postgres&#125;</span></span><br><span class="line">      <span class="attr">POSTGRES_PASSWORD:</span> <span class="string">$&#123;POSTGRES_PASSWORD:-changeme&#125;</span></span><br><span class="line">      <span class="attr">PGDATA:</span> <span class="string">/data/postgres</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">       <span class="bullet">-</span> <span class="string">postgres:/data/postgres</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5432:5432&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">postgres</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">  </span><br><span class="line">  <span class="attr">pgadmin:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">pgadmin_container</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">dpage/pgadmin4</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">PGADMIN_DEFAULT_EMAIL:</span> <span class="string">$&#123;PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org&#125;</span></span><br><span class="line">      <span class="attr">PGADMIN_DEFAULT_PASSWORD:</span> <span class="string">$&#123;PGADMIN_DEFAULT_PASSWORD:-admin&#125;</span></span><br><span class="line">      <span class="attr">PGADMIN_CONFIG_SERVER_MODE:</span> <span class="string">&#x27;False&#x27;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">       <span class="bullet">-</span> <span class="string">pgadmin:/root/.pgadmin</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;$&#123;PGADMIN_PORT:-5050&#125;:80&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">postgres</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">postgres:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span></span><br><span class="line"></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">    <span class="attr">postgres:</span></span><br><span class="line">    <span class="attr">pgadmin:</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>访问postgres<br>localhost:5432<br>用户名: postgres (默认)<br>密码：changeme（默认）</li>
+<li>进入PgAdmin<br>网址：<a target="_blank" rel="noopener" href="http://localhost:5050/">http://localhost:5050</a><br>用户名: <a href="mailto:&#112;&#103;&#x61;&#100;&#x6d;&#x69;&#110;&#52;&#x40;&#x70;&#x67;&#97;&#100;&#x6d;&#105;&#x6e;&#46;&#111;&#114;&#103;">&#112;&#103;&#x61;&#100;&#x6d;&#x69;&#110;&#52;&#x40;&#x70;&#x67;&#97;&#100;&#x6d;&#105;&#x6e;&#46;&#111;&#114;&#103;</a> (默认)<br>密码：admin（默认)</li>
+</ul>
+<h4 id="集成TypeORM和Postgre数据库"><a href="#集成TypeORM和Postgre数据库" class="headerlink" title="集成TypeORM和Postgre数据库"></a>集成<code>TypeORM</code>和<code>Postgre</code>数据库</h4><p>步骤：</p>
+<ul>
+<li>安装<code>@nestjs/typeorm</code>，<code>typeorm</code></li>
+<li>安装nodejs侧的数据库驱动程序，如<code>mysql</code>，<code>pg</code></li>
+<li>新建数据库配置文件，配置数据库</li>
+<li>在<code>app.module.ts</code>引入数据库的配置文件，调用<code>TypeOrmModule.forRoot</code>方法</li>
+<li>启动程序，进行测试</li>
+</ul>
+<p>安装依赖（跳过数据库安装过程）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save @nestjs/typeorm typeorm pg</span><br></pre></td></tr></table></figure>
+
+<p>按照上面的步骤，创建文件<code>src/config/database.config.ts</code>：</p>
+<p>数据库配置信息：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; TypeOrmModuleOptions &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/typeorm&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> typeOrmConfig: TypeOrmModuleOptions = &#123;</span><br><span class="line">  <span class="keyword">type</span>: <span class="string">&#x27;postgres&#x27;</span>,</span><br><span class="line">  host: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">  port: <span class="number">5432</span>,</span><br><span class="line">  username: <span class="string">&#x27;postgres&#x27;</span>,</span><br><span class="line">  password: <span class="string">&#x27;changeme&#x27;</span>,</span><br><span class="line">  database: <span class="string">&#x27;demo-db&#x27;</span>,</span><br><span class="line">  entities: [<span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/../entity/**/*.&#123;js,ts&#125;`</span>],</span><br><span class="line">  synchronize: <span class="literal">false</span>,</span><br><span class="line">  logging: [<span class="string">&quot;error&quot;</span>],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>src/app.module.ts</code>中添加<code>TypeOrm</code>配置：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Module &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; TypeOrmModule &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/typeorm&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; typeOrmConfig &#125; <span class="keyword">from</span> <span class="string">&#x27;./config/typeorm.config&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Module</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    TypeOrmModule.forRoot(typeOrmConfig)</span><br><span class="line">  ],</span><br><span class="line">  providers: [],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppModule</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以使用<code>npm run start:dev</code>来进行调试了。</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>应用程序通常在不同的<strong>环境</strong>中运行，根据环境（Development，Production）的不同，应该使用不同的配置设置。</p>
+<p>两种方法：</p>
+<ul>
+<li>使用<code>@nestjs/config</code>来实现对<code>.env</code>的<code>key=value</code>对进行解析</li>
+<li>使用<code>config</code>库解析<code>yaml</code>格式的文件</li>
+</ul>
+<h4 id="官方-nestjs-config"><a href="#官方-nestjs-config" class="headerlink" title="官方@nestjs/config"></a>官方<code>@nestjs/config</code></h4><h5 id="最简单的用法："><a href="#最简单的用法：" class="headerlink" title="最简单的用法："></a>最简单的用法：</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --save @nestjs/config</span><br></pre></td></tr></table></figure>
+
+<p>配置<code>src/app.module.ts</code>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Module &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppController &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.controller&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.service&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ConfigModule &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/config&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Module</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    ConfigModule.forRoot(),</span><br><span class="line">  ],</span><br><span class="line">  controllers: [AppController],</span><br><span class="line">  providers: [AppService],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppModule</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后创建：<code>.env</code>文件：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">DATABASE_USER</span>=test</span><br><span class="line"><span class="attr">DATABASE_PASSWORD</span>=test123</span><br></pre></td></tr></table></figure>
+
+<p>下面来使用<code>src/app.controller.ts</code>中使用：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Controller, Get &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ConfigService &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/config&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.service&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppController</span> </span>&#123;</span><br><span class="line">  <span class="title">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> <span class="keyword">readonly</span> appService: AppService,</span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> configService: ConfigService,</span></span><br><span class="line"><span class="params">  </span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Get</span>()</span><br><span class="line">  getHello(): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> dbUser = <span class="built_in">this</span>.configService.get&lt;<span class="built_in">string</span>&gt;(<span class="string">&#x27;DATABASE_USER&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(dbUser); <span class="comment">// 这里来测试</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.appService.getHello();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果访问<code>localhost:3000</code>即可以看到：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Nest] 14039   - 2021/03/13 下午9:43:54   [NestFactory] Starting Nest application...</span><br><span class="line">[Nest] 14039   - 2021/03/13 下午9:43:54   [InstanceLoader] ConfigHostModule dependencies initialized +95ms</span><br><span class="line">[Nest] 14039   - 2021/03/13 下午9:43:54   [InstanceLoader] ConfigModule dependencies initialized +0ms</span><br><span class="line">[Nest] 14039   - 2021/03/13 下午9:43:54   [InstanceLoader] AppModule dependencies initialized +1ms</span><br><span class="line">[Nest] 14039   - 2021/03/13 下午9:43:54   [RoutesResolver] AppController &#123;&#125;: +7ms</span><br><span class="line">[Nest] 14039   - 2021/03/13 下午9:43:54   [RouterExplorer] Mapped &#123;, GET&#125; route +3ms</span><br><span class="line">[Nest] 14039   - 2021/03/13 下午9:43:54   [NestApplication] Nest application successfully started +2ms</span><br><span class="line"><span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="进阶玩法"><a href="#进阶玩法" class="headerlink" title="进阶玩法"></a>进阶玩法</h5><img class="lazyload" src="https://static.www.toimc.com/blog/img/2021/nestjs-example-project-4/nestjs-1.jpg?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/200">
+
+<p>从这里点进去，我们发现<code>ConfigModuleOptions</code>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ConfigFactory &#125; <span class="keyword">from</span> <span class="string">&#x27;./config-factory.interface&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> ConfigModuleOptions &#123;</span><br><span class="line">    cache?: <span class="built_in">boolean</span>;</span><br><span class="line">    isGlobal?: <span class="built_in">boolean</span>;</span><br><span class="line">    ignoreEnvFile?: <span class="built_in">boolean</span>;</span><br><span class="line">    ignoreEnvVars?: <span class="built_in">boolean</span>;</span><br><span class="line">    envFilePath?: <span class="built_in">string</span> | <span class="built_in">string</span>[];</span><br><span class="line">    encoding?: <span class="built_in">string</span>;</span><br><span class="line">    validate?: <span class="function">(<span class="params">config: Record&lt;<span class="built_in">string</span>, <span class="built_in">any</span>&gt;</span>) =&gt;</span> Record&lt;<span class="built_in">string</span>, <span class="built_in">any</span>&gt;;</span><br><span class="line">    validationSchema?: <span class="built_in">any</span>;</span><br><span class="line">    validationOptions?: Record&lt;<span class="built_in">string</span>, <span class="built_in">any</span>&gt;;</span><br><span class="line">    load?: <span class="built_in">Array</span>&lt;ConfigFactory&gt;;</span><br><span class="line">    expandVariables?: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所支持的参数。</p>
+<p>我们可以利用<code>envFilePath</code>配合<code>NODE_ENV</code>来，在不同的启动命令的时候使用不同的配置。</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i <span class="keyword">cross</span>-<span class="keyword">env</span></span><br></pre></td></tr></table></figure>
+
+<p>然后添加两个文件：<code>.env.development</code>与<code>.env.production</code>，比如<code>.env.production</code>：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">DATABASE_USER</span>=test1</span><br><span class="line"><span class="attr">DATABASE_PASSWORD</span>=test123321</span><br></pre></td></tr></table></figure>
+
+<p>下面修改<code>scripts</code>：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;start:prod&quot;: &quot;cross-env NODE_ENV=production node dist/main&quot;,</span><br></pre></td></tr></table></figure>
+
+<p>可以设置<code>app.module.ts</code>中默认是<code>development</code>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Module &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppController &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.controller&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.service&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ConfigModule &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/config&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> envPath = <span class="string">`.env.<span class="subst">$&#123;process.env.NODE_ENV || <span class="string">&#x27;development&#x27;</span>&#125;</span>`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;🚀 ~ file: app.module.ts ~ line 7 ~ envPath&#x27;</span>, envPath);</span><br><span class="line"></span><br><span class="line"><span class="meta">@Module</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    ConfigModule.forRoot(&#123;</span><br><span class="line">      envFilePath: envPath,</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">  controllers: [AppController],</span><br><span class="line">  providers: [AppService],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppModule</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样，大家可以启动了测试一下。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">➜ npm run start:prod</span><br><span class="line"></span><br><span class="line">&gt; nestjs-common-template@<span class="number">0.0</span>.<span class="number">1</span> start:prod <span class="regexp">/Users/m</span>acos<span class="regexp">/Projects/</span>nestjs/nestjs-common-template</span><br><span class="line">&gt; cross-env NODE_ENV=production node dist/main</span><br><span class="line"></span><br><span class="line">🚀 ~ <span class="keyword">file</span>: app.module.ts ~ line <span class="number">7</span> ~ envPath .env.production</span><br><span class="line">[Nest] <span class="number">14977</span>   - <span class="number">2021</span><span class="regexp">/03/</span><span class="number">13</span> 下午<span class="number">11</span>:<span class="number">10</span>:<span class="number">13</span>   [NestFactory] Starting Nest application...</span><br><span class="line">[Nest] <span class="number">14977</span>   - <span class="number">2021</span><span class="regexp">/03/</span><span class="number">13</span> 下午<span class="number">11</span>:<span class="number">10</span>:<span class="number">13</span>   [InstanceLoader] ConfigHostModule <span class="keyword">dependencies</span> initialized +<span class="number">34</span>ms</span><br><span class="line">[Nest] <span class="number">14977</span>   - <span class="number">2021</span><span class="regexp">/03/</span><span class="number">13</span> 下午<span class="number">11</span>:<span class="number">10</span>:<span class="number">13</span>   [InstanceLoader] ConfigModule <span class="keyword">dependencies</span> initialized +<span class="number">1</span>ms</span><br><span class="line">[Nest] <span class="number">14977</span>   - <span class="number">2021</span><span class="regexp">/03/</span><span class="number">13</span> 下午<span class="number">11</span>:<span class="number">10</span>:<span class="number">13</span>   [InstanceLoader] AppModule <span class="keyword">dependencies</span> initialized +<span class="number">1</span>ms</span><br><span class="line">[Nest] <span class="number">14977</span>   - <span class="number">2021</span><span class="regexp">/03/</span><span class="number">13</span> 下午<span class="number">11</span>:<span class="number">10</span>:<span class="number">13</span>   [RoutesResolver] AppController &#123;&#125;: +<span class="number">6</span>ms</span><br><span class="line">[Nest] <span class="number">14977</span>   - <span class="number">2021</span><span class="regexp">/03/</span><span class="number">13</span> 下午<span class="number">11</span>:<span class="number">10</span>:<span class="number">13</span>   [RouterExplorer] Mapped &#123;, GET&#125; route +<span class="number">3</span>ms</span><br><span class="line">[Nest] <span class="number">14977</span>   - <span class="number">2021</span><span class="regexp">/03/</span><span class="number">13</span> 下午<span class="number">11</span>:<span class="number">10</span>:<span class="number">13</span>   [NestApplication] Nest application successfully started +<span class="number">3</span>ms</span><br><span class="line">test1</span><br></pre></td></tr></table></figure>
+
+<p>上面打印的<code>test1</code>正是我们设置在<code>.env.production</code>中的内容。</p>
+<h5 id="解析yaml格式的配置"><a href="#解析yaml格式的配置" class="headerlink" title="解析yaml格式的配置"></a>解析<code>yaml</code>格式的配置</h5><p>步骤：</p>
+<ul>
+<li><p>下载<code>js-yaml</code>与<code>@types/js-yaml</code></p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> i js-yaml</span><br><span class="line"><span class="built_in">npm</span> i -D @types/js-yaml</span><br></pre></td></tr></table></figure></li>
+<li><p>创建配置：<code>config.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">http:</span></span><br><span class="line">  <span class="attr">host:</span> <span class="string">&#x27;localhost&#x27;</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="attr">db:</span></span><br><span class="line">  <span class="attr">postgres:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&#x27;localhost&#x27;</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">5432</span></span><br><span class="line">    <span class="attr">database:</span> <span class="string">&#x27;yaml-db&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">sqlite:</span></span><br><span class="line">    <span class="attr">database:</span> <span class="string">&#x27;sqlite.db&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>配置自定义文件<code>configuration.ts</code></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; readFileSync &#125; <span class="keyword">from</span> <span class="string">&#x27;fs&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> yaml <span class="keyword">from</span> <span class="string">&#x27;js-yaml&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; join &#125; <span class="keyword">from</span> <span class="string">&#x27;path&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> YAML_CONFIG_FILENAME = <span class="string">&#x27;config.yml&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> filePath = join(__dirname, YAML_CONFIG_FILENAME);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> yaml.load(readFileSync(filePath, <span class="string">&#x27;utf8&#x27;</span>));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>调用<code>forRoot</code>中的load方法</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Module &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppController &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.controller&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.service&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ConfigModule &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/config&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Configuration <span class="keyword">from</span> <span class="string">&#x27;./config/configuration&#x27;</span>; <span class="comment">// 这里调整</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Module</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    ConfigModule.forRoot(&#123;</span><br><span class="line">      load: [Configuration], <span class="comment">// load方法</span></span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">  controllers: [AppController],</span><br><span class="line">  providers: [AppService],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppModule</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>修改<code>app.controller.ts</code>中的代码：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Controller, Get &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ConfigService &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/config&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.service&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; DatabaseConfig &#125; <span class="keyword">from</span> <span class="string">&#x27;./interface&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppController</span> </span>&#123;</span><br><span class="line">  <span class="title">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> <span class="keyword">readonly</span> appService: AppService,</span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> configService: ConfigService,</span></span><br><span class="line"><span class="params">  </span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Get</span>()</span><br><span class="line">  getHello(): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> db = <span class="built_in">this</span>.configService.get&lt;DatabaseConfig&gt;(<span class="string">&#x27;db&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(db);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.appService.getHello();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义<code>src/interface.ts</code>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> DatabaseConfig &#123;</span><br><span class="line">  postgres: PostgresConfig;</span><br><span class="line">  sqlite: SqliteConfig;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> PostgresConfig &#123;</span><br><span class="line">  url: <span class="built_in">string</span>;</span><br><span class="line">  port: <span class="built_in">number</span>;</span><br><span class="line">  database: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> SqliteConfig &#123;</span><br><span class="line">  database: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>最后测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Nest] 16960   - 2021/03/13 下午11:34:00   [NestFactory] Starting Nest application...</span><br><span class="line">[Nest] 16960   - 2021/03/13 下午11:34:00   [InstanceLoader] ConfigHostModule dependencies initialized +30ms</span><br><span class="line">[Nest] 16960   - 2021/03/13 下午11:34:00   [InstanceLoader] ConfigModule dependencies initialized +0ms</span><br><span class="line">[Nest] 16960   - 2021/03/13 下午11:34:00   [InstanceLoader] AppModule dependencies initialized +0ms</span><br><span class="line">[Nest] 16960   - 2021/03/13 下午11:34:00   [RoutesResolver] AppController &#123;&#125;: +4ms</span><br><span class="line">[Nest] 16960   - 2021/03/13 下午11:34:00   [RouterExplorer] Mapped &#123;, GET&#125; route +3ms</span><br><span class="line">[Nest] 16960   - 2021/03/13 下午11:34:00   [NestApplication] Nest application successfully started +1ms</span><br><span class="line">&#123;</span><br><span class="line">  postgres: &#123; url: <span class="string">&#x27;localhost&#x27;</span>, port: 5432, database: <span class="string">&#x27;yaml-db&#x27;</span> &#125;,</span><br><span class="line">  sqlite: &#123; database: <span class="string">&#x27;sqlite.db&#x27;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>写到这里，应该够用了，代码可以查看<a target="_blank" rel="noopener" href="https://github.com/toimc/nestjs-example-template/tree/48c0d75e807faa1da7de53de26a5b1512a6584aa">本次提交</a>。</p>
+<h4 id="使用config库解析"><a href="#使用config库解析" class="headerlink" title="使用config库解析"></a>使用<code>config</code>库解析</h4><p>步骤：</p>
+<ul>
+<li><p>安装第三方包<code>config</code></p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> i config -S</span><br><span class="line"><span class="built_in">npm</span> i cross-env -D</span><br></pre></td></tr></table></figure></li>
+<li><p>新建 配置文件<code>config/default.json</code>，同样还可以建立<code>development.json</code>, <code>production.json</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;server&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;happy&quot;</span>: <span class="string">&quot;my default value&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>development.json</code>:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;server&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;port&quot;</span>: <span class="number">3001</span>,</span><br><span class="line">    <span class="attr">&quot;host&quot;</span>: <span class="string">&quot;localhost&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>: <span class="string">&quot;test&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="string">&quot;test&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>production.json</code>:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;server&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;port&quot;</span>: <span class="number">3002</span>,</span><br><span class="line">    <span class="attr">&quot;host&quot;</span>: <span class="string">&quot;localhost&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>: <span class="string">&quot;prod&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="string">&quot;prod&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在<code>app.controller.ts</code>中使用：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Controller, Get &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.service&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> config <span class="keyword">from</span> <span class="string">&#x27;config&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppController</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"><span class="keyword">private</span> <span class="keyword">readonly</span> appService: AppService</span>)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Get</span>()</span><br><span class="line">  getHello(): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> server = config.get(<span class="string">&#x27;server&#x27;</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(server);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.appService.getHello();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>配置脚本：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;start:dev&quot;</span>: <span class="string">&quot;cross-env NODE_ENV=development nest start --watch&quot;</span>,</span><br><span class="line"><span class="string">&quot;start:prod&quot;</span>: <span class="string">&quot;cross-env NODE_ENV=production node dist/main&quot;</span>,</span><br></pre></td></tr></table></figure></li>
+<li><p>运行结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">➜ npm run start:dev</span><br><span class="line">[Nest] 34580   - 2021/03/14 上午12:50:42   [NestFactory] Starting Nest application...</span><br><span class="line">[Nest] 34580   - 2021/03/14 上午12:50:42   [InstanceLoader] AppModule dependencies initialized +34ms</span><br><span class="line">[Nest] 34580   - 2021/03/14 上午12:50:42   [RoutesResolver] AppController &#123;&#125;: +6ms</span><br><span class="line">[Nest] 34580   - 2021/03/14 上午12:50:42   [RouterExplorer] Mapped &#123;, GET&#125; route +3ms</span><br><span class="line">[Nest] 34580   - 2021/03/14 上午12:50:42   [NestApplication] Nest application successfully started +2ms</span><br><span class="line">&#123;</span><br><span class="line">  happy: <span class="string">&#x27;my default value&#x27;</span>,</span><br><span class="line">  port: 3001,</span><br><span class="line">  host: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">  username: <span class="string">&#x27;test&#x27;</span>,</span><br><span class="line">  password: <span class="string">&#x27;test&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">➜ npm run start:prod</span><br><span class="line"></span><br><span class="line">&gt; nestjs-common-template@0.0.1 start:prod /Users/macos/Projects/nestjs/nestjs-common-template</span><br><span class="line">&gt; cross-env NODE_ENV=production node dist/main</span><br><span class="line"></span><br><span class="line">[Nest] 34400   - 2021/03/14 上午12:50:03   [NestFactory] Starting Nest application...</span><br><span class="line">[Nest] 34400   - 2021/03/14 上午12:50:03   [InstanceLoader] AppModule dependencies initialized +71ms</span><br><span class="line">[Nest] 34400   - 2021/03/14 上午12:50:03   [RoutesResolver] AppController &#123;&#125;: +6ms</span><br><span class="line">[Nest] 34400   - 2021/03/14 上午12:50:03   [RouterExplorer] Mapped &#123;, GET&#125; route +2ms</span><br><span class="line">[Nest] 34400   - 2021/03/14 上午12:50:03   [NestApplication] Nest application successfully started +2ms</span><br><span class="line">&#123;</span><br><span class="line">  happy: <span class="string">&#x27;my default value&#x27;</span>,</span><br><span class="line">  port: 3002,</span><br><span class="line">  host: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">  username: <span class="string">&#x27;prod&#x27;</span>,</span><br><span class="line">  password: <span class="string">&#x27;prod&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>附上：<a target="_blank" rel="noopener" href="https://github.com/toimc/nestjs-example-template/tree/50858c28746323ee69a4dc65c6624f7d7c0937be">代码地址</a></p>
+</li>
+</ul>
+<h4 id="配置验证"><a href="#配置验证" class="headerlink" title="配置验证"></a>配置验证</h4><p>配置验证，主要是指在应用程序启动时，如果没有提供所需的环境变量或不符合某些验证规则，就会抛出一个异常。<code>@nestjs/config</code>包实现了两种不同的方式来实现这一点。</p>
+<ul>
+<li><code>Joi</code>内置验证器。通过<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/joi">Joi</a>，你可以定义一个对象模式，并根据它验证JavaScript对象</li>
+<li>一个自定义的<code>validate()</code>函数，它将环境变量作为输入</li>
+</ul>
+<h5 id="Joi用法"><a href="#Joi用法" class="headerlink" title="Joi用法"></a>Joi用法</h5><p>特别说明：</p>
+<ul>
+<li>最新版本的<code>joi</code>需要你运行Node v12或更高版本。旧版本的node请安装<code>v16.1.8</code>。这主要是因为在<code>v17.0.2</code>发布后，在构建的时候会出现错误。更多信息请参考其17.0.0发布说明，<a target="_blank" rel="noopener" href="https://joi.dev/resources/changelog/">点击这里</a>。</li>
+<li>joi最好配合官方的<code>@nestjs/config</code>进行使用</li>
+</ul>
+<p>步骤：</p>
+<ul>
+<li><p>安装依赖</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install <span class="comment">--save joi</span></span><br></pre></td></tr></table></figure></li>
+<li><p>定义验证Schema：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Module &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppController &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.controller&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.service&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> Joi <span class="keyword">from</span> <span class="string">&#x27;joi&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ConfigModule &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/config&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> envPath = <span class="string">`.env.<span class="subst">$&#123;process.env.NODE_ENV || <span class="string">&#x27;development&#x27;</span>&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Module</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    ConfigModule.forRoot(&#123;</span><br><span class="line">      envFilePath: envPath,</span><br><span class="line">      <span class="comment">// 这里多了一个属性：validationSchema</span></span><br><span class="line">      validationSchema: Joi.object(&#123;</span><br><span class="line">        NODE_ENV: Joi.string()</span><br><span class="line">          .valid(<span class="string">&#x27;development&#x27;</span>, <span class="string">&#x27;production&#x27;</span>, <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;provision&#x27;</span>)</span><br><span class="line">          .default(<span class="string">&#x27;development&#x27;</span>),</span><br><span class="line">        PORT: Joi.number().default(<span class="number">3000</span>),</span><br><span class="line">        DATABASE_USER: Joi.string().required()</span><br><span class="line">      &#125;),</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">  controllers: [AppController],</span><br><span class="line">  providers: [AppService],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppModule</span> </span>&#123;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>验证测试</p>
+<p>配置<code>错误</code>脚本：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;start:dev&quot;</span>: <span class="string">&quot;cross-env NODE_ENV=development PORT=toimc nest start --watch&quot;</span>,</span><br></pre></td></tr></table></figure>
+
+<p>配置正确的脚本：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;start:dev&quot;</span>: <span class="string">&quot;cross-env NODE_ENV=development PORT=3000 nest start --watch&quot;</span>,</span><br></pre></td></tr></table></figure>
+
+<p>测试命令</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="builtin-name">run</span> start:dev</span><br></pre></td></tr></table></figure>
+
+<p>错误的提示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[下午7:33:38] Found 0 errors. Watching <span class="keyword">for</span> file changes.</span><br><span class="line"></span><br><span class="line">/Users/macos/Projects/nestjs/nestjs-common-template/node_modules/_@nestjs_config@0.6.3@@nestjs/config/dist/config.module.js:61</span><br><span class="line">                throw new Error(`Config validation error: <span class="variable">$&#123;error.message&#125;</span>`);</span><br><span class="line">                ^</span><br><span class="line"></span><br><span class="line">Error: Config validation error: <span class="string">&quot;PORT&quot;</span> must be a number</span><br><span class="line">    at Function.forRoot (/Users/macos/Projects/nestjs/nestjs-common-template/node_modules/_@nestjs_config@0.6.3@@nestjs/config/dist/config.module.js:61:23)</span><br><span class="line">    at Object.&lt;anonymous&gt; (/Users/macos/Projects/nestjs/nestjs-common-template/dist/app.module.js:21:35)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:1063:30)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1092:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:928:32)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:769:14)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:952:19)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:88:18)</span><br><span class="line">    at Object.&lt;anonymous&gt; (/Users/macos/Projects/nestjs/nestjs-common-template/dist/main.js:4:22)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:1063:30)</span><br></pre></td></tr></table></figure>
+
+<p>或者修改<code>.env.development</code>中的配置信息：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DATABASE_USER=</span><br><span class="line"><span class="attr">DATABASE_PASSWORD</span>=test123</span><br></pre></td></tr></table></figure>
+
+<p>错误提示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/Users/macos/Projects/nestjs/nestjs-common-template/node_modules/_@nestjs_config@0.6.3@@nestjs/config/dist/config.module.js:61</span><br><span class="line">                throw new Error(`Config validation error: <span class="variable">$&#123;error.message&#125;</span>`);</span><br><span class="line">                ^</span><br><span class="line"></span><br><span class="line">Error: Config validation error: <span class="string">&quot;DATABASE_USER&quot;</span> is not allowed to be empty</span><br><span class="line">    at Function.forRoot (/Users/macos/Projects/nestjs/nestjs-common-template/node_modules/_@nestjs_config@0.6.3@@nestjs/config/dist/config.module.js:61:23)</span><br><span class="line">    at Object.&lt;anonymous&gt; (/Users/macos/Projects/nestjs/nestjs-common-template/dist/app.module.js:21:35)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:1063:30)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1092:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:928:32)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:769:14)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:952:19)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:88:18)</span><br><span class="line">    at Object.&lt;anonymous&gt; (/Users/macos/Projects/nestjs/nestjs-common-template/dist/main.js:4:22)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:1063:30)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>结论：使用<code>Joi</code>可以很方便对传入应用程序的参数进行验证，可以限制传入的数据类型。</p>
+<p>除了上面写的验证以外，还可以加入以下属性来验证输入的<strong>命令参数</strong>：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Module</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    ConfigModule.forRoot(&#123;</span><br><span class="line">      envFilePath: envPath,</span><br><span class="line">      validationSchema: Joi.object(&#123;</span><br><span class="line">        NODE_ENV: Joi.string()</span><br><span class="line">          .valid(<span class="string">&#x27;development&#x27;</span>, <span class="string">&#x27;production&#x27;</span>, <span class="string">&#x27;test&#x27;</span>, <span class="string">&#x27;provision&#x27;</span>)</span><br><span class="line">          .default(<span class="string">&#x27;development&#x27;</span>),</span><br><span class="line">        PORT: Joi.number().default(<span class="number">3000</span>),</span><br><span class="line">        DATABASE_USER: Joi.string().required()</span><br><span class="line">      &#125;),</span><br><span class="line">      validationOptions: &#123; <span class="comment">// 这里加</span></span><br><span class="line">        allowUnknown: <span class="literal">false</span>,</span><br><span class="line">        abortEarly: <span class="literal">true</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">  controllers: [AppController],</span><br><span class="line">  providers: [AppService],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppModule</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>@nestjs/config</code>包使用的默认设置是：</p>
+<ul>
+<li><code>allowUnknown</code>：控制是否允许在环境变量中使用未知键。默认为true</li>
+<li><code>abortEarly</code>：如果为true，则在第一个错误时停止验证；如果为false，则返回所有错误。默认值为false。</li>
+</ul>
+<p>注意上面的Joi的用法：</p>
+<ul>
+<li>主要是校验<code>process.env</code>传入的参数</li>
+<li>主要是校验<code>envFilePath</code>初次加载的时候的参数</li>
+</ul>
+<h5 id="使用class-validator"><a href="#使用class-validator" class="headerlink" title="使用class-validator"></a>使用<code>class-validator</code></h5><p>步骤：</p>
+<ul>
+<li><p>安装依赖<code>class-validator</code>与<code>class-transformer</code></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i <span class="keyword">class</span>-<span class="keyword">validator</span> <span class="keyword">class</span>-transformer</span><br></pre></td></tr></table></figure></li>
+<li><p>配置效验文件<code>src/env.validation.ts</code></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; plainToClass &#125; <span class="keyword">from</span> <span class="string">&#x27;class-transformer&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; IsEnum, IsNumber, validateSync &#125; <span class="keyword">from</span> <span class="string">&#x27;class-validator&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">enum</span> Environment &#123;</span><br><span class="line">  Development = <span class="string">&quot;development&quot;</span>,</span><br><span class="line">  Production = <span class="string">&quot;production&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EnvironmentVariables</span> </span>&#123;</span><br><span class="line">  <span class="meta">@IsEnum</span>(Environment)</span><br><span class="line">  NODE_ENV: Environment;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@IsNumber</span>()</span><br><span class="line">  PORT: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">validate</span>(<span class="params">config: Record&lt;<span class="built_in">string</span>, unknown&gt;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> validatedConfig = plainToClass(</span><br><span class="line">    EnvironmentVariables,</span><br><span class="line">    config,</span><br><span class="line">    &#123; <span class="attr">enableImplicitConversion</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">const</span> errors = validateSync(validatedConfig, &#123; <span class="attr">skipMissingProperties</span>: <span class="literal">false</span> &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (errors.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(errors.toString());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> validatedConfig;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>调整<code>app.module.ts</code>文件</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Module &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppController &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.controller&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.service&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ConfigModule &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/config&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; validate &#125; <span class="keyword">from</span> <span class="string">&#x27;./env.validation&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> envPath = <span class="string">`.env.<span class="subst">$&#123;process.env.NODE_ENV || <span class="string">&#x27;development&#x27;</span>&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Module</span>(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    ConfigModule.forRoot(&#123;</span><br><span class="line">      envFilePath: envPath,</span><br><span class="line">      validate,</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">  controllers: [AppController],</span><br><span class="line">  providers: [AppService],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AppModule</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>与使用<code>Joi</code>验证结果一致。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
+<li><p>使用第三方的包<code>config</code>，可以方便的读取配置信息，但是校验却需要在读取的位置来加，对于不需要验证，而需要全局使用的配置项可以使用这种方式；</p>
+</li>
+<li><p>官方的<code>@nestjs/config</code>可以方便的导入<code>.env</code>的文件，同时结合<code>js-yaml</code>也可以导入<code>yaml</code>格式的配置。</p>
+<p>配置灵活，而且可以配合验证工具<code>Joi</code>进行参数的验证（推荐）</p>
+<p>自定义的校验第三方包<code>class-validator</code>这里只是冰山一角，后面在学习数据验证的时候还会使用到它；</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/nestjs-example-project-1/" rel="bookmark">nestjs搭建通用业务框架（1）：基础介绍</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/nestjs-example-project-3/" rel="bookmark">nestjs搭建通用业务框架（3）：核心概念</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/nestjs-example-project-2/" rel="bookmark">nestjs搭建通用业务框架（2）：初体验</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>var author='Brian'
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.toimc.com/nestjs-example-project-4/" title="nestjs-example-project-4">https://www.toimc.com/nestjs-example-project-4/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/node-js/" rel="tag"># node.js</a>
+              <a href="/tags/nestjs/" rel="tag"># nestjs</a>
+              <a href="/tags/web%E6%A1%86%E6%9E%B6/" rel="tag"># web框架</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/what-is-dependency-injection/" rel="next" title="什么是依赖注入?">
+                  什么是依赖注入? <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-disqusjs">Load Disqus</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqusjs" id="comment-disqusjs">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备19018123号-1 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">toimc前端技术</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+
+
+  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+
+
+<script>
+var options = {
+  bottom: '64px', // default: '32px'
+  right: 'unset', // default: '32px'
+  left: '32px', // default: 'unset'
+  time: '0.5s', // default: '0.3s'
+  mixColor: '#fff', // default: '#fff'
+  backgroundColor: '#fff',  // default: '#fff'
+  buttonColorDark: '#100f2c',  // default: '#100f2c'
+  buttonColorLight: '#fff', // default: '#fff'
+  saveInCookies: true, // default: true,
+  label: '🌓', // default: ''
+  autoMatchOsTheme: true // default: true
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.8.5/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.15.0/dist/instantsearch.production.min.js"></script><script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<script data-pjax>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            const counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            const target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"YvgheVT82eRRYHM6xtvaEL6l-gzGzoHsz","app_key":"uwmRd9pGJeDmqKQNmalNsosO","server_url":"https://blog.toimc.com","security":true};
+    function fetchData(api_server) {
+      const Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+    <div class="pjax">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments('#disqus_thread', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
+      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
+      shortname : 'toimc',
+      url       : "https://www.toimc.com/nestjs-example-project-4/",
+      identifier: "nestjs-example-project-4/",
+      title     : "nestjs-example-project-4",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'c2514f07e902bf3f9af6',
+      clientSecret: '4a1a05479a3ca34095cb13fccc48245674407ba7',
+      repo        : 'toimc.github.io',
+      owner       : 'toimc',
+      admin       : ['toimc'],
+      id          : 'bd62793d60981c438326975c6e296643',
+      proxy       : '/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>
