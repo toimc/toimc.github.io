@@ -10,6 +10,24 @@
     
     
     <url>
+        <loc>https://www.toimc.com/lessons/</loc>
+        <lastmod>2021-03-15T01:27:54.712Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    
+    
+    <url>
+        <loc>https://www.toimc.com/about/</loc>
+        <lastmod>2021-03-14T13:09:21.054Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    
+    
+    <url>
         <loc>https://www.toimc.com/categories/</loc>
         <lastmod>2019-02-13T03:09:54.000Z</lastmod>
         <changefreq>weekly</changefreq>
