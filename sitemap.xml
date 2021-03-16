@@ -2,23 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.toimc.com/test-post/</loc>
-    
-    <lastmod>2021-03-16T13:06:38.785Z</lastmod>
-    
-    <date>1615899982000</date>
-    <title>测试文章</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
     <loc>https://www.toimc.com/lessons/index.html</loc>
     
     <lastmod>2021-03-15T01:27:54.712Z</lastmod>
     
     <date>1609430400000</date>
-    <title>我的课程</title>
+    <title>我的课程 | Coding World</title>
     
     <desc></desc>
   </url>
@@ -29,7 +18,7 @@
     <lastmod>2021-03-14T13:09:21.054Z</lastmod>
     
     <date>1508382123000</date>
-    <title>print("关于"+Author)</title>
+    <title>print("关于"+Author) | Coding World</title>
     
     <desc></desc>
   </url>
@@ -40,7 +29,7 @@
     <lastmod>2021-03-14T12:27:22.797Z</lastmod>
     
     <date>1615604553000</date>
-    <title>nestjs搭建通用业务框架（4）：数据库+配置</title>
+    <title>nestjs搭建通用业务框架（4）：数据库+配置 | Coding World</title>
     
     <desc>这是《nestjs搭建通用业务框架》系列的第4篇，进入开发具体的功能之前，学习nest框架本身提供的CLI工具与规划合理的工程目录，对于要实现的内容进行架构与计划，这是实现健壮高可用的框架的前提。</desc>
   </url>
@@ -51,7 +40,7 @@
     <lastmod>2021-03-13T04:39:32.530Z</lastmod>
     
     <date>1614614364000</date>
-    <title>大型项目前端架构设计</title>
+    <title>大型项目前端架构设计 | Coding World</title>
     
     <desc>入门很多年的前端小伙伴，也会遇到工作中需要设计大型项目的时候。如何做好前期的架构设计，对于后期项目的扩展与升级都是非常重要的。 本文不会侧重于具体技术实现，而是尝试从整体角度出发，分析为什么与怎么做，以及成本和产出如何。</desc>
   </url>
@@ -62,7 +51,7 @@
     <lastmod>2021-03-12T09:48:11.539Z</lastmod>
     
     <date>1615516790000</date>
-    <title>什么是依赖注入?</title>
+    <title>什么是依赖注入? | Coding World</title>
     
     <desc>本篇是nestjs系列文章的番外篇，主要是介绍控制反转Invention of Control(IoC)和依赖注入Dependecy Injection(DI)，作为nestjs和angular的核心概念，学习它们有利于更好的进行框架的学习。</desc>
   </url>
@@ -73,7 +62,7 @@
     <lastmod>2021-03-12T03:40:49.702Z</lastmod>
     
     <date>1615295650000</date>
-    <title>nestjs搭建通用业务框架（2）：初体验</title>
+    <title>nestjs搭建通用业务框架（2）：初体验 | Coding World</title>
     
     <desc>今天是《nestjs搭建通用业务框架》系列的第2篇，主要是介绍如何使用nestjs的CLI工具快速初始化项目，了解项目的启动与调试。PS: 调试技巧非常的重要，有利于后续学习框架的核心的原理。</desc>
   </url>
@@ -84,7 +73,7 @@
     <lastmod>2021-03-12T03:40:39.725Z</lastmod>
     
     <date>1615208705000</date>
-    <title>nestjs搭建通用业务框架（1）：基础介绍</title>
+    <title>nestjs搭建通用业务框架（1）：基础介绍 | Coding World</title>
     
     <desc>在网上看了很多关于nestjs的文章，发现大多数的文章不成体系。所以，打算从应用角度，带领大家一点点的学习nestjs，并架构一套可通用的业务框架，方便大家入门。</desc>
   </url>
@@ -95,7 +84,7 @@
     <lastmod>2021-03-12T03:40:36.290Z</lastmod>
     
     <date>1615426245000</date>
-    <title>nestjs搭建通用业务框架（3）：核心概念</title>
+    <title>nestjs搭建通用业务框架（3）：核心概念 | Coding World</title>
     
     <desc>这是《nestjs搭建通用业务框架》系列的第3篇，主要是介绍nestjs中的核心概念，理解这些概念与使用方法是今后学习上的垫脚石。PS: 对于本篇的学习，你需要有一定的TS的基础，理解起来才会比较顺畅。</desc>
   </url>
@@ -106,7 +95,7 @@
     <lastmod>2021-03-12T03:40:01.749Z</lastmod>
     
     <date>1555816659000</date>
-    <title>使用harbor搭建私有docker仓库</title>
+    <title>使用harbor搭建私有docker仓库 | Coding World</title>
     
     <desc>小伙伴们，想不想自己建立自己的 docker 私库。本篇介绍了什么是 Harbor，如何安装。来，动起手来。 本篇介绍了使用官方在线/离线安装包，进行 Harbor 的安装的过程。</desc>
   </url>
@@ -117,7 +106,7 @@
     <lastmod>2021-03-12T03:36:33.808Z</lastmod>
     
     <date>1614692845000</date>
-    <title>如何让网站达到ssl评级A+——本站开启tls1.3</title>
+    <title>如何让网站达到ssl评级A+——本站开启tls1.3 | Coding World</title>
     
     <desc>本文介绍了使用docker快速创建nginx服务，并介绍了如何配置tls1.3的方法，让网站的ssl</desc>
   </url>
@@ -128,7 +117,7 @@
     <lastmod>2021-03-12T03:36:06.832Z</lastmod>
     
     <date>1614859951000</date>
-    <title>Flutter 2.0正式发布，支持跨全平台</title>
+    <title>Flutter 2.0正式发布，支持跨全平台 | Coding World</title>
     
     <desc>2021年3月4日，谷歌正式宣布了 Flutter 2 的推出。作为一款用于构建轻巧型移动应用的开源 UI 工具包，Flutter 的第二个大版本增加了对桌面和 Web 应用程序的支持。开发者可借助 Flutter 2 打造开箱即用的应用程序，并且能够为 iOS、Android、Windows、macOS、Linux 和 Web 端套用相同的代码。</desc>
   </url>
@@ -139,7 +128,7 @@
     <lastmod>2021-03-03T03:53:15.522Z</lastmod>
     
     <date>1614736623000</date>
-    <title>浏览器http自动跳转https，导致图片访问失败</title>
+    <title>浏览器http自动跳转https，导致图片访问失败 | Coding World</title>
     
     <desc>目前，chrome浏览器https协议的域中访问http自动跳转https，该如何解决呢？思路：给图床添加ssl证书，一般的对象云存储都可以有免费的SSL证书申请；或者，直接在浏览器中关闭阻止不安全的内容来源。</desc>
   </url>
@@ -150,7 +139,7 @@
     <lastmod>2021-03-02T15:36:52.405Z</lastmod>
     
     <date>1584029464000</date>
-    <title>Vue3将带来巨大的性能提升</title>
+    <title>Vue3将带来巨大的性能提升 | Coding World</title>
     
     <desc>即将发布的Vue.js的第三个主要版本。 通过下面的讨论，虽然还不能确定所有内容，但是我们可以放心地认为，它将是对当前版本（已经非常出色）的巨大改进。Vue团队在改进框架API方面做得非常出色。Evan You将Vue 3的目标描述为： 让它更快 让它更小 使它更易于维护 使原生目标更容易 让您的生活更轻松 通过查看RFC，我确信上述所有目标都将毫无问题地实现。在本文中，我将引导您完成一些对我来说</desc>
   </url>
@@ -161,7 +150,7 @@
     <lastmod>2021-03-02T15:36:20.104Z</lastmod>
     
     <date>1577435798000</date>
-    <title>引领未来，走出自己的前端之路</title>
+    <title>引领未来，走出自己的前端之路 | Coding World</title>
     
     <desc>在今天开始分享之前，我来说一下这一次分享的准备，我开始问了我的很多学生，比如：讲什么选题、大家想听什么、大家觉得学习了前端这么久想听听什么….很多的问题，都集中在一个问题上，这么多的未知，这么多的技术，我该怎么办？这就像是一个哲学问题，问“我从哪里来，我要到哪里去”一样——人生这一躺旅程，如果想不清楚前路，那最最关键的是抓住现在。老师，最多只是引路人是灯塔，自己的路要靠自己的脚走出来。</desc>
   </url>
@@ -172,7 +161,7 @@
     <lastmod>2021-03-02T15:36:13.626Z</lastmod>
     
     <date>1554533401000</date>
-    <title>慕课网《前端跳槽面试必备技巧》——关于业务技术面</title>
+    <title>慕课网《前端跳槽面试必备技巧》——关于业务技术面 | Coding World</title>
     
     <desc>本篇介绍的是面试的二/三面，即业务技术面需要准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
   </url>
@@ -183,7 +172,7 @@
     <lastmod>2021-03-02T15:35:52.138Z</lastmod>
     
     <date>1553441334000</date>
-    <title>慕课网《前端跳槽面试必备技巧》——如何看待面试</title>
+    <title>慕课网《前端跳槽面试必备技巧》——如何看待面试 | Coding World</title>
     
     <desc>面试，字面意思，面对面的考试。面试是一场糟心设计的对面试者的考察活动。通过课程的学习笔记，整理相关的资料与大家分享。原课程链接：前端跳槽面试必备技巧</desc>
   </url>
@@ -194,7 +183,7 @@
     <lastmod>2021-03-02T15:35:31.764Z</lastmod>
     
     <date>1553933513000</date>
-    <title>慕课网《前端跳槽面试必备技巧》——关于基础面</title>
+    <title>慕课网《前端跳槽面试必备技巧》——关于基础面 | Coding World</title>
     
     <desc>本篇介绍的是面试的一/二面，即基础面需要准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
   </url>
@@ -205,7 +194,7 @@
     <lastmod>2021-03-02T14:48:20.154Z</lastmod>
     
     <date>1613982165000</date>
-    <title>windows10家庭版如何添加Hyper-V</title>
+    <title>windows10家庭版如何添加Hyper-V | Coding World</title>
     
     <desc>本文是《大前端》配套介绍图文内容，主要是介绍如何在windows10家庭版如何添加Hyper-V</desc>
   </url>
@@ -216,7 +205,7 @@
     <lastmod>2021-03-02T14:48:20.153Z</lastmod>
     
     <date>1613983440000</date>
-    <title>Redis-cli的常见操作</title>
+    <title>Redis-cli的常见操作 | Coding World</title>
     
     <desc>本文主要介绍Redis及redis-cli的使用方式，介绍redis操作中的一些常见的命令。 分为以下几个部分介绍： docker中的redis如何进入命令模式 redis的常见命令及用法 有哪些比较好的redis连接工具</desc>
   </url>
@@ -227,9 +216,20 @@
     <lastmod>2020-12-01T02:33:05.214Z</lastmod>
     
     <date>1584031485000</date>
-    <title>Vue3中令人兴奋的新功能</title>
+    <title>Vue3中令人兴奋的新功能 | Coding World</title>
     
     <desc>在上一篇文章中，我们了解了Vue 3将带来的性能改进。我们已经知道用新的Vue编写的应用程序性能炸裂（运行非常好），但性能并不是最重要的部分。对我们开发人员而言最重要的是，新版本将如何影响我们编写代码的方式。 如今，Vue 3带来了许多令人兴奋的新功能。 值得庆幸的是，Vue团队主要介绍了对当前API的添加和改进，而不是进行重大更改，因此，已经了解Vue 2的大家应该会非常习惯这些变化。 让我们从</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/</loc>
+    
+    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
+    
+    <date>1522051127000</date>
+    <title>centos6.5离线安装mysql | Coding World</title>
+    
+    <desc>本文介绍了在Centos6.5下离线安装Mysql的方法</desc>
   </url>
   
   <url>
@@ -238,7 +238,7 @@
     <lastmod>2019-12-27T08:58:30.000Z</lastmod>
     
     <date>1553153736000</date>
-    <title>Centos7网络配置及SSH自定义端口</title>
+    <title>Centos7网络配置及SSH自定义端口 | Coding World</title>
     
     <desc>本文介绍了Centos7中网络的配置和SSH自定义端口的设置方法，核心命令：nmcli, nmtui 介绍</desc>
   </url>
@@ -249,7 +249,7 @@
     <lastmod>2019-12-27T08:58:30.000Z</lastmod>
     
     <date>1553703064000</date>
-    <title>常用vps测试脚本/Linux软硬件测试脚本</title>
+    <title>常用vps测试脚本/Linux软硬件测试脚本 | Coding World</title>
     
     <desc>这里有各种测试VPS硬件/网络/IO的脚本，比如：bench,Superbench,Zbench,LemonBench,etc，快来试试吧。</desc>
   </url>
@@ -260,20 +260,9 @@
     <lastmod>2019-12-27T08:58:30.000Z</lastmod>
     
     <date>1553736633000</date>
-    <title>Docker入门之安装教程</title>
+    <title>Docker入门之安装教程 | Coding World</title>
     
     <desc>本篇介绍了在Mac OS, Windows, Linux下的Docker安装方法。</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/</loc>
-    
-    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
-    
-    <date>1522051127000</date>
-    <title>centos6.5离线安装mysql</title>
-    
-    <desc>本文介绍了在Centos6.5下离线安装Mysql的方法</desc>
   </url>
   
   <url>
@@ -282,7 +271,7 @@
     <lastmod>2019-08-29T14:23:47.000Z</lastmod>
     
     <date>1480264008000</date>
-    <title>使用git subtree管理项目中的子库</title>
+    <title>使用git subtree管理项目中的子库 | Coding World</title>
     
     <desc>随着项目越来越多，很多项目依赖同一个模板或是配置文件想同一管理，又不想分开维护，所以只能互相引用，或是各自维护，导致了后续的很多麻烦。怎么办呢？</desc>
   </url>
@@ -293,7 +282,7 @@
     <lastmod>2019-08-29T14:21:11.000Z</lastmod>
     
     <date>1480264008000</date>
-    <title>git submodule</title>
+    <title>git submodule | Coding World</title>
     
     <desc>git submodule的介绍，常用命令git submodule add，git submodule init等。</desc>
   </url>
@@ -304,7 +293,7 @@
     <lastmod>2019-08-03T17:05:42.000Z</lastmod>
     
     <date>1453739208000</date>
-    <title>启动Apache对.htaccess的支持步骤</title>
+    <title>启动Apache对.htaccess的支持步骤 | Coding World</title>
     
     <desc>Ubuntu/Debian下启动Apache对.htaccess 的支持步骤</desc>
   </url>
@@ -315,7 +304,7 @@
     <lastmod>2019-08-03T17:05:42.000Z</lastmod>
     
     <date>1456504008000</date>
-    <title>SQL快速入门</title>
+    <title>SQL快速入门 | Coding World</title>
     
     <desc>SQL 是用于访问和处理数据库的标准的计算机语言。在本教程中，您将学到如何使用 SQL 访问和处理数据系统中的数据，这类数据库包括：MySQL、SQL Server、Access、Oracle、Sybase、DB2 等等。本篇博客告诉大家如果快速入门，学习SQL的增(Insert)、删(Delete)、改(Update)、查(Select)。</desc>
   </url>
@@ -326,7 +315,7 @@
     <lastmod>2019-08-03T17:05:42.000Z</lastmod>
     
     <date>1481644800000</date>
-    <title>如何在Ubuntu上搭建私有Docker仓库</title>
+    <title>如何在Ubuntu上搭建私有Docker仓库 | Coding World</title>
     
     <desc>本章的内容已经过时！！ Docker作为在服务器上，非常不错的一个部署部署工具。那大家应该使用过Docker hub，一个存储镜像的公有的Docker仓库。但是，当你创建了一个镜像上传到Docker hub上之后，必须公开你所创建的镜像——这可能不是你所想要的。因为，我们的很多项目，可能需要私有化。</desc>
   </url>
@@ -337,7 +326,7 @@
     <lastmod>2019-08-03T17:04:10.000Z</lastmod>
     
     <date>1461205735000</date>
-    <title>Debian/Ubuntu搭建LNMP（Linux,nginx,MySQL,PHP）环境，搭建wordpress</title>
+    <title>Debian/Ubuntu搭建LNMP（Linux,nginx,MySQL,PHP）环境，搭建wordpress | Coding World</title>
     
     <desc>本文介绍了Debian/Ubuntu搭建LNMP（Linux,nginx,MySQL,PHP）环境的基本方法，并安装wordpress，附上视频教程。</desc>
   </url>
@@ -348,7 +337,7 @@
     <lastmod>2019-08-03T17:03:10.000Z</lastmod>
     
     <date>1457540808000</date>
-    <title>Git入门教程</title>
+    <title>Git入门教程 | Coding World</title>
     
     <desc>这是一篇Git入门教程，开始阅读本教程之前，请先仔细阅读目录，巧用目录来快速指引你阅读，无关紧要的目录内容可以跳过。</desc>
   </url>
@@ -359,7 +348,7 @@
     <lastmod>2019-08-03T17:00:27.000Z</lastmod>
     
     <date>1482249600000</date>
-    <title>Gitlab+Jenkins+docker完成Maven项目的自动部署</title>
+    <title>Gitlab+Jenkins+docker完成Maven项目的自动部署 | Coding World</title>
     
     <desc>工程自动化开发环境搭建：Gitlab+Jenkins+docker如何来构建Maven项目</desc>
   </url>
@@ -370,7 +359,7 @@
     <lastmod>2019-04-09T05:09:02.000Z</lastmod>
     
     <date>1554554361000</date>
-    <title>慕课网《前端跳槽面试必备技巧》——综合面/业务面</title>
+    <title>慕课网《前端跳槽面试必备技巧》——综合面/业务面 | Coding World</title>
     
     <desc>本篇介绍的是面试的四/五面，即综合面/BOSS面准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
   </url>
@@ -381,7 +370,7 @@
     <lastmod>2019-04-07T01:27:03.000Z</lastmod>
     
     <date>1554564006000</date>
-    <title>慕课网《前端跳槽面试必备技巧》——总结</title>
+    <title>慕课网《前端跳槽面试必备技巧》——总结 | Coding World</title>
     
     <desc>本篇介绍的是课程总结的内容。原课程链接：前端跳槽面试必备技巧</desc>
   </url>
@@ -392,7 +381,7 @@
     <lastmod>2019-04-06T15:19:22.000Z</lastmod>
     
     <date>1554562885000</date>
-    <title>慕课网《前端跳槽面试必备技巧》——终面/HR面</title>
+    <title>慕课网《前端跳槽面试必备技巧》——终面/HR面 | Coding World</title>
     
     <desc>本篇介绍的是面试的终面，即HR面准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
   </url>
@@ -403,7 +392,7 @@
     <lastmod>2019-04-04T01:26:02.000Z</lastmod>
     
     <date>1553439216000</date>
-    <title>慕课网《前端跳槽面试必备技巧》——导学部分</title>
+    <title>慕课网《前端跳槽面试必备技巧》——导学部分 | Coding World</title>
     
     <desc>这个系列介绍的是前端跳槽面试中经验的总结，技巧分享，常见面试题的解析。通过课程的学习笔记，整理相关的资料与大家分享。原课程链接：前端跳槽面试必备技巧</desc>
   </url>
@@ -414,7 +403,7 @@
     <lastmod>2019-03-18T02:27:35.000Z</lastmod>
     
     <date>1487608620000</date>
-    <title>认知与设计——理解UI设计</title>
+    <title>认知与设计——理解UI设计 | Coding World</title>
     
     <desc>《认知与设计》阅后感和一些摘抄，学习前端不得不会、不得不懂的UI设计的基础原则。</desc>
   </url>
@@ -425,7 +414,7 @@
     <lastmod>2019-03-16T05:39:05.000Z</lastmod>
     
     <date>1518485760000</date>
-    <title>《创业小败局》阅后笔记</title>
+    <title>《创业小败局》阅后笔记 | Coding World</title>
     
     <desc>让别人的失败，成为你的成功之母！阅读笔记！</desc>
   </url>
@@ -436,7 +425,7 @@
     <lastmod>2019-03-16T01:36:02.000Z</lastmod>
     
     <date>1491818580000</date>
-    <title>精益创业：新创企业的成长思维</title>
+    <title>精益创业：新创企业的成长思维 | Coding World</title>
     
     <desc>一本好书推荐给大家。精益创业的五项原则：1. 创业者无处不在。2. 创业即管理。3. 经证实的认知。4. 开发-测量-认知。5. 创新核算。</desc>
   </url>
@@ -447,7 +436,7 @@
     <lastmod>2019-03-14T16:16:17.000Z</lastmod>
     
     <date>1537538428000</date>
-    <title>我的咖啡因依赖</title>
+    <title>我的咖啡因依赖 | Coding World</title>
     
     <desc>时间管理，是一门看似简单实则复杂的学问。 最近非常依赖咖啡，因为不喝咖啡就让我感觉一天很困，效率很低下，头闷闷的。我在想我是不是得了咖啡因依赖症，症状与我现在的差不多。</desc>
   </url>
@@ -458,7 +447,7 @@
     <lastmod>2019-03-14T15:42:19.000Z</lastmod>
     
     <date>1538490448000</date>
-    <title>《穷爸爸和富爸爸》阅后感</title>
+    <title>《穷爸爸和富爸爸》阅后感 | Coding World</title>
     
     <desc>《富爸爸，穷爸爸》是一个真实的故事，作者罗伯特・清崎的亲生父亲和朋友的父亲对金钱的看法截然不同，这使他对认识金钱产生了兴趣，最终他接受了朋友的父亲的建议，也就是书中所说的。“富爸爸”的观念，即不要做金钱的奴隶，要让金钱为我们工作，并由此成为一名极富传奇色彩的成功的投资家。</desc>
   </url>
@@ -469,7 +458,7 @@
     <lastmod>2019-03-14T15:38:32.000Z</lastmod>
     
     <date>1537194448000</date>
-    <title>看逻辑思维笔记</title>
+    <title>看逻辑思维笔记 | Coding World</title>
     
     <desc>有很多人对罗胖这个人争议很大，但是人家做节目是认真的。 这里记录下来最近学习到的几个知识，并打算在今后的工作生活中去实践。</desc>
   </url>
@@ -480,7 +469,7 @@
     <lastmod>2019-03-13T01:22:41.000Z</lastmod>
     
     <date>1453311955000</date>
-    <title>MySQL权限管理</title>
+    <title>MySQL权限管理 | Coding World</title>
     
     <desc>本文介绍了MySQL的权限管理，可以满足日常的权限管理需求: 授权、查看用户权限等。</desc>
   </url>
@@ -491,7 +480,7 @@
     <lastmod>2019-03-13T01:20:48.000Z</lastmod>
     
     <date>1453688935000</date>
-    <title>Ubuntu(Debian)上安装LAMP环境（Linux+Apache+MySQL+PHP）</title>
+    <title>Ubuntu(Debian)上安装LAMP环境（Linux+Apache+MySQL+PHP） | Coding World</title>
     
     <desc>Ubuntu(Debian)上安装LAMP环境（Linux+Apache+MySQL+PHP）的介绍，方便小伙伴们开发PHP，部署Wordpress。 其实还有很多很优秀的安装脚本与工具，比如：宝塔，这个就是一个管理面板，里面集成了很多开发环境。</desc>
   </url>
@@ -502,7 +491,7 @@
     <lastmod>2019-03-13T01:18:08.000Z</lastmod>
     
     <date>1453740595000</date>
-    <title>用SSH来管理Linux服务器，禁用口令登陆，提高Linux服务器安全</title>
+    <title>用SSH来管理Linux服务器，禁用口令登陆，提高Linux服务器安全 | Coding World</title>
     
     <desc>我们一般使用 PuTTY 等 SSH 客户端来远程管理 Linux 服务器。但是，一般的密码方式登录，容易有密码被暴力破解的问题。所以，一般我们会将 SSH 的端口设置为默认的22以外的端口，或者禁用 root 账户登录。 其实，有一个更好的办法来保证安全，而且让你可以放心地用root账户从远程登录——那就是通过密钥方式登录。 密钥形式登录的原理是：利用密钥生成器制作一对密钥，将公钥添加到服务器的</desc>
   </url>
@@ -513,7 +502,7 @@
     <lastmod>2019-03-13T01:17:33.000Z</lastmod>
     
     <date>1453785828000</date>
-    <title>使用WampServer搭建本地PHP环境，绑定域名，配置伪静态</title>
+    <title>使用WampServer搭建本地PHP环境，绑定域名，配置伪静态 | Coding World</title>
     
     <desc>WampServer 简介Wamp就是Windows Apache Mysql PHP集成安装环境，即在window下的apache、php和mysql的服务器软件。也是一件安装，不需要你进行环境的配置。</desc>
   </url>
@@ -524,7 +513,7 @@
     <lastmod>2019-03-12T16:10:48.000Z</lastmod>
     
     <date>1453960195000</date>
-    <title>github使用ssh密钥</title>
+    <title>github使用ssh密钥 | Coding World</title>
     
     <desc>本文介绍了使用ssh完成对github上仓库的git push，git pull等操作。</desc>
   </url>
@@ -535,7 +524,7 @@
     <lastmod>2019-03-12T16:10:43.000Z</lastmod>
     
     <date>1453738968000</date>
-    <title>Debian/Ubuntu下更换默认编辑器为vim</title>
+    <title>Debian/Ubuntu下更换默认编辑器为vim | Coding World</title>
     
     <desc>有些同学在debian系统下输入VI或VIM的命令编辑文本，确发现按键盘的上下左右方向键，变成显示ABCD字符了，退格键也失灵。恩，没错这是有些debian系统默认的编辑器并不是VIM而是nano的缘故。下面有几个方法可以解决问题。</desc>
   </url>
@@ -546,7 +535,7 @@
     <lastmod>2019-03-12T16:10:32.000Z</lastmod>
     
     <date>1455638400000</date>
-    <title>gulp入门教程</title>
+    <title>gulp入门教程 | Coding World</title>
     
     <desc>本文介绍了前端自动化工具gulp，算是入门介绍，如何安装、配置基础脚本。</desc>
   </url>
@@ -557,7 +546,7 @@
     <lastmod>2019-03-12T16:10:32.000Z</lastmod>
     
     <date>1456329660000</date>
-    <title>如何在Linux中添加Swap</title>
+    <title>如何在Linux中添加Swap | Coding World</title>
     
     <desc>Swap是什么？当系统的物理内存不够用的时候，就需要将物理内存中的一部分空间释放出来，以供当前运行的程序使用。那些被释放的空间可能来自一些很长时间没有什么操作的程序，这些被释放的空间被临时保存到Swap空间中，等到那些程序要运行时，再从Swap中恢复保存的数据到内存中。这样，系统总是在物理内存不够时，才进行Swap交换。</desc>
   </url>
@@ -568,7 +557,7 @@
     <lastmod>2019-03-12T16:10:32.000Z</lastmod>
     
     <date>1456202280000</date>
-    <title>监控mysql运行状态</title>
+    <title>监控mysql运行状态 | Coding World</title>
     
     <desc>本文介绍了使用简单的shell脚本/supervisor来监控mysql的运行情况，如果停止则重启。</desc>
   </url>
@@ -579,7 +568,7 @@
     <lastmod>2019-03-12T16:10:32.000Z</lastmod>
     
     <date>1456226808000</date>
-    <title>搭建Wordpress</title>
+    <title>搭建Wordpress | Coding World</title>
     
     <desc>虽然现在有更多更便捷的安装方式，了解一下原始的安装方法，可以清楚的了解到wordpress是如何运行起来的。搭建wordpress，首先你需要有自己的域名、空间，说白了wordpress就是程序，需要一台机器给它运行，同时需要给这个机器的IP配上一个名字（域名），这样大家通过域名就能访问到你的博客wordpress。</desc>
   </url>
@@ -590,7 +579,7 @@
     <lastmod>2019-03-12T16:08:46.000Z</lastmod>
     
     <date>1457540808000</date>
-    <title>Git常用命令</title>
+    <title>Git常用命令 | Coding World</title>
     
     <desc>本文介绍了git的常用命令，如git clone、git pull、git push等等。</desc>
   </url>
@@ -601,7 +590,7 @@
     <lastmod>2019-03-12T16:08:46.000Z</lastmod>
     
     <date>1457540808000</date>
-    <title>Git分支管理</title>
+    <title>Git分支管理 | Coding World</title>
     
     <desc>还记得《星际穿越》中的平行空间吗？两个独立的空间互不干扰，当你正在电脑前努力学习Git的时候，另一个你正在另一个平行宇宙里努力学习SVN。在某一个时间点，两个平行的时空合并了，结果，你既学会了Git又学会了SVN！</desc>
   </url>
@@ -612,7 +601,7 @@
     <lastmod>2019-03-12T16:08:34.000Z</lastmod>
     
     <date>1457195208000</date>
-    <title>HTTP状态码200、301、302、304、403、410、500的含义？</title>
+    <title>HTTP状态码200、301、302、304、403、410、500的含义？ | Coding World</title>
     
     <desc>一些常见的状态码为： 200 - 服务器成功返回网页 404 - 请求的网页不存在 503 - 服务器超时 下面提供 HTTP 状态码的完整列表。点击链接可了解详情。您也可以访问 HTTP 状态码上的 W3C 页获取更多信息。</desc>
   </url>
@@ -623,7 +612,7 @@
     <lastmod>2019-03-12T16:08:34.000Z</lastmod>
     
     <date>1457540808000</date>
-    <title>JavaSript闭包学习</title>
+    <title>JavaSript闭包学习 | Coding World</title>
     
     <desc>今天学了JavaScript闭包，闭包作用：一个是可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。</desc>
   </url>
@@ -634,7 +623,7 @@
     <lastmod>2019-03-12T16:08:27.000Z</lastmod>
     
     <date>1459009608000</date>
-    <title>《程序员修炼之道》书评</title>
+    <title>《程序员修炼之道》书评 | Coding World</title>
     
     <desc>《程序员修炼之道》由一系列的独立的部分组成，涵盖的主题从个人责任、职业发展，直到用于使代码保持灵活、并且易于改编和复用的各种架构技术。利用许多富有娱乐性的奇闻轶事、有思想性的例子以及有趣的类比，全面阐释了软件开发的许多不同方面的最佳实践和重大陷阱。无论你是初学者，是有经验的程序员，还是软件项目经理，本书都适合你阅读。</desc>
   </url>
@@ -645,7 +634,7 @@
     <lastmod>2019-03-12T16:08:15.000Z</lastmod>
     
     <date>1460219208000</date>
-    <title>Dont't Make Me Think《点石成金》阅后感</title>
+    <title>Dont't Make Me Think《点石成金》阅后感 | Coding World</title>
     
     <desc>Don’t Make Me Think —— Steve Krug 点石成金——访客至上的Web和移动可用性设计秘笈 这本书很薄，内容很精练，入门级选择，让你设计出让访客舒服、易用的页面。</desc>
   </url>
@@ -656,7 +645,7 @@
     <lastmod>2019-03-12T16:07:58.000Z</lastmod>
     
     <date>1480176000000</date>
-    <title>使用docker快速搭建gitlab服务器</title>
+    <title>使用docker快速搭建gitlab服务器 | Coding World</title>
     
     <desc>对于想自己搭建一套属于自己（公司）的git服务的小伙伴有服了，我们使用gitlab的社区版，可以快速搭建一套gitlab服务。但是，gitlab的官方配置又比较麻烦，怎么办呢？使用docker吧！</desc>
   </url>
@@ -667,7 +656,7 @@
     <lastmod>2019-03-12T16:06:14.000Z</lastmod>
     
     <date>1481644800000</date>
-    <title>Ubuntu上安装Docker卡在了“setting up docker-engine”</title>
+    <title>Ubuntu上安装Docker卡在了“setting up docker-engine” | Coding World</title>
     
     <desc>本文介绍了Ubuntu上安装Docker卡在了“setting up docker-engine”</desc>
   </url>
@@ -678,7 +667,7 @@
     <lastmod>2019-03-12T16:03:17.000Z</lastmod>
     
     <date>1460737608000</date>
-    <title>Webstorm中使用Autoprefixer</title>
+    <title>Webstorm中使用Autoprefixer | Coding World</title>
     
     <desc>最近玩了一下SASS，感觉不错，不过CSS3在不同平台兼容性代码一直是个头痛的问题，手写处理费时费力又容易出错。曾经一直用sublime text写html和css，这些问题都有相应的插件。用Webstorm写js，但是来回切换编辑器也比较麻烦。虽然Webstorm内置了css3自动补全功能，当输入user-select时,Webstorm会自动补全： -webkit-user-select: n</desc>
   </url>
@@ -689,7 +678,7 @@
     <lastmod>2019-03-12T16:01:29.000Z</lastmod>
     
     <date>1517963623000</date>
-    <title>linux编译安装php7+nginx</title>
+    <title>linux编译安装php7+nginx | Coding World</title>
     
     <desc>有很多坑人的内网情况下，需要手动安装PHP，下面就带大家一起来学习一下。有一些企业内网环境用的linux版本又低，又不能装docker，那么就要折腾一下吧。 如果能用docker，如果能联网，如果能升级内核，不装TMD该死的十三年前的内核的RHEL6.5，那么就没有这篇文章及下面的总结了。</desc>
   </url>
@@ -700,7 +689,7 @@
     <lastmod>2019-03-12T16:01:05.000Z</lastmod>
     
     <date>1518103225000</date>
-    <title>linux离线安装nginx</title>
+    <title>linux离线安装nginx | Coding World</title>
     
     <desc>nginx编译安装介绍</desc>
   </url>
@@ -711,20 +700,9 @@
     <lastmod>2019-03-12T15:59:03.000Z</lastmod>
     
     <date>1480176000000</date>
-    <title>linux硬盘分区，LVS分区扩容，挂载mount</title>
+    <title>linux硬盘分区，LVS分区扩容，挂载mount | Coding World</title>
     
     <desc>前言：前段时间gitlab服务器挂了，看了一下日志，提示空间满了。 df -m看了一下硬盘，满了。所以想来操作加一块盘上来。 完成下面的操作后: 硬盘使用30%</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/python%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6%E7%A8%8B%E5%BA%8F/</loc>
-    
-    <lastmod>2019-03-12T15:59:03.000Z</lastmod>
-    
-    <date>1513777946000</date>
-    <title>python开发微信企业应用-报警程序</title>
-    
-    <desc>为了熟悉python，记使用python开发一个简单的微信报警后台的过程，主要完成了微信企业应用中进行文字推送。</desc>
   </url>
   
   <url>
@@ -733,9 +711,20 @@
     <lastmod>2019-03-12T15:59:03.000Z</lastmod>
     
     <date>1513783568000</date>
-    <title>centos远程桌面vncserver安装</title>
+    <title>centos远程桌面vncserver安装 | Coding World</title>
     
     <desc>VNC 可以实现对另外的计算机的操作： A ： 可以访问另一个计算机，采用命令终端 或者窗口界面。 B ： 可以远程控制另一个计算机，两台同步显示操作。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/python%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6%E7%A8%8B%E5%BA%8F/</loc>
+    
+    <lastmod>2019-03-12T15:59:03.000Z</lastmod>
+    
+    <date>1513777946000</date>
+    <title>python开发微信企业应用-报警程序 | Coding World</title>
+    
+    <desc>为了熟悉python，记使用python开发一个简单的微信报警后台的过程，主要完成了微信企业应用中进行文字推送。</desc>
   </url>
   
   <url>
@@ -744,7 +733,7 @@
     <lastmod>2019-03-12T14:40:25.000Z</lastmod>
     
     <date>1453960195000</date>
-    <title>git代码仓库转移</title>
+    <title>git代码仓库转移 | Coding World</title>
     
     <desc></desc>
   </url>
@@ -755,7 +744,7 @@
     <lastmod>2019-02-13T03:09:54.000Z</lastmod>
     
     <date>1508398785000</date>
-    <title>categories</title>
+    <title>categories | Coding World</title>
     
     <desc></desc>
   </url>
@@ -766,7 +755,7 @@
     <lastmod>2019-02-13T03:09:54.000Z</lastmod>
     
     <date>1508382094000</date>
-    <title>tags</title>
+    <title>tags | Coding World</title>
     
     <desc></desc>
   </url>
@@ -777,7 +766,7 @@
     <lastmod>2017-10-19T03:01:44.000Z</lastmod>
     
     <date>1508382103000</date>
-    <title>archives</title>
+    <title>archives | Coding World</title>
     
     <desc></desc>
   </url>
