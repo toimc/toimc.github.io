@@ -255,6 +255,17 @@
   </url>
   
   <url>
+    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/</loc>
+    
+    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
+    
+    <date>1522051127000</date>
+    <title>centos6.5离线安装mysql | Coding World</title>
+    
+    <desc>本文介绍了在Centos6.5下离线安装Mysql的方法</desc>
+  </url>
+  
+  <url>
     <loc>https://www.toimc.com/Centos7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%8F%8ASSH%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AB%AF%E5%8F%A3/</loc>
     
     <lastmod>2019-12-27T08:58:30.000Z</lastmod>
@@ -285,17 +296,6 @@
     <title>常用vps测试脚本/Linux软硬件测试脚本 | Coding World</title>
     
     <desc>这里有各种测试VPS硬件/网络/IO的脚本，比如：bench,Superbench,Zbench,LemonBench,etc，快来试试吧。</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/</loc>
-    
-    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
-    
-    <date>1522051127000</date>
-    <title>centos6.5离线安装mysql | Coding World</title>
-    
-    <desc>本文介绍了在Centos6.5下离线安装Mysql的方法</desc>
   </url>
   
   <url>
@@ -629,17 +629,6 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/HTTP%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81/</loc>
-    
-    <lastmod>2019-03-12T16:08:34.000Z</lastmod>
-    
-    <date>1457195208000</date>
-    <title>HTTP状态码200、301、302、304、403、410、500的含义？ | Coding World</title>
-    
-    <desc>一些常见的状态码为： 200 - 服务器成功返回网页 404 - 请求的网页不存在 503 - 服务器超时 下面提供 HTTP 状态码的完整列表。点击链接可了解详情。您也可以访问 HTTP 状态码上的 W3C 页获取更多信息。</desc>
-  </url>
-  
-  <url>
     <loc>https://www.toimc.com/JavaSript%E9%97%AD%E5%8C%85%E5%AD%A6%E4%B9%A0/</loc>
     
     <lastmod>2019-03-12T16:08:34.000Z</lastmod>
@@ -648,6 +637,17 @@
     <title>JavaSript闭包学习 | Coding World</title>
     
     <desc>今天学了JavaScript闭包，闭包作用：一个是可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/HTTP%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81/</loc>
+    
+    <lastmod>2019-03-12T16:08:34.000Z</lastmod>
+    
+    <date>1457195208000</date>
+    <title>HTTP状态码200、301、302、304、403、410、500的含义？ | Coding World</title>
+    
+    <desc>一些常见的状态码为： 200 - 服务器成功返回网页 404 - 请求的网页不存在 503 - 服务器超时 下面提供 HTTP 状态码的完整列表。点击链接可了解详情。您也可以访问 HTTP 状态码上的 W3C 页获取更多信息。</desc>
   </url>
   
   <url>
@@ -739,17 +739,6 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/python%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6%E7%A8%8B%E5%BA%8F/</loc>
-    
-    <lastmod>2019-03-12T15:59:03.000Z</lastmod>
-    
-    <date>1513777946000</date>
-    <title>python开发微信企业应用-报警程序 | Coding World</title>
-    
-    <desc>为了熟悉python，记使用python开发一个简单的微信报警后台的过程，主要完成了微信企业应用中进行文字推送。</desc>
-  </url>
-  
-  <url>
     <loc>https://www.toimc.com/centos%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2vncserver%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2019-03-12T15:59:03.000Z</lastmod>
@@ -758,6 +747,17 @@
     <title>centos远程桌面vncserver安装 | Coding World</title>
     
     <desc>VNC 可以实现对另外的计算机的操作： A ： 可以访问另一个计算机，采用命令终端 或者窗口界面。 B ： 可以远程控制另一个计算机，两台同步显示操作。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/python%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6%E7%A8%8B%E5%BA%8F/</loc>
+    
+    <lastmod>2019-03-12T15:59:03.000Z</lastmod>
+    
+    <date>1513777946000</date>
+    <title>python开发微信企业应用-报警程序 | Coding World</title>
+    
+    <desc>为了熟悉python，记使用python开发一个简单的微信报警后台的过程，主要完成了微信企业应用中进行文字推送。</desc>
   </url>
   
   <url>
