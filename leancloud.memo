@@ -28,6 +28,7 @@
 {"title":"Git分支管理","url":"/git分支管理/"},
 {"title":"Git常用命令","url":"/git常用命令/"},
 {"title":"gulp入门教程","url":"/gulp入门到精通/"},
+{"title":"hexo博客next主题添加夜间模式（Dark Mode）","url":"/hexo-usage-1/"},
 {"title":"浏览器http自动跳转https，导致图片访问失败","url":"/image-google-ssl-limit/"},
 {"title":"linux硬盘分区，LVS分区扩容，挂载mount","url":"/linux硬盘分区，LVS分区扩容，挂载mount/"},
 {"title":"linux离线安装nginx","url":"/linux离线安装nginx/"},
