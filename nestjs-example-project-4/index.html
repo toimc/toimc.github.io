@@ -213,20 +213,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -610,6 +610,9 @@
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/nestjs-example-project-5/" rel="bookmark">nestjs搭建通用业务框架（5）：数据库+配置</a></div>
     </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/hexo-usage-1/" rel="bookmark">hexo博客next主题添加夜间模式（Dark Mode）</a></div>
+    </li>
   </ul>
 
 
@@ -884,23 +887,6 @@ document.addEventListener('pjax:success', () => {
     <div class="pjax">
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
-
-<script>
-NexT.utils.loadComments('#disqus_thread', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
-    window.dsqjs = new DisqusJS({
-      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
-      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
-      shortname : 'toimc',
-      url       : "https://www.toimc.com/nestjs-example-project-4/",
-      identifier: "nestjs-example-project-4/",
-      title     : "nestjs搭建通用业务框架（4）：工程目录与代码规范",
-    });
-  }, window.DisqusJS);
-});
-</script>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
@@ -919,6 +905,23 @@ NexT.utils.loadComments('.gitalk-container', () => {
     });
     gitalk.render(document.querySelector('.gitalk-container'));
   }, window.Gitalk);
+});
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments('#disqus_thread', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
+      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
+      shortname : 'toimc',
+      url       : "https://www.toimc.com/nestjs-example-project-4/",
+      identifier: "nestjs-example-project-4/",
+      title     : "nestjs搭建通用业务框架（4）：工程目录与代码规范",
+    });
+  }, window.DisqusJS);
 });
 </script>
 
