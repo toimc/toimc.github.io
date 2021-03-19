@@ -2,6 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.toimc.com/hexo-usage-2/</loc>
+    
+    <lastmod>2021-03-19T08:23:52.354Z</lastmod>
+    
+    <date>1616137188000</date>
+    <title>hexo博客代码折叠功能 | Coding World</title>
+    
+    <desc>在Heox中即使再长的代码，默认发布出来很长，也不会进行折叠。这怎么能忍？本文介绍如何在Hexo中实现类型代码折叠功能，让文章看起来更加清爽</desc>
+  </url>
+  
+  <url>
     <loc>https://www.toimc.com/hexo-usage-1/</loc>
     
     <lastmod>2021-03-19T06:38:48.810Z</lastmod>
@@ -244,17 +255,6 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/</loc>
-    
-    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
-    
-    <date>1522051127000</date>
-    <title>centos6.5离线安装mysql | Coding World</title>
-    
-    <desc>本文介绍了在Centos6.5下离线安装Mysql的方法</desc>
-  </url>
-  
-  <url>
     <loc>https://www.toimc.com/Centos7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%8F%8ASSH%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AB%AF%E5%8F%A3/</loc>
     
     <lastmod>2019-12-27T08:58:30.000Z</lastmod>
@@ -263,6 +263,17 @@
     <title>Centos7网络配置及SSH自定义端口 | Coding World</title>
     
     <desc>本文介绍了Centos7中网络的配置和SSH自定义端口的设置方法，核心命令：nmcli, nmtui 介绍</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/docker%E5%85%A5%E9%97%A8%E4%B9%8B%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</loc>
+    
+    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
+    
+    <date>1553736633000</date>
+    <title>Docker入门之安装教程 | Coding World</title>
+    
+    <desc>本篇介绍了在Mac OS, Windows, Linux下的Docker安装方法。</desc>
   </url>
   
   <url>
@@ -277,14 +288,14 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/docker%E5%85%A5%E9%97%A8%E4%B9%8B%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</loc>
+    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/</loc>
     
     <lastmod>2019-12-27T08:58:30.000Z</lastmod>
     
-    <date>1553736633000</date>
-    <title>Docker入门之安装教程 | Coding World</title>
+    <date>1522051127000</date>
+    <title>centos6.5离线安装mysql | Coding World</title>
     
-    <desc>本篇介绍了在Mac OS, Windows, Linux下的Docker安装方法。</desc>
+    <desc>本文介绍了在Centos6.5下离线安装Mysql的方法</desc>
   </url>
   
   <url>
@@ -596,17 +607,6 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
-    
-    <lastmod>2019-03-12T16:08:46.000Z</lastmod>
-    
-    <date>1457540808000</date>
-    <title>Git常用命令 | Coding World</title>
-    
-    <desc>本文介绍了git的常用命令，如git clone、git pull、git push等等。</desc>
-  </url>
-  
-  <url>
     <loc>https://www.toimc.com/git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/</loc>
     
     <lastmod>2019-03-12T16:08:46.000Z</lastmod>
@@ -615,6 +615,17 @@
     <title>Git分支管理 | Coding World</title>
     
     <desc>还记得《星际穿越》中的平行空间吗？两个独立的空间互不干扰，当你正在电脑前努力学习Git的时候，另一个你正在另一个平行宇宙里努力学习SVN。在某一个时间点，两个平行的时空合并了，结果，你既学会了Git又学会了SVN！</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2019-03-12T16:08:46.000Z</lastmod>
+    
+    <date>1457540808000</date>
+    <title>Git常用命令 | Coding World</title>
+    
+    <desc>本文介绍了git的常用命令，如git clone、git pull、git push等等。</desc>
   </url>
   
   <url>
@@ -728,17 +739,6 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/centos%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2vncserver%E5%AE%89%E8%A3%85/</loc>
-    
-    <lastmod>2019-03-12T15:59:03.000Z</lastmod>
-    
-    <date>1513783568000</date>
-    <title>centos远程桌面vncserver安装 | Coding World</title>
-    
-    <desc>VNC 可以实现对另外的计算机的操作： A ： 可以访问另一个计算机，采用命令终端 或者窗口界面。 B ： 可以远程控制另一个计算机，两台同步显示操作。</desc>
-  </url>
-  
-  <url>
     <loc>https://www.toimc.com/python%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6%E7%A8%8B%E5%BA%8F/</loc>
     
     <lastmod>2019-03-12T15:59:03.000Z</lastmod>
@@ -747,6 +747,17 @@
     <title>python开发微信企业应用-报警程序 | Coding World</title>
     
     <desc>为了熟悉python，记使用python开发一个简单的微信报警后台的过程，主要完成了微信企业应用中进行文字推送。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/centos%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2vncserver%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2019-03-12T15:59:03.000Z</lastmod>
+    
+    <date>1513783568000</date>
+    <title>centos远程桌面vncserver安装 | Coding World</title>
+    
+    <desc>VNC 可以实现对另外的计算机的操作： A ： 可以访问另一个计算机，采用命令终端 或者窗口界面。 B ： 可以远程控制另一个计算机，两台同步显示操作。</desc>
   </url>
   
   <url>
