@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://static.www.toimc.com/blog/img/2021/hexo-usage-3/blog-2.jpg?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/200">
 <meta property="og:image" content="https://static.www.toimc.com/blog/img/2021/hexo-usage-3/blog-3.jpg?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/200">
 <meta property="article:published_time" content="2021-03-19T09:41:16.000Z">
-<meta property="article:modified_time" content="2021-03-19T11:32:14.158Z">
+<meta property="article:modified_time" content="2021-03-19T17:01:56.000Z">
 <meta property="article:author" content="var author&#x3D;&#39;Brian&#39;">
 <meta property="article:tag" content="前端工程师，前端学习，前端开发，全栈工程师，全栈开发，自动化流程，前端自动化，webpack">
 <meta name="twitter:card" content="summary">
@@ -215,7 +215,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">70</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -228,7 +228,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -323,7 +323,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
+      <span>1.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -418,7 +418,7 @@
 
 <h3 id="自建一个workers"><a href="#自建一个workers" class="headerlink" title="自建一个workers"></a>自建一个workers</h3><p>地址：<a target="_blank" rel="noopener" href="https://workers.cloudflare.com/">CloudFlare Workers</a></p>
 <p>参考项目：<a href="Zibri/cloudflare-cors-anywhere">Zibri/cloudflare-cors-anywhere</a></p>
-<p>比如我们部署的地址：<a target="_blank" rel="noopener" href="https://github-proxy.toimc.workers.dev/https://github.com/login/oauth/access_token">https://github-proxy.toimc.workers.dev/https://github.com/login/oauth/access_token</a> 大家也可以使用</p>
+<p>比如我们部署的地址：<a target="_blank" rel="noopener" href="https://github-proxy.toimc.workers.dev/https://github.com/login/oauth/access_token">右键复制 Link</a> 大家也可以使用</p>
 <p>参考文章：<a target="_blank" rel="noopener" href="https://blog.dsrkafuu.su/post/2020/cloudflare-worker-cors-anywhere/">使用 CloudFlare Workers 实现 CORS Anywhere</a></p>
 <h3 id="使用其他人搭建的代理"><a href="#使用其他人搭建的代理" class="headerlink" title="使用其他人搭建的代理"></a>使用其他人搭建的代理</h3><p>比如这个<a target="_blank" rel="noopener" href="https://github.com/gitalk/gitalk/issues/429">issues</a>介绍到的：</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>shielded-brushlands-<span class="number">08810</span>.herokuapp.com<span class="regexp">/https:/</span><span class="regexp">/github.com/</span>login<span class="regexp">/oauth/</span>access_token</span><br></pre></td></tr></table></figure>
@@ -455,6 +455,9 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/use-docker-install-common-database/" rel="prev" title="use-docker-install-common-database">
+                  <i class="fa fa-chevron-left"></i> use-docker-install-common-database
+                </a>
             </div>
             <div class="post-nav-item">
                 <a href="/hexo-usage-2/" rel="next" title="hexo博客代码折叠功能">
@@ -539,7 +542,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:02</span>
+    <span title="站点阅读时长">3:03</span>
   </span>
 </div>
 
@@ -709,6 +712,23 @@ document.addEventListener('pjax:success', () => {
     <div class="pjax">
 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments('#disqus_thread', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
+      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
+      shortname : 'toimc',
+      url       : "https://www.toimc.com/hexo-usage-3/",
+      identifier: "hexo-usage-3/",
+      title     : "hexo主题next中gitalk配置与评论初始化",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
@@ -727,23 +747,6 @@ NexT.utils.loadComments('.gitalk-container', () => {
     });
     gitalk.render(document.querySelector('.gitalk-container'));
   }, window.Gitalk);
-});
-</script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
-
-<script>
-NexT.utils.loadComments('#disqus_thread', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
-    window.dsqjs = new DisqusJS({
-      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
-      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
-      shortname : 'toimc',
-      url       : "https://www.toimc.com/hexo-usage-3/",
-      identifier: "hexo-usage-3/",
-      title     : "hexo主题next中gitalk配置与评论初始化",
-    });
-  }, window.DisqusJS);
 });
 </script>
 

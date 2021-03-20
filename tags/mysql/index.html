@@ -208,7 +208,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">70</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -221,7 +221,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -358,7 +358,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:02</span>
+    <span title="站点阅读时长">3:03</span>
   </span>
 </div>
 
@@ -533,7 +533,25 @@ document.addEventListener('pjax:success', () => {
     </div>
 </body>
 </html>
-p_id, app_key, server_url } = {"enable":true,"app_id":"YvgheVT82eRRYHM6xtvaEL6l-gzGzoHsz","app_key":"uwmRd9pGJeDmqKQNmalNsosO","server_url":"https://blog.toimc.com","security":true};
+rs = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            const target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"YvgheVT82eRRYHM6xtvaEL6l-gzGzoHsz","app_key":"uwmRd9pGJeDmqKQNmalNsosO","server_url":"https://blog.toimc.com","security":true};
     function fetchData(api_server) {
       const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {

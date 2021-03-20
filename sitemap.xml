@@ -2,9 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.toimc.com/use-docker-install-common-database/</loc>
+    
+    <lastmod>2021-03-20T16:23:06.921Z</lastmod>
+    
+    <date>1616204578000</date>
+    <title>use-docker-install-common-database | Coding World</title>
+    
+    <desc>本文介绍了常见的数据库MySQL、Postgre、MongoDB使用docker安装方式快速安装。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/nestjs-example-project-5/</loc>
+    
+    <lastmod>2021-03-20T14:13:13.786Z</lastmod>
+    
+    <date>1615939588000</date>
+    <title>nestjs搭建通用业务框架（5）：数据库+配置 | Coding World</title>
+    
+    <desc>这是《nestjs搭建通用业务框架》系列的第5篇，进入开发具体的功能之前，学习nest框架本身提供的CLI工具与规划合理的工程目录，对于要实现的内容进行架构与计划，这是实现健壮高可用的框架的前提。</desc>
+  </url>
+  
+  <url>
     <loc>https://www.toimc.com/hexo-usage-3/</loc>
     
-    <lastmod>2021-03-19T11:32:14.158Z</lastmod>
+    <lastmod>2021-03-19T17:01:56.000Z</lastmod>
     
     <date>1616146876000</date>
     <title>hexo主题next中gitalk配置与评论初始化 | Coding World</title>
@@ -32,17 +54,6 @@
     <title>hexo博客代码折叠功能 | Coding World</title>
     
     <desc>在Heox中即使再长的代码，默认发布出来很长，也不会进行折叠。这怎么能忍？本文介绍如何在Hexo中实现类型代码折叠功能，让文章看起来更加清爽</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/nestjs-example-project-5/</loc>
-    
-    <lastmod>2021-03-17T00:12:39.549Z</lastmod>
-    
-    <date>1615939588000</date>
-    <title>nestjs搭建通用业务框架（5）：数据库+配置 | Coding World</title>
-    
-    <desc>这是《nestjs搭建通用业务框架》系列的第5篇，进入开发具体的功能之前，学习nest框架本身提供的CLI工具与规划合理的工程目录，对于要实现的内容进行架构与计划，这是实现健壮高可用的框架的前提。</desc>
   </url>
   
   <url>
