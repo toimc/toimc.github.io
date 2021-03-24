@@ -2,6 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.toimc.com/nestjs-example-project-6/</loc>
+    
+    <lastmod>2021-03-24T17:19:13.441Z</lastmod>
+    
+    <date>1616508299000</date>
+    <title>nestjs搭建通用业务框架（6）：高性能框架fastify | Coding World</title>
+    
+    <desc>这是《nestjs搭建通用业务框架》系列的第6篇，本篇带领大家升级nestjs中默认的web服务器Express，改成高性能的 fastify。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/nestjs-example-project-7/</loc>
+    
+    <lastmod>2021-03-24T17:14:41.375Z</lastmod>
+    
+    <date>1616603519000</date>
+    <title>nestjs搭建通用业务框架（7）：TypeORM进阶CURD操作 | Coding World</title>
+    
+    <desc>这是《nestjs搭建通用业务框架》系列的第7篇，主要介绍了nestjs中的TypeORM的具体使用方案。两种情况：1. 有数据库设计的情况，使用typeorm-model-generator产生实体类；2. 无数据库的情况，可以手动创建实体类后，使用typeorm的synchronize属性，来同步创建表格；</desc>
+  </url>
+  
+  <url>
     <loc>https://www.toimc.com/use-docker-install-common-database/</loc>
     
     <lastmod>2021-03-20T16:32:01.571Z</lastmod>
