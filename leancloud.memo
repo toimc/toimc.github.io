@@ -43,6 +43,8 @@
 {"title":"nestjs搭建通用业务框架（4）：数据库+配置","url":"/nestjs-example-project-4/"},
 {"title":"nestjs搭建通用业务框架（4）：工程目录与代码规范","url":"/nestjs-example-project-4/"},
 {"title":"nestjs搭建通用业务框架（5）：数据库+配置","url":"/nestjs-example-project-5/"},
+{"title":"nestjs搭建通用业务框架（6）：高性能框架fastify","url":"/nestjs-example-project-6/"},
+{"title":"nestjs搭建通用业务框架（7）：TypeORM进阶CURD操作","url":"/nestjs-example-project-7/"},
 {"title":"python开发微信企业应用-报警程序","url":"/python开发微信报警程序/"},
 {"title":"测试文章","url":"/test-post/"},
 {"title":"use-docker-install-common-database","url":"/use-docker-install-common-database/"},

@@ -2,6 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.toimc.com/hexo-usage-2/</loc>
+    
+    <lastmod>2021-03-29T02:38:33.211Z</lastmod>
+    
+    <date>1616137188000</date>
+    <title>hexo博客代码折叠功能 | Coding World</title>
+    
+    <desc>在Heox中即使再长的代码，默认发布出来很长，也不会进行折叠。这怎么能忍？本文介绍如何在Hexo中实现类型代码折叠功能，让文章看起来更加清爽</desc>
+  </url>
+  
+  <url>
     <loc>https://www.toimc.com/nestjs-example-project-6/</loc>
     
     <lastmod>2021-03-24T17:19:13.441Z</lastmod>
@@ -65,17 +76,6 @@
     <title>hexo博客next主题添加夜间模式（Dark Mode） | Coding World</title>
     
     <desc>本文主要介绍为hexo next主题添加一个可以切换的黑色/夜间模式，虽然next 8.0 主题已经支持原生黑色模式，但是这个黑色模式是不可以切换的。本文介绍如何实现按钮来切换，包括如何在代码部分也切换夜间模式。</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/hexo-usage-2/</loc>
-    
-    <lastmod>2021-03-19T08:23:52.354Z</lastmod>
-    
-    <date>1616137188000</date>
-    <title>hexo博客代码折叠功能 | Coding World</title>
-    
-    <desc>在Heox中即使再长的代码，默认发布出来很长，也不会进行折叠。这怎么能忍？本文介绍如何在Hexo中实现类型代码折叠功能，让文章看起来更加清爽</desc>
   </url>
   
   <url>
