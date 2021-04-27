@@ -2,6 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.toimc.com/node-vscode-webstorm-debug/</loc>
+    
+    <lastmod>2021-04-03T09:33:30.421Z</lastmod>
+    
+    <date>1617437615000</date>
+    <title>如何调试node&npm？ | Coding World</title>
+    
+    <desc>如何使用尝试的IDE（VSCode &amp; Webstorm）调试node&amp;npm程序？本篇通过真实的案例（图片教程）介绍了调试方法</desc>
+  </url>
+  
+  <url>
     <loc>https://www.toimc.com/book-reviews-prepared/</loc>
     
     <lastmod>2021-03-31T06:51:46.697Z</lastmod>
