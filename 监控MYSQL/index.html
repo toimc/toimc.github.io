@@ -738,27 +738,6 @@ document.addEventListener('pjax:success', () => {
     <div class="pjax">
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
-
-<script>
-NexT.utils.loadComments('.gitalk-container', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : 'c2514f07e902bf3f9af6',
-      clientSecret: '4a1a05479a3ca34095cb13fccc48245674407ba7',
-      repo        : 'toimc.github.io',
-      owner       : 'toimc',
-      admin       : ['toimc'],
-      id          : '94e197ec54517e2a48ee294728be581e',
-      proxy       : '/login/oauth/access_token',
-        language: 'zh-CN',
-      distractionFreeMode: true
-    });
-    gitalk.render(document.querySelector('.gitalk-container'));
-  }, window.Gitalk);
-});
-</script>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
 
 <script>
@@ -773,6 +752,27 @@ NexT.utils.loadComments('#disqus_thread', () => {
       title     : "监控mysql运行状态",
     });
   }, window.DisqusJS);
+});
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '53229f4c6047d8b0ad40',
+      clientSecret: '3b5f5a9d6479440b6bd7a112b36e967b9a8da7d4',
+      repo        : 'toimc.github.io',
+      owner       : 'toimc',
+      admin       : ['toimc'],
+      id          : '94e197ec54517e2a48ee294728be581e',
+      proxy       : 'https://github-proxy.toimc.workers.dev/https://github.com/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
 });
 </script>
 
