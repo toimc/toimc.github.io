@@ -501,6 +501,7 @@ rm -rf project.git
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">toimc前端技术</span>
+    <a href="https://bandwagonhost.com/aff.php?aff=6389" target="_blank" data-pjax-state="">搬瓦工Host</a>
 </div>
 
     </div>
@@ -667,23 +668,6 @@ document.addEventListener('pjax:success', () => {
     <div class="pjax">
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
-
-<script>
-NexT.utils.loadComments('#disqus_thread', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
-    window.dsqjs = new DisqusJS({
-      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
-      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
-      shortname : 'toimc',
-      url       : "https://www.toimc.com/git%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E8%BD%AC%E7%A7%BB/",
-      identifier: "git代码仓库转移/",
-      title     : "git代码仓库转移",
-    });
-  }, window.DisqusJS);
-});
-</script>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
@@ -702,6 +686,23 @@ NexT.utils.loadComments('.gitalk-container', () => {
     });
     gitalk.render(document.querySelector('.gitalk-container'));
   }, window.Gitalk);
+});
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments('#disqus_thread', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
+      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
+      shortname : 'toimc',
+      url       : "https://www.toimc.com/git%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E8%BD%AC%E7%A7%BB/",
+      identifier: "git代码仓库转移/",
+      title     : "git代码仓库转移",
+    });
+  }, window.DisqusJS);
 });
 </script>
 
