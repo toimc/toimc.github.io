@@ -2,6 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.toimc.com/lessons/index.html</loc>
+    
+    <lastmod>2022-02-06T15:42:23.178Z</lastmod>
+    
+    <date>1609430400000</date>
+    <title>我的课程 | Coding World</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
     <loc>https://www.toimc.com/node-vscode-webstorm-debug/</loc>
     
     <lastmod>2021-04-03T09:33:30.421Z</lastmod>
@@ -109,17 +120,6 @@
     <title>nestjs搭建通用业务框架（4）：工程目录与代码规范 | Coding World</title>
     
     <desc>这是《nestjs搭建通用业务框架》系列的第4篇，进入开发具体的功能之前，养成良好的工程目录与代码风格的习惯，目的构建大型复杂项目，提高代码易维护性。</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/lessons/index.html</loc>
-    
-    <lastmod>2021-03-15T01:27:54.712Z</lastmod>
-    
-    <date>1609430400000</date>
-    <title>我的课程 | Coding World</title>
-    
-    <desc></desc>
   </url>
   
   <url>
