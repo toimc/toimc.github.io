@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.0.0">
+<meta name="generator" content="Hexo 5.4.1">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://uploader.shimo.im/f/DBf8kAtxw59w5DZg.png!thumbnail?fileGuid=47kgJ0X4NrCPLEqV">
 <meta property="og:image" content="https://uploader.shimo.im/f/HavX4mmb4ojv6hUr.png!thumbnail?fileGuid=47kgJ0X4NrCPLEqV">
 <meta property="article:published_time" content="2021-02-22T08:22:45.000Z">
-<meta property="article:modified_time" content="2021-03-02T14:48:20.154Z">
+<meta property="article:modified_time" content="2021-03-02T14:48:20.000Z">
 <meta property="article:author" content="var author&#x3D;&#39;Brian&#39;">
 <meta property="article:tag" content="Hyper-V">
 <meta property="article:tag" content="虚拟机">
@@ -373,7 +373,7 @@
 <p>打开 控制面板 -&gt; 程序和功能 -&gt; 启用或关闭Windows功能，勾选 Hyper-V 相关选项，确认，等待配置，提示重启，添加完成</p>
 <p>如果你的系统是 WIN10 家庭版：</p>
 <p>新建记事本，复制以下命令，后缀改为 .bat 或 .cmd，以管理员身份运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line">dir &#x2F;b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line">for &#x2F;f %%i in (&#39;findstr &#x2F;i . hyper-v.txt 2^&gt;nul&#39;) do dism &#x2F;online &#x2F;norestart &#x2F;add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line">del hyper-v.txt</span><br><span class="line">Dism &#x2F;online &#x2F;enable-feature &#x2F;featurename:Microsoft-Hyper-V-All &#x2F;LimitAccess &#x2F;ALL</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line">dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line">for /f %%i in (&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line">del hyper-v.txt</span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL</span><br></pre></td></tr></table></figure>
 <p>命令处理完成后，输入 “Y” 确认重启，进行配置更新添加 Hyper-V 完成顺便说一下，Hyper-V 目前比较完美支持 Windows、Linux 等系统，不太支持苹果等系统，除了 Hyper-V 也可以试试其他软件，比如 VMWare 等。</p>
 
     </div>

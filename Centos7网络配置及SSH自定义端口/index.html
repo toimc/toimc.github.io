@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.0.0">
+<meta name="generator" content="Hexo 5.4.1">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -348,7 +348,7 @@
 <h2 id="Centos7-中网络配置"><a href="#Centos7-中网络配置" class="headerlink" title="Centos7 中网络配置"></a>Centos7 中网络配置</h2><h3 id="nmcli命令与nmtui命令介绍"><a href="#nmcli命令与nmtui命令介绍" class="headerlink" title="nmcli命令与nmtui命令介绍"></a><code>nmcli</code>命令与<code>nmtui</code>命令介绍</h3><h4 id="nmcli命令"><a href="#nmcli命令" class="headerlink" title="nmcli命令"></a>nmcli命令</h4><blockquote>
 <p>在CentOS / RHEL 7中网络管理命令行工具，叫nmcli(command-line tool for controlling NetworkManager)。经常使用ifconfig的用户应该在CentOS 7中避免使用ifconfig，如果需要使用ifconfig命令，可以参考：如下命令进行安装。</p>
 </blockquote>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum search ifconfig</span></span><br><span class="line">Failed <span class="keyword">to</span> <span class="builtin-name">set</span> locale, defaulting <span class="keyword">to</span> C</span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Loading<span class="built_in"> mirror </span>speeds <span class="keyword">from</span> cached hostfile</span><br><span class="line">net-tools.x86_64 : Basic networking tools</span><br><span class="line"><span class="comment"># yum install -y net-tools</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum search ifconfig</span></span><br><span class="line">Failed <span class="keyword">to</span> <span class="built_in">set</span> locale, defaulting <span class="keyword">to</span> C</span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Loading<span class="built_in"> mirror </span>speeds <span class="keyword">from</span> cached hostfile</span><br><span class="line">net-tools.x86_64 : Basic networking tools</span><br><span class="line"><span class="comment"># yum install -y net-tools</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 </blockquote>
 <p>常用的几个命令及用法：</p>
@@ -452,13 +452,13 @@
 </blockquote>
 <ol>
 <li><p>查看是否已安装SSH软件包(可跳过)    </p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#rpm -qa|grep ssh</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#rpm -<span class="keyword">qa</span>|<span class="keyword">grep</span> ssh</span><br></pre></td></tr></table></figure></li>
 <li><p>检查服务是否开启</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status sshd.service</span><br></pre></td></tr></table></figure></li>
 <li><p>检查进程运行状态(可跳过)</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ps</span> -ef |<span class="keyword">grep</span> sshd</span><br></pre></td></tr></table></figure></li>
 <li><p>检查程序运行端口(可跳过)</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># netstat -anpl |grep sshd</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># netstat -anpl |grep sshd</span></span><br></pre></td></tr></table></figure></li>
 <li><p>修改sshd配置文件</p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># vi <span class="regexp">/etc/</span>ssh/sshd_config </span><br></pre></td></tr></table></figure>
 
@@ -490,13 +490,13 @@
 
 <p><strong>多数情况：</strong></p>
 <p>若未安装，请先安装工具包</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># yum update -y</span></span><br><span class="line"><span class="meta"># yum install -y policycoreutils-python</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># yum update -y</span></span><br><span class="line"><span class="meta"># yum install -y policycoreutils-python</span></span><br></pre></td></tr></table></figure>
 
 <p>查看当前selinux允许的端口</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># semanage port -l |grep ssh</span></span><br><span class="line"><span class="attribute">ssh_port_t</span>                     tcp      <span class="number">22</span></span><br></pre></td></tr></table></figure>
 
 <p>添加新端口</p>
- <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># semanage port -a -t ssh_port_t -p tcp 27300</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># semanage port -<span class="selector-tag">a</span> -t ssh_port_t -<span class="selector-tag">p</span> tcp <span class="number">27300</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>注意：无法使用如下命令，去删除<strong>默认的SELinux配置</strong>端口<code>22</code></p>
@@ -511,7 +511,7 @@
  <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># semanage port -l |grep ssh</span></span><br><span class="line"><span class="attribute">ssh_port_t</span>                     tcp      <span class="number">27300</span>, <span class="number">22</span>  # 说明添加成功了</span><br></pre></td></tr></table></figure>
 
 <p>重启SSH服务</p>
- <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># systemctl restart sshd.service  </span></span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># systemctl restart sshd.service  </span></span><br></pre></td></tr></table></figure></li>
 </ol>
 
     </div>

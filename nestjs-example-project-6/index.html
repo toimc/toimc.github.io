@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.0.0">
+<meta name="generator" content="Hexo 5.4.1">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -31,7 +31,7 @@
 <meta property="og:description" content="这是《nestjs搭建通用业务框架》系列的第6篇，本篇带领大家升级nestjs中默认的web服务器Express，改成高性能的 fastify。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-23T14:04:59.000Z">
-<meta property="article:modified_time" content="2021-03-24T17:19:13.441Z">
+<meta property="article:modified_time" content="2021-03-24T17:19:13.000Z">
 <meta property="article:author" content="var author&#x3D;&#39;Brian&#39;">
 <meta property="article:tag" content="node.js">
 <meta property="article:tag" content="nestjs">
@@ -446,10 +446,10 @@
 <p>集成步骤：</p>
 <ol>
 <li><p>安装依赖<code>@nestjs/platform-fastify</code></p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> i --save @nestjs/platform-fastify</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="selector-tag">i</span> <span class="attr">--save</span> <span class="keyword">@nestjs</span>/platform-fastify</span><br></pre></td></tr></table></figure></li>
 <li><p>配置适配器</p>
 <p>安装 fastify 后，我们可以使用 <code>FastifyAdapter</code>，修改<code>src/main.ts</code>文件</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; NestFactory &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/core&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; FastifyAdapter, NestFastifyApplication &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/platform-fastify&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ApplicationModule &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.module&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">bootstrap</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> app = <span class="keyword">await</span> NestFactory.create&lt;NestFastifyApplication&gt;(ApplicationModule, <span class="keyword">new</span> FastifyAdapter());</span><br><span class="line">  <span class="comment">// 默认情况下，`Fastify`仅在 `localhost 127.0.0.1` 接口上监听</span></span><br><span class="line">  <span class="comment">// 改成 0.0.0.0 接受其他主机上的连接</span></span><br><span class="line">  <span class="keyword">await</span> app.listen(<span class="number">3000</span>, <span class="string">&#x27;0.0.0.0&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">bootstrap();</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NestFactory</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/core&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">FastifyAdapter</span>, <span class="title class_">NestFastifyApplication</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/platform-fastify&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">ApplicationModule</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.module&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">bootstrap</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> app = <span class="keyword">await</span> <span class="title class_">NestFactory</span>.<span class="property">create</span>&lt;<span class="title class_">NestFastifyApplication</span>&gt;(<span class="title class_">ApplicationModule</span>, <span class="keyword">new</span> <span class="title class_">FastifyAdapter</span>());</span><br><span class="line">  <span class="comment">// 默认情况下，`Fastify`仅在 `localhost 127.0.0.1` 接口上监听</span></span><br><span class="line">  <span class="comment">// 改成 0.0.0.0 接受其他主机上的连接</span></span><br><span class="line">  <span class="keyword">await</span> app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="string">&#x27;0.0.0.0&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">bootstrap</span>();</span><br></pre></td></tr></table></figure></li>
 <li><p>运行<code>npm run start:dev</code>，打开<code>localhost:3000</code>验证服务是否OK。</p>
 </li>
 </ol>
@@ -459,7 +459,7 @@
 <p>就OK了。</p>
 <h2 id="关于路径别名"><a href="#关于路径别名" class="headerlink" title="关于路径别名"></a>关于路径别名</h2><p>我们常见的用法，比如：<code>@</code>代表<code>src</code></p>
 <p>在nest项目中配置路径别名比较简单，可以在<code>tsconfig.json</code>中添加<code>paths</code>属性：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="comment">// ....</span></span><br><span class="line">    <span class="comment">// 添加如下内容</span></span><br><span class="line">    <span class="attr">&quot;paths&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;@/*&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;src/*&quot;</span></span><br><span class="line">      ],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;compilerOptions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// ....</span></span><br><span class="line">    <span class="comment">// 添加如下内容</span></span><br><span class="line">    <span class="attr">&quot;paths&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;@/*&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;src/*&quot;</span></span><br><span class="line">      <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>然后，重新使用<code>npm run start:dev</code>进行测试即可。</p>
 <p>后面，项目目录再深，也好写文件路径了，再也不用看到<code>../../../</code>无穷无尽的关联路径了。</p>
@@ -476,19 +476,19 @@
       <div class="popular-posts-title"><a href="/nestjs-example-project-1/" rel="bookmark">nestjs搭建通用业务框架（1）：基础介绍</a></div>
     </li>
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/nestjs-example-project-2/" rel="bookmark">nestjs搭建通用业务框架（2）：初体验</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/nestjs-example-project-3/" rel="bookmark">nestjs搭建通用业务框架（3）：核心概念</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/nestjs-example-project-7/" rel="bookmark">nestjs搭建通用业务框架（7）：TypeORM进阶CURD操作</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/nestjs-example-project-2/" rel="bookmark">nestjs搭建通用业务框架（2）：初体验</a></div>
+      <div class="popular-posts-title"><a href="/nestjs-example-project-4/" rel="bookmark">nestjs搭建通用业务框架（4）：工程目录与代码规范</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/nestjs-example-project-5/" rel="bookmark">nestjs搭建通用业务框架（5）：数据库+配置</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/nestjs-example-project-4/" rel="bookmark">nestjs搭建通用业务框架（4）：工程目录与代码规范</a></div>
+      <div class="popular-posts-title"><a href="/nestjs-example-project-7/" rel="bookmark">nestjs搭建通用业务框架（7）：TypeORM进阶CURD操作</a></div>
     </li>
   </ul>
 

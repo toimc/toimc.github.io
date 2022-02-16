@@ -1269,6 +1269,9 @@ pre code {
 .darkmode--activated .header {
   background: #fff;
 }
+.darkmode-toggle {
+  z-index: 999999;
+}
 .headband {
   background: #222;
   height: 3px;
@@ -2938,6 +2941,9 @@ ul.breadcrumb li:last-child {
 .highlight-container .js_retract_code_btn:hover {
   border-bottom-color: none !important;
 }
+.highlight-container +blockquote {
+  margin-top: 0.5em;
+}
 hr {
   height: 2px;
   margin: 20px 0;
@@ -3188,7 +3194,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ff2bff;
+  background: #0f4f6b;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -3213,4 +3219,12 @@ hr {
 }
 .sub-menu .menu-item {
   display: inline-block;
+}
+figure.highlight,
+ul,
+ol {
+  margin: 0;
+}
+p {
+  margin: 0 0 5px;
 }

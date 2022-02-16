@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.0.0">
+<meta name="generator" content="Hexo 5.4.1">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -31,7 +31,7 @@
 <meta property="og:description" content="本篇是nestjs系列文章的番外篇，主要是介绍控制反转Invention of Control(IoC)和依赖注入Dependecy Injection(DI)，作为nestjs和angular的核心概念，学习它们有利于更好的进行框架的学习。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-12T02:39:50.000Z">
-<meta property="article:modified_time" content="2021-03-12T09:48:11.539Z">
+<meta property="article:modified_time" content="2021-03-12T09:48:11.000Z">
 <meta property="article:author" content="var author&#x3D;&#39;Brian&#39;">
 <meta property="article:tag" content="Dependecy Injection(DI)">
 <meta property="article:tag" content="Invention of Control(IoC)">
@@ -355,10 +355,10 @@
 </ul>
 <h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>先看个例子：我们希望在通知组件(NotificationComponent)中通过消息服务(MessageService)发送一条消息。</p>
 <p>如果不使用依赖注入的话，我们的代码大概长这样：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NotificationComponent</span> </span>&#123;</span><br><span class="line">  msg: MessageService;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">     <span class="built_in">this</span>.msg = <span class="keyword">new</span> MessageService();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">sendMsg</span>(<span class="params">msgType: string, info: string</span>)</span> &#123;</span><br><span class="line">     <span class="built_in">this</span>.msg.send(msgType, info);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NotificationComponent</span> &#123;</span><br><span class="line">  <span class="attr">msg</span>: <span class="title class_">MessageService</span>;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">msg</span> = <span class="keyword">new</span> <span class="title class_">MessageService</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">sendMsg</span>(<span class="params">msgType: string, info: string</span>) &#123;</span><br><span class="line">     <span class="variable language_">this</span>.<span class="property">msg</span>.<span class="title function_">send</span>(msgType, info);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>使用依赖注入时：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NotificationComponent</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">msg: MessageService</span>)</span> &#123;&#125;  <span class="comment">// Angular 中注入依赖的方式</span></span><br><span class="line">  <span class="function"><span class="title">sendMsg</span>(<span class="params">msgType: string, info: string</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.msg.send(msgType, info);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NotificationComponent</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">msg: MessageService</span>) &#123;&#125;  <span class="comment">// Angular 中注入依赖的方式</span></span><br><span class="line">  <span class="title function_">sendMsg</span>(<span class="params">msgType: string, info: string</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">msg</span>.<span class="title function_">send</span>(msgType, info);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>经过对比，可以看到使用依赖注入有两个很显然的优点：</p>
 <ul>

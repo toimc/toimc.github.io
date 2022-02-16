@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.0.0">
+<meta name="generator" content="Hexo 5.4.1">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -369,7 +369,7 @@
 <li><p>将下载的二进制压缩包放到<code>/usr/local/</code>目录下。</p>
 </li>
 <li><p>解压安装包</p>
- <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">tar</span> -zxvfmysql-<span class="number">5</span>.<span class="number">6</span>.<span class="number">36</span>-linux-glibc<span class="number">2</span>.<span class="number">5</span>-x<span class="number">86</span>_<span class="number">64</span>.tar.gz</span><br></pre></td></tr></table></figure>
+ <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">tar</span> -zxvfmysql-<span class="number">5</span>.<span class="number">6</span>.<span class="number">36</span>-linux-glibc2.<span class="number">5</span>-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>将解压好的文件夹重命名为mysql</p>
 </li>
@@ -379,7 +379,7 @@
 <li><p>创建步骤9中用到的目录并将其用户设置为mysql</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir <span class="regexp">/var/</span>lib/mysql</span><br><span class="line">mkdir <span class="regexp">/var/</span>lib<span class="regexp">/mysql/my</span>sql</span><br><span class="line">chown -R mysql:mysql <span class="regexp">/var/</span>lib/mysql</span><br><span class="line">chown -R mysql:mysql <span class="regexp">/var/</span>lib<span class="regexp">/mysql/my</span>sql</span><br></pre></td></tr></table></figure></li>
 <li><p>进入安装mysql软件目录</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/usr/local/mysql</span></span><br><span class="line">chown -R mysql<span class="function">:mysql</span> <span class="string">./</span>　　                             <span class="comment">#修改当前目录拥有者为mysql用户</span></span><br><span class="line"><span class="string">./scripts/mysql_install_db</span> <span class="params">--user=mysql</span>         <span class="comment">#安装数据库</span></span><br><span class="line">chown -R mysql<span class="function">:mysql</span> data                              <span class="comment">#修改当前data目录拥有者为mysql用户</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/mysql</span><br><span class="line"><span class="built_in">chown</span> -R mysql:mysql ./　　                             <span class="comment">#修改当前目录拥有者为mysql用户</span></span><br><span class="line">./scripts/mysql_install_db --user=mysql         <span class="comment">#安装数据库</span></span><br><span class="line"><span class="built_in">chown</span> -R mysql:mysql data                              <span class="comment">#修改当前data目录拥有者为mysql用户</span></span><br></pre></td></tr></table></figure>
 <p>到此数据库安装完毕！</p>
 </li>
 </ol>
@@ -405,10 +405,10 @@
       <div class="popular-posts-title"><a href="/linux硬盘分区，LVS分区扩容，挂载mount/" rel="bookmark">linux硬盘分区，LVS分区扩容，挂载mount</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/linux离线安装nginx/" rel="bookmark">linux离线安装nginx</a></div>
+      <div class="popular-posts-title"><a href="/linux编译安装php7/" rel="bookmark">linux编译安装php7+nginx</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/linux编译安装php7/" rel="bookmark">linux编译安装php7+nginx</a></div>
+      <div class="popular-posts-title"><a href="/linux离线安装nginx/" rel="bookmark">linux离线安装nginx</a></div>
     </li>
   </ul>
 
