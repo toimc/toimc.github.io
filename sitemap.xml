@@ -4,7 +4,7 @@
   <url>
     <loc>https://www.toimc.com/lessons/index.html</loc>
     
-    <lastmod>2022-02-16T13:54:45.175Z</lastmod>
+    <lastmod>2022-02-16T13:59:13.468Z</lastmod>
     
     <date>1609430400000</date>
     <title>我的课程 | Coding World</title>
@@ -288,17 +288,6 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/windows10%E5%AE%B6%E5%BA%AD%E7%89%88%E5%A6%82%E4%BD%95%E6%B7%BB%E5%8A%A0Hyper-V/</loc>
-    
-    <lastmod>2021-03-02T14:48:20.000Z</lastmod>
-    
-    <date>1613982165000</date>
-    <title>windows10家庭版如何添加Hyper-V | Coding World</title>
-    
-    <desc>本文是《大前端》配套介绍图文内容，主要是介绍如何在windows10家庭版如何添加Hyper-V</desc>
-  </url>
-  
-  <url>
     <loc>https://www.toimc.com/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/</loc>
     
     <lastmod>2021-03-02T14:48:20.000Z</lastmod>
@@ -307,6 +296,17 @@
     <title>Redis-cli的常见操作 | Coding World</title>
     
     <desc>本文主要介绍Redis及redis-cli的使用方式，介绍redis操作中的一些常见的命令。 分为以下几个部分介绍： docker中的redis如何进入命令模式 redis的常见命令及用法 有哪些比较好的redis连接工具</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/windows10%E5%AE%B6%E5%BA%AD%E7%89%88%E5%A6%82%E4%BD%95%E6%B7%BB%E5%8A%A0Hyper-V/</loc>
+    
+    <lastmod>2021-03-02T14:48:20.000Z</lastmod>
+    
+    <date>1613982165000</date>
+    <title>windows10家庭版如何添加Hyper-V | Coding World</title>
+    
+    <desc>本文是《大前端》配套介绍图文内容，主要是介绍如何在windows10家庭版如何添加Hyper-V</desc>
   </url>
   
   <url>
@@ -321,6 +321,17 @@
   </url>
   
   <url>
+    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/</loc>
+    
+    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
+    
+    <date>1522051127000</date>
+    <title>centos6.5离线安装mysql | Coding World</title>
+    
+    <desc>本文介绍了在Centos6.5下离线安装Mysql的方法</desc>
+  </url>
+  
+  <url>
     <loc>https://www.toimc.com/Centos7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%8F%8ASSH%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AB%AF%E5%8F%A3/</loc>
     
     <lastmod>2019-12-27T08:58:30.000Z</lastmod>
@@ -329,17 +340,6 @@
     <title>Centos7网络配置及SSH自定义端口 | Coding World</title>
     
     <desc>本文介绍了Centos7中网络的配置和SSH自定义端口的设置方法，核心命令：nmcli, nmtui 介绍</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/docker%E5%85%A5%E9%97%A8%E4%B9%8B%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</loc>
-    
-    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
-    
-    <date>1553736633000</date>
-    <title>Docker入门之安装教程 | Coding World</title>
-    
-    <desc>本篇介绍了在Mac OS, Windows, Linux下的Docker安装方法。</desc>
   </url>
   
   <url>
@@ -354,14 +354,14 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/</loc>
+    <loc>https://www.toimc.com/docker%E5%85%A5%E9%97%A8%E4%B9%8B%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</loc>
     
     <lastmod>2019-12-27T08:58:30.000Z</lastmod>
     
-    <date>1522051127000</date>
-    <title>centos6.5离线安装mysql | Coding World</title>
+    <date>1553736633000</date>
+    <title>Docker入门之安装教程 | Coding World</title>
     
-    <desc>本文介绍了在Centos6.5下离线安装Mysql的方法</desc>
+    <desc>本篇介绍了在Mac OS, Windows, Linux下的Docker安装方法。</desc>
   </url>
   
   <url>
@@ -651,17 +651,6 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E5%AE%89%E8%A3%85wordpress/</loc>
-    
-    <lastmod>2019-03-12T16:10:32.000Z</lastmod>
-    
-    <date>1456226808000</date>
-    <title>搭建Wordpress | Coding World</title>
-    
-    <desc>虽然现在有更多更便捷的安装方式，了解一下原始的安装方法，可以清楚的了解到wordpress是如何运行起来的。搭建wordpress，首先你需要有自己的域名、空间，说白了wordpress就是程序，需要一台机器给它运行，同时需要给这个机器的IP配上一个名字（域名），这样大家通过域名就能访问到你的博客wordpress。</desc>
-  </url>
-  
-  <url>
     <loc>https://www.toimc.com/%E7%9B%91%E6%8E%A7MYSQL/</loc>
     
     <lastmod>2019-03-12T16:10:32.000Z</lastmod>
@@ -673,14 +662,14 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    <loc>https://www.toimc.com/%E5%AE%89%E8%A3%85wordpress/</loc>
     
-    <lastmod>2019-03-12T16:08:46.000Z</lastmod>
+    <lastmod>2019-03-12T16:10:32.000Z</lastmod>
     
-    <date>1457540808000</date>
-    <title>Git常用命令 | Coding World</title>
+    <date>1456226808000</date>
+    <title>搭建Wordpress | Coding World</title>
     
-    <desc>本文介绍了git的常用命令，如git clone、git pull、git push等等。</desc>
+    <desc>虽然现在有更多更便捷的安装方式，了解一下原始的安装方法，可以清楚的了解到wordpress是如何运行起来的。搭建wordpress，首先你需要有自己的域名、空间，说白了wordpress就是程序，需要一台机器给它运行，同时需要给这个机器的IP配上一个名字（域名），这样大家通过域名就能访问到你的博客wordpress。</desc>
   </url>
   
   <url>
@@ -695,14 +684,14 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/HTTP%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81/</loc>
+    <loc>https://www.toimc.com/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
     
-    <lastmod>2019-03-12T16:08:34.000Z</lastmod>
+    <lastmod>2019-03-12T16:08:46.000Z</lastmod>
     
-    <date>1457195208000</date>
-    <title>HTTP状态码200、301、302、304、403、410、500的含义？ | Coding World</title>
+    <date>1457540808000</date>
+    <title>Git常用命令 | Coding World</title>
     
-    <desc>一些常见的状态码为： 200 - 服务器成功返回网页 404 - 请求的网页不存在 503 - 服务器超时 下面提供 HTTP 状态码的完整列表。点击链接可了解详情。您也可以访问 HTTP 状态码上的 W3C 页获取更多信息。</desc>
+    <desc>本文介绍了git的常用命令，如git clone、git pull、git push等等。</desc>
   </url>
   
   <url>
@@ -714,6 +703,17 @@
     <title>JavaSript闭包学习 | Coding World</title>
     
     <desc>今天学了JavaScript闭包，闭包作用：一个是可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/HTTP%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81/</loc>
+    
+    <lastmod>2019-03-12T16:08:34.000Z</lastmod>
+    
+    <date>1457195208000</date>
+    <title>HTTP状态码200、301、302、304、403、410、500的含义？ | Coding World</title>
+    
+    <desc>一些常见的状态码为： 200 - 服务器成功返回网页 404 - 请求的网页不存在 503 - 服务器超时 下面提供 HTTP 状态码的完整列表。点击链接可了解详情。您也可以访问 HTTP 状态码上的 W3C 页获取更多信息。</desc>
   </url>
   
   <url>
@@ -805,17 +805,6 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/python%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6%E7%A8%8B%E5%BA%8F/</loc>
-    
-    <lastmod>2019-03-12T15:59:03.000Z</lastmod>
-    
-    <date>1513777946000</date>
-    <title>python开发微信企业应用-报警程序 | Coding World</title>
-    
-    <desc>为了熟悉python，记使用python开发一个简单的微信报警后台的过程，主要完成了微信企业应用中进行文字推送。</desc>
-  </url>
-  
-  <url>
     <loc>https://www.toimc.com/centos%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2vncserver%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2019-03-12T15:59:03.000Z</lastmod>
@@ -824,6 +813,17 @@
     <title>centos远程桌面vncserver安装 | Coding World</title>
     
     <desc>VNC 可以实现对另外的计算机的操作： A ： 可以访问另一个计算机，采用命令终端 或者窗口界面。 B ： 可以远程控制另一个计算机，两台同步显示操作。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/python%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6%E7%A8%8B%E5%BA%8F/</loc>
+    
+    <lastmod>2019-03-12T15:59:03.000Z</lastmod>
+    
+    <date>1513777946000</date>
+    <title>python开发微信企业应用-报警程序 | Coding World</title>
+    
+    <desc>为了熟悉python，记使用python开发一个简单的微信报警后台的过程，主要完成了微信企业应用中进行文字推送。</desc>
   </url>
   
   <url>
