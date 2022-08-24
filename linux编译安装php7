@@ -743,6 +743,23 @@ document.addEventListener('pjax:success', () => {
     <div class="pjax">
 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments('#disqus_thread', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
+      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
+      shortname : 'toimc',
+      url       : "https://www.toimc.com/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85php7",
+      identifier: "/linux编译安装php7",
+      title     : "linux编译安装php7+nginx",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
@@ -761,23 +778,6 @@ NexT.utils.loadComments('.gitalk-container', () => {
     });
     gitalk.render(document.querySelector('.gitalk-container'));
   }, window.Gitalk);
-});
-</script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
-
-<script>
-NexT.utils.loadComments('#disqus_thread', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
-    window.dsqjs = new DisqusJS({
-      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
-      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
-      shortname : 'toimc',
-      url       : "https://www.toimc.com/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85php7",
-      identifier: "/linux编译安装php7",
-      title     : "linux编译安装php7+nginx",
-    });
-  }, window.DisqusJS);
 });
 </script>
 
