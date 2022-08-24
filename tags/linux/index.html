@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.0.0">
+<meta name="generator" content="Hexo 6.2.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -208,7 +208,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -293,7 +293,7 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/vps%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC-Linux%E8%BD%AF%E7%A1%AC%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC/" itemprop="url">
+          <a class="post-title-link" href="/vps%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC-Linux%E8%BD%AF%E7%A1%AC%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC" itemprop="url">
             <span itemprop="name">常用vps测试脚本/Linux软硬件测试脚本</span>
           </a>
       </div>
@@ -313,7 +313,7 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/Centos7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%8F%8ASSH%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AB%AF%E5%8F%A3/" itemprop="url">
+          <a class="post-title-link" href="/Centos7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%8F%8ASSH%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AB%AF%E5%8F%A3" itemprop="url">
             <span itemprop="name">Centos7网络配置及SSH自定义端口</span>
           </a>
       </div>
@@ -496,49 +496,6 @@ document.addEventListener('pjax:success', () => {
     }
 
     const { app_id, app_key, server_url } = {"enable":true,"app_id":"YvgheVT82eRRYHM6xtvaEL6l-gzGzoHsz","app_key":"uwmRd9pGJeDmqKQNmalNsosO","server_url":"https://blog.toimc.com","security":true};
-    function fetchData(api_server) {
-      const Counter = (method, url, data) => {
-        return fetch(`${api_server}/1.1${url}`, {
-          method,
-          headers: {
-            'X-LC-Id'     : app_id,
-            'X-LC-Key'    : app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      if (CONFIG.page.isPost) {
-        if (CONFIG.hostname !== location.hostname) return;
-        addCount(Counter);
-      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
-        showTime(Counter);
-      }
-    }
-
-    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
-
-    if (api_server) {
-      fetchData(api_server);
-    } else {
-      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
-        .then(response => response.json())
-        .then(({ api_server }) => {
-          fetchData('https://' + api_server);
-        });
-    }
-  })();
-</script>
-
-    <div class="pjax">
-
-
-
-
-    </div>
-</body>
-</html>
-z","app_key":"uwmRd9pGJeDmqKQNmalNsosO","server_url":"https://blog.toimc.com","security":true};
     function fetchData(api_server) {
       const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {

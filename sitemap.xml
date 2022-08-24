@@ -2,6 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.toimc.com/side-bussiness</loc>
+    
+    <lastmod>2022-08-24T04:01:22.010Z</lastmod>
+    
+    <date>1661308243000</date>
+    <title>side-bussiness | Coding World</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
     <loc>https://www.toimc.com/lessons/index.html</loc>
     
     <lastmod>2022-08-22T02:12:24.473Z</lastmod>
@@ -13,7 +24,18 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/vue1/</loc>
+    <loc>https://www.toimc.com/nestjs-example-project-5</loc>
+    
+    <lastmod>2022-08-14T03:04:15.053Z</lastmod>
+    
+    <date>1615939588000</date>
+    <title>nestjs搭建通用业务框架（5）：数据库+配置 | Coding World</title>
+    
+    <desc>这是《nestjs搭建通用业务框架》系列的第5篇，进入开发具体的功能之前，学习nest框架本身提供的CLI工具与规划合理的工程目录，对于要实现的内容进行架构与计划，这是实现健壮高可用的框架的前提。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/vue1</loc>
     
     <lastmod>2022-03-03T16:10:56.590Z</lastmod>
     
@@ -24,7 +46,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/node-vscode-webstorm-debug/</loc>
+    <loc>https://www.toimc.com/node-vscode-webstorm-debug</loc>
     
     <lastmod>2021-04-03T09:33:30.000Z</lastmod>
     
@@ -35,7 +57,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/book-reviews-prepared/</loc>
+    <loc>https://www.toimc.com/book-reviews-prepared</loc>
     
     <lastmod>2021-03-31T06:51:46.000Z</lastmod>
     
@@ -46,7 +68,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/hexo-usage-2/</loc>
+    <loc>https://www.toimc.com/hexo-usage-2</loc>
     
     <lastmod>2021-03-29T02:38:33.000Z</lastmod>
     
@@ -57,7 +79,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/nestjs-example-project-6/</loc>
+    <loc>https://www.toimc.com/nestjs-example-project-6</loc>
     
     <lastmod>2021-03-24T17:19:13.000Z</lastmod>
     
@@ -68,7 +90,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/nestjs-example-project-7/</loc>
+    <loc>https://www.toimc.com/nestjs-example-project-7</loc>
     
     <lastmod>2021-03-24T17:14:41.000Z</lastmod>
     
@@ -79,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/use-docker-install-common-database/</loc>
+    <loc>https://www.toimc.com/use-docker-install-common-database</loc>
     
     <lastmod>2021-03-20T16:32:01.000Z</lastmod>
     
@@ -90,18 +112,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/nestjs-example-project-5/</loc>
-    
-    <lastmod>2021-03-20T14:13:13.000Z</lastmod>
-    
-    <date>1615939588000</date>
-    <title>nestjs搭建通用业务框架（5）：数据库+配置 | Coding World</title>
-    
-    <desc>这是《nestjs搭建通用业务框架》系列的第5篇，进入开发具体的功能之前，学习nest框架本身提供的CLI工具与规划合理的工程目录，对于要实现的内容进行架构与计划，这是实现健壮高可用的框架的前提。</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/hexo-usage-3/</loc>
+    <loc>https://www.toimc.com/hexo-usage-3</loc>
     
     <lastmod>2021-03-19T17:01:56.000Z</lastmod>
     
@@ -112,18 +123,18 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/hexo-usage-1/</loc>
+    <loc>https://www.toimc.com/hexo-usage-1</loc>
     
     <lastmod>2021-03-19T08:54:32.000Z</lastmod>
     
     <date>1616132109000</date>
     <title>hexo博客next主题添加夜间模式（Dark Mode） | Coding World</title>
     
-    <desc>本文主要介绍为hexo next主题添加一个可以切换的黑色/夜间模式，虽然next 8.0 主题已经支持原生黑色模式，但是这个黑色模式是不可以切换的。本文介绍如何实现按钮来切换，包括如何在代码部分也切换夜间模式。</desc>
+    <desc>本文主要介绍为hexo next主题添加一个可以切换的黑色&#x2F;夜间模式，虽然next 8.0 主题已经支持原生黑色模式，但是这个黑色模式是不可以切换的。本文介绍如何实现按钮来切换，包括如何在代码部分也切换夜间模式。</desc>
   </url>
   
   <url>
-    <loc>https://www.toimc.com/nestjs-example-project-4/</loc>
+    <loc>https://www.toimc.com/nestjs-example-project-4</loc>
     
     <lastmod>2021-03-17T00:11:06.000Z</lastmod>
     
@@ -145,7 +156,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E5%A4%A7%E5%9E%8B%E9%A1%B9%E7%9B%AE%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</loc>
+    <loc>https://www.toimc.com/%E5%A4%A7%E5%9E%8B%E9%A1%B9%E7%9B%AE%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1</loc>
     
     <lastmod>2021-03-13T04:39:32.000Z</lastmod>
     
@@ -156,7 +167,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/what-is-dependency-injection/</loc>
+    <loc>https://www.toimc.com/what-is-dependency-injection</loc>
     
     <lastmod>2021-03-12T09:48:11.000Z</lastmod>
     
@@ -167,7 +178,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/nestjs-example-project-2/</loc>
+    <loc>https://www.toimc.com/nestjs-example-project-2</loc>
     
     <lastmod>2021-03-12T03:40:49.000Z</lastmod>
     
@@ -178,7 +189,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/nestjs-example-project-1/</loc>
+    <loc>https://www.toimc.com/nestjs-example-project-1</loc>
     
     <lastmod>2021-03-12T03:40:39.000Z</lastmod>
     
@@ -189,7 +200,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/nestjs-example-project-3/</loc>
+    <loc>https://www.toimc.com/nestjs-example-project-3</loc>
     
     <lastmod>2021-03-12T03:40:36.000Z</lastmod>
     
@@ -200,18 +211,18 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E4%BD%BF%E7%94%A8harbor%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89docker%E4%BB%93%E5%BA%93/</loc>
+    <loc>https://www.toimc.com/%E4%BD%BF%E7%94%A8harbor%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89docker%E4%BB%93%E5%BA%93</loc>
     
     <lastmod>2021-03-12T03:40:01.000Z</lastmod>
     
     <date>1555816659000</date>
     <title>使用harbor搭建私有docker仓库 | Coding World</title>
     
-    <desc>小伙伴们，想不想自己建立自己的 docker 私库。本篇介绍了什么是 Harbor，如何安装。来，动起手来。 本篇介绍了使用官方在线/离线安装包，进行 Harbor 的安装的过程。</desc>
+    <desc>小伙伴们，想不想自己建立自己的 docker 私库。本篇介绍了什么是 Harbor，如何安装。来，动起手来。 本篇介绍了使用官方在线&#x2F;离线安装包，进行 Harbor 的安装的过程。</desc>
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E5%A6%82%E4%BD%95%E8%AE%A9%E7%BD%91%E7%AB%99%E8%BE%BE%E5%88%B0ssl%E8%AF%84%E7%BA%A7A/</loc>
+    <loc>https://www.toimc.com/%E5%A6%82%E4%BD%95%E8%AE%A9%E7%BD%91%E7%AB%99%E8%BE%BE%E5%88%B0ssl%E8%AF%84%E7%BA%A7A</loc>
     
     <lastmod>2021-03-12T03:36:33.000Z</lastmod>
     
@@ -222,7 +233,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/flutter-2-is-comming/</loc>
+    <loc>https://www.toimc.com/flutter-2-is-comming</loc>
     
     <lastmod>2021-03-12T03:36:06.000Z</lastmod>
     
@@ -233,7 +244,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/image-google-ssl-limit/</loc>
+    <loc>https://www.toimc.com/image-google-ssl-limit</loc>
     
     <lastmod>2021-03-03T03:53:15.000Z</lastmod>
     
@@ -244,7 +255,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Vue3%E5%B0%86%E5%B8%A6%E6%9D%A5%E5%B7%A8%E5%A4%A7%E7%9A%84%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/</loc>
+    <loc>https://www.toimc.com/Vue3%E5%B0%86%E5%B8%A6%E6%9D%A5%E5%B7%A8%E5%A4%A7%E7%9A%84%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87</loc>
     
     <lastmod>2021-03-02T15:36:52.000Z</lastmod>
     
@@ -255,7 +266,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E5%BC%95%E9%A2%86%E6%9C%AA%E6%9D%A5%EF%BC%8C%E8%B5%B0%E5%87%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF/</loc>
+    <loc>https://www.toimc.com/%E5%BC%95%E9%A2%86%E6%9C%AA%E6%9D%A5%EF%BC%8C%E8%B5%B0%E5%87%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF</loc>
     
     <lastmod>2021-03-02T15:36:20.000Z</lastmod>
     
@@ -266,18 +277,18 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E4%B8%9A%E5%8A%A1%E6%8A%80%E6%9C%AF%E9%9D%A2/</loc>
+    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E4%B8%9A%E5%8A%A1%E6%8A%80%E6%9C%AF%E9%9D%A2</loc>
     
     <lastmod>2021-03-02T15:36:13.000Z</lastmod>
     
     <date>1554533401000</date>
     <title>慕课网《前端跳槽面试必备技巧》——关于业务技术面 | Coding World</title>
     
-    <desc>本篇介绍的是面试的二/三面，即业务技术面需要准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
+    <desc>本篇介绍的是面试的二&#x2F;三面，即业务技术面需要准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%A6%82%E4%BD%95%E7%9C%8B%E5%BE%85%E9%9D%A2%E8%AF%95/</loc>
+    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%A6%82%E4%BD%95%E7%9C%8B%E5%BE%85%E9%9D%A2%E8%AF%95</loc>
     
     <lastmod>2021-03-02T15:35:52.000Z</lastmod>
     
@@ -288,18 +299,18 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E5%9F%BA%E7%A1%80%E9%9D%A2/</loc>
+    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E5%9F%BA%E7%A1%80%E9%9D%A2</loc>
     
     <lastmod>2021-03-02T15:35:31.000Z</lastmod>
     
     <date>1553933513000</date>
     <title>慕课网《前端跳槽面试必备技巧》——关于基础面 | Coding World</title>
     
-    <desc>本篇介绍的是面试的一/二面，即基础面需要准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
+    <desc>本篇介绍的是面试的一&#x2F;二面，即基础面需要准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C/</loc>
+    <loc>https://www.toimc.com/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C</loc>
     
     <lastmod>2021-03-02T14:48:20.000Z</lastmod>
     
@@ -310,7 +321,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/windows10%E5%AE%B6%E5%BA%AD%E7%89%88%E5%A6%82%E4%BD%95%E6%B7%BB%E5%8A%A0Hyper-V/</loc>
+    <loc>https://www.toimc.com/windows10%E5%AE%B6%E5%BA%AD%E7%89%88%E5%A6%82%E4%BD%95%E6%B7%BB%E5%8A%A0Hyper-V</loc>
     
     <lastmod>2021-03-02T14:48:20.000Z</lastmod>
     
@@ -321,7 +332,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Vue3%E4%B8%AD%E4%BB%A4%E4%BA%BA%E5%85%B4%E5%A5%8B%E7%9A%84%E6%96%B0%E5%8A%9F%E8%83%BD/</loc>
+    <loc>https://www.toimc.com/Vue3%E4%B8%AD%E4%BB%A4%E4%BA%BA%E5%85%B4%E5%A5%8B%E7%9A%84%E6%96%B0%E5%8A%9F%E8%83%BD</loc>
     
     <lastmod>2020-12-01T02:33:05.000Z</lastmod>
     
@@ -332,40 +343,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/docker%E5%85%A5%E9%97%A8%E4%B9%8B%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</loc>
-    
-    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
-    
-    <date>1553736633000</date>
-    <title>Docker入门之安装教程 | Coding World</title>
-    
-    <desc>本篇介绍了在Mac OS, Windows, Linux下的Docker安装方法。</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/vps%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC-Linux%E8%BD%AF%E7%A1%AC%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC/</loc>
-    
-    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
-    
-    <date>1553703064000</date>
-    <title>常用vps测试脚本/Linux软硬件测试脚本 | Coding World</title>
-    
-    <desc>这里有各种测试VPS硬件/网络/IO的脚本，比如：bench,Superbench,Zbench,LemonBench,etc，快来试试吧。</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/Centos7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%8F%8ASSH%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AB%AF%E5%8F%A3/</loc>
-    
-    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
-    
-    <date>1553153736000</date>
-    <title>Centos7网络配置及SSH自定义端口 | Coding World</title>
-    
-    <desc>本文介绍了Centos7中网络的配置和SSH自定义端口的设置方法，核心命令：nmcli, nmtui 介绍</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/</loc>
+    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql</loc>
     
     <lastmod>2019-12-27T08:58:30.000Z</lastmod>
     
@@ -376,7 +354,40 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E4%BD%BF%E7%94%A8git%20subtree%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%AD%90%E5%BA%93/</loc>
+    <loc>https://www.toimc.com/Centos7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%8F%8ASSH%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AB%AF%E5%8F%A3</loc>
+    
+    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
+    
+    <date>1553153736000</date>
+    <title>Centos7网络配置及SSH自定义端口 | Coding World</title>
+    
+    <desc>本文介绍了Centos7中网络的配置和SSH自定义端口的设置方法，核心命令：nmcli, nmtui 介绍</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/docker%E5%85%A5%E9%97%A8%E4%B9%8B%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B</loc>
+    
+    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
+    
+    <date>1553736633000</date>
+    <title>Docker入门之安装教程 | Coding World</title>
+    
+    <desc>本篇介绍了在Mac OS, Windows, Linux下的Docker安装方法。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/vps%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC-Linux%E8%BD%AF%E7%A1%AC%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC</loc>
+    
+    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
+    
+    <date>1553703064000</date>
+    <title>常用vps测试脚本/Linux软硬件测试脚本 | Coding World</title>
+    
+    <desc>这里有各种测试VPS硬件&#x2F;网络&#x2F;IO的脚本，比如：bench,Superbench,Zbench,LemonBench,etc，快来试试吧。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/%E4%BD%BF%E7%94%A8git%20subtree%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%AD%90%E5%BA%93</loc>
     
     <lastmod>2019-08-29T14:23:47.000Z</lastmod>
     
@@ -387,7 +398,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/git%20submodule/</loc>
+    <loc>https://www.toimc.com/git%20submodule</loc>
     
     <lastmod>2019-08-29T14:21:11.000Z</lastmod>
     
@@ -398,29 +409,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Apache%E5%AF%B9.htaccess%20%E7%9A%84%E6%94%AF%E6%8C%81/</loc>
-    
-    <lastmod>2019-08-03T17:05:42.000Z</lastmod>
-    
-    <date>1453739208000</date>
-    <title>启动Apache对.htaccess的支持步骤 | Coding World</title>
-    
-    <desc>Ubuntu/Debian下启动Apache对.htaccess 的支持步骤</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/SQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</loc>
-    
-    <lastmod>2019-08-03T17:05:42.000Z</lastmod>
-    
-    <date>1456504008000</date>
-    <title>SQL快速入门 | Coding World</title>
-    
-    <desc>SQL 是用于访问和处理数据库的标准的计算机语言。在本教程中，您将学到如何使用 SQL 访问和处理数据系统中的数据，这类数据库包括：MySQL、SQL Server、Access、Oracle、Sybase、DB2 等等。本篇博客告诉大家如果快速入门，学习SQL的增(Insert)、删(Delete)、改(Update)、查(Select)。</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/%E5%A6%82%E4%BD%95%E5%9C%A8Ubuntu%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Docker%E4%BB%93%E5%BA%93/</loc>
+    <loc>https://www.toimc.com/%E5%A6%82%E4%BD%95%E5%9C%A8Ubuntu%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Docker%E4%BB%93%E5%BA%93</loc>
     
     <lastmod>2019-08-03T17:05:42.000Z</lastmod>
     
@@ -431,18 +420,40 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Debian%20Ubuntu%E6%90%AD%E5%BB%BALNMP%EF%BC%88Linux,nginx,MySQL,PHP%EF%BC%89%E7%8E%AF%E5%A2%83%EF%BC%8C%E6%90%AD%E5%BB%BAwordpress/</loc>
+    <loc>https://www.toimc.com/Apache%E5%AF%B9.htaccess%20%E7%9A%84%E6%94%AF%E6%8C%81</loc>
+    
+    <lastmod>2019-08-03T17:05:42.000Z</lastmod>
+    
+    <date>1453739208000</date>
+    <title>启动Apache对.htaccess的支持步骤 | Coding World</title>
+    
+    <desc>Ubuntu&#x2F;Debian下启动Apache对.htaccess 的支持步骤</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/SQL%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8</loc>
+    
+    <lastmod>2019-08-03T17:05:42.000Z</lastmod>
+    
+    <date>1456504008000</date>
+    <title>SQL快速入门 | Coding World</title>
+    
+    <desc>SQL 是用于访问和处理数据库的标准的计算机语言。在本教程中，您将学到如何使用 SQL 访问和处理数据系统中的数据，这类数据库包括：MySQL、SQL Server、Access、Oracle、Sybase、DB2 等等。本篇博客告诉大家如果快速入门，学习SQL的增(Insert)、删(Delete)、改(Update)、查(Select)。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/Debian%20Ubuntu%E6%90%AD%E5%BB%BALNMP%EF%BC%88Linux,nginx,MySQL,PHP%EF%BC%89%E7%8E%AF%E5%A2%83%EF%BC%8C%E6%90%AD%E5%BB%BAwordpress</loc>
     
     <lastmod>2019-08-03T17:04:10.000Z</lastmod>
     
     <date>1461205735000</date>
     <title>Debian/Ubuntu搭建LNMP（Linux,nginx,MySQL,PHP）环境，搭建wordpress | Coding World</title>
     
-    <desc>本文介绍了Debian/Ubuntu搭建LNMP（Linux,nginx,MySQL,PHP）环境的基本方法，并安装wordpress，附上视频教程。</desc>
+    <desc>本文介绍了Debian&#x2F;Ubuntu搭建LNMP（Linux,nginx,MySQL,PHP）环境的基本方法，并安装wordpress，附上视频教程。</desc>
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Git%E5%85%A5%E9%97%A8/</loc>
+    <loc>https://www.toimc.com/Git%E5%85%A5%E9%97%A8</loc>
     
     <lastmod>2019-08-03T17:03:10.000Z</lastmod>
     
@@ -453,7 +464,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Gitlab+Jenkins+docker%E5%AE%8C%E6%88%90Maven%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</loc>
+    <loc>https://www.toimc.com/Gitlab+Jenkins+docker%E5%AE%8C%E6%88%90Maven%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2</loc>
     
     <lastmod>2019-08-03T17:00:27.000Z</lastmod>
     
@@ -464,18 +475,18 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E7%BB%BC%E5%90%88%E9%9D%A2-BOSS%E9%9D%A2/</loc>
+    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E7%BB%BC%E5%90%88%E9%9D%A2-BOSS%E9%9D%A2</loc>
     
     <lastmod>2019-04-09T05:09:02.000Z</lastmod>
     
     <date>1554554361000</date>
     <title>慕课网《前端跳槽面试必备技巧》——综合面/业务面 | Coding World</title>
     
-    <desc>本篇介绍的是面试的四/五面，即综合面/BOSS面准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
+    <desc>本篇介绍的是面试的四&#x2F;五面，即综合面&#x2F;BOSS面准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E6%80%BB%E7%BB%93/</loc>
+    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E6%80%BB%E7%BB%93</loc>
     
     <lastmod>2019-04-07T01:27:03.000Z</lastmod>
     
@@ -486,7 +497,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E7%BB%88%E9%9D%A2-HR%E9%9D%A2/</loc>
+    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E7%BB%88%E9%9D%A2-HR%E9%9D%A2</loc>
     
     <lastmod>2019-04-06T15:19:22.000Z</lastmod>
     
@@ -497,7 +508,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%AF%BC%E5%AD%A6%E9%83%A8%E5%88%86/</loc>
+    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%AF%BC%E5%AD%A6%E9%83%A8%E5%88%86</loc>
     
     <lastmod>2019-04-04T01:26:02.000Z</lastmod>
     
@@ -508,7 +519,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E8%AE%A4%E7%9F%A5%E4%B8%8E%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E7%90%86%E8%A7%A3UI%E8%AE%BE%E8%AE%A1/</loc>
+    <loc>https://www.toimc.com/%E8%AE%A4%E7%9F%A5%E4%B8%8E%E8%AE%BE%E8%AE%A1%E2%80%94%E2%80%94%E7%90%86%E8%A7%A3UI%E8%AE%BE%E8%AE%A1</loc>
     
     <lastmod>2019-03-18T02:27:35.000Z</lastmod>
     
@@ -519,7 +530,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E5%88%9B%E4%B8%9A%E5%B0%8F%E8%B4%A5%E5%B1%80/</loc>
+    <loc>https://www.toimc.com/%E5%88%9B%E4%B8%9A%E5%B0%8F%E8%B4%A5%E5%B1%80</loc>
     
     <lastmod>2019-03-16T05:39:05.000Z</lastmod>
     
@@ -530,7 +541,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E7%B2%BE%E7%9B%8A%E5%88%9B%E4%B8%9A%EF%BC%9A%E6%96%B0%E5%88%9B%E4%BC%81%E4%B8%9A%E7%9A%84%E6%88%90%E9%95%BF%E6%80%9D%E7%BB%B4/</loc>
+    <loc>https://www.toimc.com/%E7%B2%BE%E7%9B%8A%E5%88%9B%E4%B8%9A%EF%BC%9A%E6%96%B0%E5%88%9B%E4%BC%81%E4%B8%9A%E7%9A%84%E6%88%90%E9%95%BF%E6%80%9D%E7%BB%B4</loc>
     
     <lastmod>2019-03-16T01:36:02.000Z</lastmod>
     
@@ -541,7 +552,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E6%88%91%E7%9A%84%E5%92%96%E5%95%A1%E5%9B%A0%E4%BE%9D%E8%B5%96/</loc>
+    <loc>https://www.toimc.com/%E6%88%91%E7%9A%84%E5%92%96%E5%95%A1%E5%9B%A0%E4%BE%9D%E8%B5%96</loc>
     
     <lastmod>2019-03-14T16:16:17.000Z</lastmod>
     
@@ -552,7 +563,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E3%80%8A%E7%A9%B7%E7%88%B8%E7%88%B8%E5%92%8C%E5%AF%8C%E7%88%B8%E7%88%B8%E3%80%8B%E9%98%85%E5%90%8E%E6%84%9F/</loc>
+    <loc>https://www.toimc.com/%E3%80%8A%E7%A9%B7%E7%88%B8%E7%88%B8%E5%92%8C%E5%AF%8C%E7%88%B8%E7%88%B8%E3%80%8B%E9%98%85%E5%90%8E%E6%84%9F</loc>
     
     <lastmod>2019-03-14T15:42:19.000Z</lastmod>
     
@@ -563,7 +574,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E7%9C%8B%E9%80%BB%E8%BE%91%E6%80%9D%E7%BB%B4%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://www.toimc.com/%E7%9C%8B%E9%80%BB%E8%BE%91%E6%80%9D%E7%BB%B4%E7%AC%94%E8%AE%B0</loc>
     
     <lastmod>2019-03-14T15:38:32.000Z</lastmod>
     
@@ -574,7 +585,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/MySQL%E4%B8%AD%E6%8E%88%E6%9D%83(grant)%E5%92%8C%E6%92%A4%E9%94%80%E6%8E%88%E6%9D%83(revoke)/</loc>
+    <loc>https://www.toimc.com/MySQL%E4%B8%AD%E6%8E%88%E6%9D%83(grant)%E5%92%8C%E6%92%A4%E9%94%80%E6%8E%88%E6%9D%83(revoke)</loc>
     
     <lastmod>2019-03-13T01:22:41.000Z</lastmod>
     
@@ -585,7 +596,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Ubuntu(Debian)%E5%AE%89%E8%A3%85LAMP/</loc>
+    <loc>https://www.toimc.com/Ubuntu(Debian)%E5%AE%89%E8%A3%85LAMP</loc>
     
     <lastmod>2019-03-13T01:20:48.000Z</lastmod>
     
@@ -596,7 +607,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/SSH%E7%99%BB%E9%99%86linux/</loc>
+    <loc>https://www.toimc.com/SSH%E7%99%BB%E9%99%86linux</loc>
     
     <lastmod>2019-03-13T01:18:08.000Z</lastmod>
     
@@ -618,7 +629,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/github%E4%BD%BF%E7%94%A8ssh%E5%AF%86%E9%92%A5/</loc>
+    <loc>https://www.toimc.com/github%E4%BD%BF%E7%94%A8ssh%E5%AF%86%E9%92%A5</loc>
     
     <lastmod>2019-03-12T16:10:48.000Z</lastmod>
     
@@ -629,7 +640,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Debian%E4%B8%8B%E6%9B%B4%E6%8D%A2%E9%BB%98%E8%AE%A4%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%BAvim/</loc>
+    <loc>https://www.toimc.com/Debian%E4%B8%8B%E6%9B%B4%E6%8D%A2%E9%BB%98%E8%AE%A4%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%BAvim</loc>
     
     <lastmod>2019-03-12T16:10:43.000Z</lastmod>
     
@@ -640,7 +651,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/gulp%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/</loc>
+    <loc>https://www.toimc.com/gulp%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A</loc>
     
     <lastmod>2019-03-12T16:10:32.000Z</lastmod>
     
@@ -651,29 +662,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E7%9B%91%E6%8E%A7MYSQL/</loc>
-    
-    <lastmod>2019-03-12T16:10:32.000Z</lastmod>
-    
-    <date>1456202280000</date>
-    <title>监控mysql运行状态 | Coding World</title>
-    
-    <desc>本文介绍了使用简单的shell脚本/supervisor来监控mysql的运行情况，如果停止则重启。</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/%E5%AE%89%E8%A3%85wordpress/</loc>
-    
-    <lastmod>2019-03-12T16:10:32.000Z</lastmod>
-    
-    <date>1456226808000</date>
-    <title>搭建Wordpress | Coding World</title>
-    
-    <desc>虽然现在有更多更便捷的安装方式，了解一下原始的安装方法，可以清楚的了解到wordpress是如何运行起来的。搭建wordpress，首先你需要有自己的域名、空间，说白了wordpress就是程序，需要一台机器给它运行，同时需要给这个机器的IP配上一个名字（域名），这样大家通过域名就能访问到你的博客wordpress。</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E6%B7%BB%E5%8A%A0Swap/</loc>
+    <loc>https://www.toimc.com/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%AD%E6%B7%BB%E5%8A%A0Swap</loc>
     
     <lastmod>2019-03-12T16:10:32.000Z</lastmod>
     
@@ -684,7 +673,29 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/</loc>
+    <loc>https://www.toimc.com/%E5%AE%89%E8%A3%85wordpress</loc>
+    
+    <lastmod>2019-03-12T16:10:32.000Z</lastmod>
+    
+    <date>1456226808000</date>
+    <title>搭建Wordpress | Coding World</title>
+    
+    <desc>虽然现在有更多更便捷的安装方式，了解一下原始的安装方法，可以清楚的了解到wordpress是如何运行起来的。搭建wordpress，首先你需要有自己的域名、空间，说白了wordpress就是程序，需要一台机器给它运行，同时需要给这个机器的IP配上一个名字（域名），这样大家通过域名就能访问到你的博客wordpress。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/%E7%9B%91%E6%8E%A7MYSQL</loc>
+    
+    <lastmod>2019-03-12T16:10:32.000Z</lastmod>
+    
+    <date>1456202280000</date>
+    <title>监控mysql运行状态 | Coding World</title>
+    
+    <desc>本文介绍了使用简单的shell脚本&#x2F;supervisor来监控mysql的运行情况，如果停止则重启。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86</loc>
     
     <lastmod>2019-03-12T16:08:46.000Z</lastmod>
     
@@ -695,7 +706,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    <loc>https://www.toimc.com/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4</loc>
     
     <lastmod>2019-03-12T16:08:46.000Z</lastmod>
     
@@ -706,18 +717,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/JavaSript%E9%97%AD%E5%8C%85%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2019-03-12T16:08:34.000Z</lastmod>
-    
-    <date>1457540808000</date>
-    <title>JavaSript闭包学习 | Coding World</title>
-    
-    <desc>今天学了JavaScript闭包，闭包作用：一个是可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/HTTP%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81/</loc>
+    <loc>https://www.toimc.com/HTTP%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81</loc>
     
     <lastmod>2019-03-12T16:08:34.000Z</lastmod>
     
@@ -728,7 +728,18 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93%E3%80%8B%E8%B1%86%E7%93%A3%E4%B9%A6%E8%AF%84/</loc>
+    <loc>https://www.toimc.com/JavaSript%E9%97%AD%E5%8C%85%E5%AD%A6%E4%B9%A0</loc>
+    
+    <lastmod>2019-03-12T16:08:34.000Z</lastmod>
+    
+    <date>1457540808000</date>
+    <title>JavaSript闭包学习 | Coding World</title>
+    
+    <desc>今天学了JavaScript闭包，闭包作用：一个是可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%BF%AE%E7%82%BC%E4%B9%8B%E9%81%93%E3%80%8B%E8%B1%86%E7%93%A3%E4%B9%A6%E8%AF%84</loc>
     
     <lastmod>2019-03-12T16:08:27.000Z</lastmod>
     
@@ -739,7 +750,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Don't%20Make%20Me%20Think/</loc>
+    <loc>https://www.toimc.com/Don't%20Make%20Me%20Think</loc>
     
     <lastmod>2019-03-12T16:08:15.000Z</lastmod>
     
@@ -750,7 +761,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E4%BD%BF%E7%94%A8docker%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAgitlab%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <loc>https://www.toimc.com/%E4%BD%BF%E7%94%A8docker%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BAgitlab%E6%9C%8D%E5%8A%A1%E5%99%A8</loc>
     
     <lastmod>2019-03-12T16:07:58.000Z</lastmod>
     
@@ -761,7 +772,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Docker%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</loc>
+    <loc>https://www.toimc.com/Docker%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98</loc>
     
     <lastmod>2019-03-12T16:06:14.000Z</lastmod>
     
@@ -772,7 +783,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/Webstorm%E4%B8%AD%E4%BD%BF%E7%94%A8Autoprefixer/</loc>
+    <loc>https://www.toimc.com/Webstorm%E4%B8%AD%E4%BD%BF%E7%94%A8Autoprefixer</loc>
     
     <lastmod>2019-03-12T16:03:17.000Z</lastmod>
     
@@ -783,7 +794,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85php7/</loc>
+    <loc>https://www.toimc.com/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85php7</loc>
     
     <lastmod>2019-03-12T16:01:29.000Z</lastmod>
     
@@ -794,7 +805,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85nginx/</loc>
+    <loc>https://www.toimc.com/linux%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85nginx</loc>
     
     <lastmod>2019-03-12T16:01:05.000Z</lastmod>
     
@@ -805,18 +816,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/linux%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%EF%BC%8CLVS%E5%88%86%E5%8C%BA%E6%89%A9%E5%AE%B9%EF%BC%8C%E6%8C%82%E8%BD%BDmount/</loc>
-    
-    <lastmod>2019-03-12T15:59:03.000Z</lastmod>
-    
-    <date>1480176000000</date>
-    <title>linux硬盘分区，LVS分区扩容，挂载mount | Coding World</title>
-    
-    <desc>前言：前段时间gitlab服务器挂了，看了一下日志，提示空间满了。 df -m看了一下硬盘，满了。所以想来操作加一块盘上来。 完成下面的操作后: 硬盘使用30%</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/centos%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2vncserver%E5%AE%89%E8%A3%85/</loc>
+    <loc>https://www.toimc.com/centos%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2vncserver%E5%AE%89%E8%A3%85</loc>
     
     <lastmod>2019-03-12T15:59:03.000Z</lastmod>
     
@@ -827,7 +827,7 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/python%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6%E7%A8%8B%E5%BA%8F/</loc>
+    <loc>https://www.toimc.com/python%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E6%8A%A5%E8%AD%A6%E7%A8%8B%E5%BA%8F</loc>
     
     <lastmod>2019-03-12T15:59:03.000Z</lastmod>
     
@@ -838,7 +838,18 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/git%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E8%BD%AC%E7%A7%BB/</loc>
+    <loc>https://www.toimc.com/linux%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%EF%BC%8CLVS%E5%88%86%E5%8C%BA%E6%89%A9%E5%AE%B9%EF%BC%8C%E6%8C%82%E8%BD%BDmount</loc>
+    
+    <lastmod>2019-03-12T15:59:03.000Z</lastmod>
+    
+    <date>1480176000000</date>
+    <title>linux硬盘分区，LVS分区扩容，挂载mount | Coding World</title>
+    
+    <desc>前言：前段时间gitlab服务器挂了，看了一下日志，提示空间满了。 df -m看了一下硬盘，满了。所以想来操作加一块盘上来。 完成下面的操作后: 硬盘使用30%</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/git%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E8%BD%AC%E7%A7%BB</loc>
     
     <lastmod>2019-03-12T14:40:25.000Z</lastmod>
     

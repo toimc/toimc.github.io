@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.0.0">
+<meta name="generator" content="Hexo 6.2.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -212,7 +212,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -355,7 +355,7 @@
 <p><strong>注：如果提示你无法保存hosts文件，可能是你目前的系统用户没有修改权限，请自己搜索解决办法；或者是某些安全软件限制了修改，暂时退出安全软件。</strong></p>
 <p>www目录：存放网站文件的根目录</p>
 <h3 id="WampServer-绑定域名，添加虚拟主机"><a href="#WampServer-绑定域名，添加虚拟主机" class="headerlink" title="WampServer 绑定域名，添加虚拟主机"></a>WampServer 绑定域名，添加虚拟主机</h3><p>1.将你要绑定的域名，使用A记录绑定到 127.0.0.1</p>
-<p>2.启动wampserver服务，左键单击右下角wampserver图标，打开Apache菜单下“httpd.conf”文件； 找到“# Include conf/extra/httpd-vhosts.conf” ，把这句前面的#号去掉，启用了虚拟主机配置文件 httpd-vhosts.conf 的引用。</p>
+<p>2.启动wampserver服务，左键单击右下角wampserver图标，打开Apache菜单下“httpd.conf”文件； 找到“# Include conf&#x2F;extra&#x2F;httpd-vhosts.conf” ，把这句前面的#号去掉，启用了虚拟主机配置文件 httpd-vhosts.conf 的引用。</p>
 <p>３.在Apache安装目录的confextra目录下，比如我的是 D:\wamp\bin\apache\apache2.2.22\conf\extra，用记事本打开httpd-vhosts.conf，最最底部你会看到２个虚拟主机样例，将其中一个修改为类型下面的，删除多余的样例：</p>
 <pre><code>&lt;VirtualHost *:80&gt;
     ServerAdmin admin@xxx.com
@@ -372,7 +372,7 @@
 <p>7.如果你要添加多个虚拟主机，重复上面的操作即可。</p>
 <h3 id="WampServer-配置伪静态"><a href="#WampServer-配置伪静态" class="headerlink" title="WampServer 配置伪静态"></a>WampServer 配置伪静态</h3><p>默认情况下，WampServer不支持伪静态，我们需要进行一些配置</p>
 <p>1.启动wampserver服务，左键单击右下角wampserver图标，打开Apache菜单下“httpd.conf”文件；</p>
-<p>2.搜索找到“LoadModule rewrite_module modules/mod_rewrite.so”这一行，去掉前面的“#”；</p>
+<p>2.搜索找到“LoadModule rewrite_module modules&#x2F;mod_rewrite.so”这一行，去掉前面的“#”；</p>
 <p>3.找到“AllowOverride None”改为“AllowOverride All”；</p>
 <p>4.重启wampserver的所有服务</p>
 <p>5.新建.haccess文件，放在当前网站根目录下，在.haccess文件中添加伪静态规则，比如添加WordPress伪静态规则</p>
@@ -424,12 +424,12 @@ RewriteRule . /index.php [L]
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/git%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E8%BD%AC%E7%A7%BB/" rel="prev" title="git代码仓库转移">
+                <a href="/git%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E8%BD%AC%E7%A7%BB" rel="prev" title="git代码仓库转移">
                   <i class="fa fa-chevron-left"></i> git代码仓库转移
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/SSH%E7%99%BB%E9%99%86linux/" rel="next" title="用SSH来管理Linux服务器，禁用口令登陆，提高Linux服务器安全">
+                <a href="/SSH%E7%99%BB%E9%99%86linux" rel="next" title="用SSH来管理Linux服务器，禁用口令登陆，提高Linux服务器安全">
                   用SSH来管理Linux服务器，禁用口令登陆，提高Linux服务器安全 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>

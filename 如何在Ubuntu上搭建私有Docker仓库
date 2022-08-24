@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon-16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="preload" as="style" href="https://fonts.geekzu.org/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" onload="this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.toimc.com","root":"/","images":"/images","scheme":"Mist","version":"8.2.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-2},"disqusjs":{"text":"Load Disqus","order":-1}},"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"F0BT9J7IQF","apiKey":"fc8f8ea23cfb91aa998b6dd1ac6d2c87","indexName":"myblog","hits":{"per_page":10}}};
+  </script>
+<meta name="description" content="本章的内容已经过时！！ Docker作为在服务器上，非常不错的一个部署部署工具。那大家应该使用过Docker hub，一个存储镜像的公有的Docker仓库。但是，当你创建了一个镜像上传到Docker hub上之后，必须公开你所创建的镜像——这可能不是你所想要的。因为，我们的很多项目，可能需要私有化。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在Ubuntu上搭建私有Docker仓库">
+<meta property="og:url" content="https://www.toimc.com/%E5%A6%82%E4%BD%95%E5%9C%A8Ubuntu%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Docker%E4%BB%93%E5%BA%93">
+<meta property="og:site_name" content="Coding World">
+<meta property="og:description" content="本章的内容已经过时！！ Docker作为在服务器上，非常不错的一个部署部署工具。那大家应该使用过Docker hub，一个存储镜像的公有的Docker仓库。但是，当你创建了一个镜像上传到Docker hub上之后，必须公开你所创建的镜像——这可能不是你所想要的。因为，我们的很多项目，可能需要私有化。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-12-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-08-03T17:05:42.000Z">
+<meta property="article:author" content="var author&#x3D;&#39;Brian&#39;">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.toimc.com/%E5%A6%82%E4%BD%95%E5%9C%A8Ubuntu%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Docker%E4%BB%93%E5%BA%93">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>如何在Ubuntu上搭建私有Docker仓库 | Coding World</title>
+  
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1e336df3c9b33283b6b6067eae9dc201";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Coding World" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Coding World</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay hungry, stay foolish</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-lessons"><a href="/lessons/" rel="section"><i class="fa fa-book fa-fw"></i>我的课程</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">Docker相关概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">先决条件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Apache2%E6%89%A9%E5%B1%95%E5%8C%85"><span class="nav-number">2.1.</span> <span class="nav-text">安装Apache2扩展包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEDocker%E4%BB%93%E5%BA%93"><span class="nav-number">2.2.</span> <span class="nav-text">安装与配置Docker仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8CNginx%E5%AE%B9%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">运行Nginx容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%AE%A4%E8%AF%81%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.4.</span> <span class="nav-text">设置认证服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AESSL"><span class="nav-number">2.5.</span> <span class="nav-text">设置SSL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95SSL%E8%AF%81%E4%B9%A6"><span class="nav-number">2.6.</span> <span class="nav-text">测试SSL证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AESSL%E4%B8%BA443%E7%AB%AF%E5%8F%A3"><span class="nav-number">2.7.</span> <span class="nav-text">设置SSL为443端口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">如何使用</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="var author='Brian'"
+      src="/assets/img/header.jpg">
+  <p class="site-author-name" itemprop="name">var author='Brian'</p>
+  <div class="site-description" itemprop="description">指尖改变世界</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/toimc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;toimc" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@wayearn.com" title="E-Mail → mailto:admin@wayearn.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/toimc" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.toimc.com/%E5%A6%82%E4%BD%95%E5%9C%A8Ubuntu%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Docker%E4%BB%93%E5%BA%93">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/img/header.jpg">
+      <meta itemprop="name" content="var author='Brian'">
+      <meta itemprop="description" content="指尖改变世界">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何在Ubuntu上搭建私有Docker仓库
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-12-14 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-14T00:00:00+08:00">2016-12-14</time>
+    </span>
+
+  
+    <span id="/%E5%A6%82%E4%BD%95%E5%9C%A8Ubuntu%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Docker%E4%BB%93%E5%BA%93" class="post-meta-item leancloud_visitors" data-flag-title="如何在Ubuntu上搭建私有Docker仓库" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本章的内容已经过时！！</p>
+<p>Docker作为在服务器上，非常不错的一个部署部署工具。那大家应该使用过Docker hub，一个存储镜像的公有的Docker仓库。但是，当你创建了一个镜像上传到Docker hub上之后，必须公开你所创建的镜像——这可能不是你所想要的。因为，我们的很多项目，可能需要<strong>私有化</strong>。</p>
+<span id="more"></span>
+
+<p>这是一篇如何搭建Docker私有仓库，并对仓库进行加密的教程。在教程的最后，你将学会如何建立私有镜像上传到自己的Docker仓库，并且以一种加密的方式，把自己的镜像从私有仓库拉取回来。</p>
+<p>这篇教程没有把容器相关的知识全部涵盖到，只是把创建私有Docker放在第一介绍的位置。如果说，你想去学习Docker（而非Docker仓库本身），你可以在这个地方学习:</p>
+<p><a target="_blank" rel="noopener" href="https://www.docker.com/products/docker#/windows">Docker官方教程</a></p>
+<p>这篇教程在Ubuntu14.04环境上架设，也可以在基于Debian的发行版上架设。同样，本教程涵盖了Docker 2.0版本。</p>
+<h3 id="Docker相关概念"><a href="#Docker相关概念" class="headerlink" title="Docker相关概念"></a>Docker相关概念</h3><p>如果说之前你没有使用过Docker，那可能需要先来学习几个Docker相关的概念。如果说，你已经学习并使用过Docker，可以跳过这个章节，进入下一步。</p>
+<blockquote>
+<p>为小白准备了一个<a target="_blank" rel="noopener" href="https://github.com/wsargent/docker-cheat-sheet">Docker备忘录</a>。</p>
+</blockquote>
+<p>Docker的核心是分离应用和运行于该操作系统上的应用依赖。为了达到这个目的，Docker使用了容器与镜像。Docker镜像是一个基础的模块文件系统。当创建了Docker镜像之后，一个实例的文件系统就会创建，并在宿主机的Docker容器中运行起来。但是，宿主机的文件系统与容器的文件系统默认是隔离的，容器是一个隔离的运行环境。</p>
+<p>无论在容器内部作了任何的改变，都不会影响到Docker的原始镜像，只会影响到正在运行的镜像本身。如果说，需要把改变保留下来，使用<code>commit</code>命令把该镜像容器生成一个镜像（<code>docker commit</code>命令）。这意味着，你可以根据旧的容器来产生新的容器，并且不影响原先的容器的文件系统（或者说镜像）。如果说你之前学习过<code>git</code>，那么Docker与Git有很相近的工作流：Docker里面的新容器或者说新镜像，就像是在Git中新建<br>了一个分支一样，运行珍上新的镜像，就像是git中的切换分支<code>git checkout</code>。</p>
+<p>形象一点说，存放Docker镜像的Docker仓库中的就像Git仓库一样。</p>
+<h3 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h3><p>继续这个教程，可能需要以下环境：</p>
+<ul>
+<li>有管理员账户的2个Ubuntu14.04环境: 一个Docker仓库，一个Docker客户机。</li>
+<li>安装Docker和Docker Compose。</li>
+<li>一个可以解析到Ubuntu机器的域名。</li>
+</ul>
+<h4 id="安装Apache2扩展包"><a href="#安装Apache2扩展包" class="headerlink" title="安装Apache2扩展包"></a>安装Apache2扩展包</h4><p>为了让Docker仓库更加安全，最好使用Docker Compose。 通过Docker Compose可以轻松在Docker容器中构建Docker仓库，并且在另一个Docker镜像中构建Nginx容器，来负责Docker仓库认证环境。</p>
+<p>所以，我们需要一个文件来存放访问我们私有仓库的用户名与密码。需要安装<code>apached2-utils</code>，它包含了<code>htpasswd</code>工具包，可以产生Nginx可以理解的hashes值，来保证Docker仓库的安全：</p>
+<pre><code>sudo apt-get -y install apache2-utils
+</code></pre>
+<h4 id="安装与配置Docker仓库"><a href="#安装与配置Docker仓库" class="headerlink" title="安装与配置Docker仓库"></a>安装与配置Docker仓库</h4><p>Docker原生的命令行工具可以很好的管理与运行Docker容器，但是大多数容器并不是独立运行的容器。为了可以部署大部分应用，可能需要并行运行多个组件。例如：大多数应用需要的Web服务，可能需要像解析语言PHP、或者Ruby(with rails)，数据库服务MySQL。</p>
+<p>使用Docker Compose可以在<code>.yml</code>的配置文件中，配置所有的Docker容器，以及容器之间的通信。使用<code>docker-compose</code>命令行工具，可以轻松的管理docker容器，<code>docker-compose</code>就像是一个复合管理命令。</p>
+<p>Docker仓库需要多个组件来运行，使用<code>docker-compose</code>来进行管理，唯一需要定义的是仓库存放数据的位置。开始吧，在宿主机上，建立一个放置YAML配置文件和数据的位置：</p>
+<pre><code>mkdir ~/docker-registry &amp;&amp; cd $_
+mkdir data 
+</code></pre>
+<p>使用<code>nano</code>或者<code>vim</code>来编辑<code>docker-compose.yml</code>文件：</p>
+<pre><code>nano docker-compose.yml
+</code></pre>
+<p>添加如下内容：</p>
+<pre><code>registry:
+  container_name: &quot;docker-registry&quot;
+  image: registry:2
+  ports:
+    - 5000:5000
+  environment:
+    REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
+  volumes:
+    - /root/docker-registry/data:/data
+</code></pre>
+<p>通过设置docker仓库的环境变量<code>REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY</code>来指定仓库容器建立之后，数据在容器中的存放位置。当容器启动之后，会到该变量的地方去建立数据。而<code>volumes</code>配置，设置了与宿主机的数据映射关系：在容器中的<code>/data</code>目录与宿主机的<code>~/docker-registry/data</code>建立了宿主关系。启动容器：</p>
+<pre><code>cd ~/docker-registry
+docker-compose up -d
+</code></pre>
+<p>可以通过<code>docker logs docker-registry</code>查看docker-registry的运行日志信息。</p>
+<p>上面的配置文件很好理解，有一个叫<code>docker-registry</code>的docker镜像<code>registry:2</code>，运行在5000端口，映射到宿主机的5000端口。</p>
+<p>可以通过<code>docker-compose stop docker-registry</code>和<code>docker=compose rm docker-registry</code>来停止与删除容器。</p>
+<h4 id="运行Nginx容器"><a href="#运行Nginx容器" class="headerlink" title="运行Nginx容器"></a>运行Nginx容器</h4><p>下面来着手解决容器的安全问题。第一步，需要另外新建一个Nginx容器，并且与我们的Dokcer仓库链接起来。新建一个Ngnix的配置文件：</p>
+<pre><code>mkdir ~/docker-registry/nginx
+
+nano ~/docker-registry/nginx/registry.conf
+</code></pre>
+<p>加入以下内容：</p>
+<pre><code>upstream docker-registry &#123;
+  server registry:5000;
+&#125;
+
+server &#123;
+  listen 443;
+  server_name myregistrydomain.com;
+
+  # SSL
+  # ssl on;
+  # ssl_certificate /etc/nginx/conf.d/domain.crt;
+  # ssl_certificate_key /etc/nginx/conf.d/domain.key;
+
+  # disable any limits to avoid HTTP 413 for large image uploads
+  client_max_body_size 0;
+
+  # required to avoid HTTP 411: see Issue #1486 (https://github.com/docker/docker/issues/1486)
+  chunked_transfer_encoding on;
+
+  location /v2/ &#123;
+    # Do not allow connections from docker 1.5 and earlier
+    # docker pre-1.6.0 did not properly set the user agent on ping, catch &quot;Go *&quot; user agents
+    if ($http_user_agent ~ &quot;^(docker\/1\.(3|4|5(?!\.[0-9]-dev))|Go ).*$&quot; ) &#123;
+      return 404;
+    &#125;
+
+    # To add basic authentication to v2 use auth_basic setting plus add_header
+    # auth_basic &quot;registry.localhost&quot;;
+    # auth_basic_user_file /etc/nginx/conf.d/registry.password;
+    # add_header &#39;Docker-Distribution-Api-Version&#39; &#39;registry/2.0&#39; always;
+
+    proxy_pass                          http://docker-registry;
+    proxy_set_header  Host              $http_host;   # required for docker client&#39;s sake
+    proxy_set_header  X-Real-IP         $remote_addr; # pass on real client&#39;s IP
+    proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
+    proxy_set_header  X-Forwarded-Proto $scheme;
+    proxy_read_timeout                  900;
+  &#125;
+&#125;
+</code></pre>
+<p>并且再次编辑目录<code>~/docker-registry</code>下的<code>docker-compose.yml</code>文件：</p>
+<pre><code>nano docker-compose.yml
+</code></pre>
+<p>加入以下内容：</p>
+<pre><code>registry:
+  container_name: &quot;docker-registry&quot;
+  image: registry:2
+  ports:
+    - 5000:5000
+  environment:
+    REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
+  volumes:
+    - ./data:/data
+
+nginx:
+  container_name: &quot;docker-nignx&quot;
+  image: &quot;nginx:1.9&quot;
+  ports:
+    - 5043:443
+  links:
+    - registry:registry
+  volumes:
+    - ./nginx/:/etc/nginx/conf.d:ro
+</code></pre>
+<blockquote>
+<p><code>volumes</code>可以使用绝对位置，也可以使用相对位置，相对该配置文件的位置。</p>
+</blockquote>
+<p>使用<code>docker-compose up -d</code>命令，可以在同一时间一次运行两个容器：docker仓库和Nginx。同样，使用<code>log</code>命令，查看docker与nginx的运行情况。</p>
+<p>测试HTTP请求：</p>
+<pre><code>curl http://localhost:5000/v2/
+</code></pre>
+<p>如果看到：</p>
+<pre><code>&#123;&#125;
+</code></pre>
+<p>或者：</p>
+<pre><code>curl http://localhost:5043/v2/
+</code></pre>
+<p>看到：</p>
+<pre><code>&#123;&#125;
+</code></pre>
+<p>说明，已经成功构建了Docker仓库，并且Nginx运行良好。如果，没有curl命令，可以通过<code>apt-get install curl</code>来安装<code>curl</code>。</p>
+<p>使用<code>docker-compose</code>中的日志命令，在<code>docker-compose.yml</code>配置文件下使用如下命令：</p>
+<pre><code>docker-compose logs
+</code></pre>
+<p>可以看到如下信息：</p>
+<pre><code>registry_1 | time=&quot;2015-08-11T10:24:53.746529894Z&quot; level=debug msg=&quot;authorizing request&quot; environment=development http.request.host=&quot;localhost:5043&quot; http.request.id=55c3e2a6-4f34-4b0b-bc57-11c814b4f4d3 http.request.method=GET http.request.remoteaddr=172.17.42.1 http.request.uri=&quot;/v2/&quot; http.request.useragent=&quot;curl/7.35.0&quot; instance.id=55634dfc-c9e0-4ec9-9872-6f4930c17759 service=registry version=v2.0.1
+registry_1 | time=&quot;2015-08-11T10:24:53.747650205Z&quot; level=info msg=&quot;response completed&quot; environment=development http.request.host=&quot;localhost:5043&quot; http.request.id=55c3e2a6-4f34-4b0b-bc57-11c814b4f4d3 http.request.method=GET http.request.remoteaddr=172.17.42.1 http.request.uri=&quot;/v2/&quot; http.request.useragent=&quot;curl/7.35.0&quot; http.response.contenttype=&quot;application/json; charset=utf-8&quot; http.response.duration=8.143193ms http.response.status=200 http.response.written=2 instance.id=55634dfc-c9e0-4ec9-9872-6f4930c17759 service=registry version=v2.0.1
+registry_1 | 172.17.0.21 - - [11/Aug/2015:10:24:53 +0000] &quot;GET /v2/ HTTP/1.0&quot; 200 2 &quot;&quot; &quot;curl/7.35.0&quot;
+nginx_1    | 172.17.42.1 - - [11/Aug/2015:10:24:53 +0000] &quot;GET /v2/ HTTP/1.1&quot; 200 2 &quot;-&quot; &quot;curl/7.35.0&quot; &quot;-&quot;
+</code></pre>
+<h4 id="设置认证服务"><a href="#设置认证服务" class="headerlink" title="设置认证服务"></a>设置认证服务</h4><p>现在，Nginx作为代理控制着Docker仓库的HTTP请求，所以，可以通过Nginx来控制用户访问权限。使用之前安装的apache的<code>htpasswd</code>组件，创建第一个用户：（下面的<code>USERNAME</code>可以替换成其他的用户）</p>
+<pre><code>cd ~/docker-registry/nginx
+htpasswd -c registry.password USERNAME
+</code></pre>
+<p>创建用户密码：</p>
+<pre><code>htpasswd registry.password USERNAME
+</code></pre>
+<p>使用<code>-c</code>可以重新创建配置文件，会覆盖之前的用户配置信息。</p>
+<p>查看之前创建的Nginx的配置文件：</p>
+<pre><code>nano ~/docker-registry/nginx/registry.conf
+</code></pre>
+<p>把如下注释给取消：</p>
+<pre><code># To add basic authentication to v2 use auth_basic setting plus add_header
+auth_basic &quot;registry.localhost&quot;;
+auth_basic_user_file /etc/nginx/conf.d/registry.password;
+add_header &#39;Docker-Distribution-Api-Version&#39; &#39;registry/2.0&#39; always;
+</code></pre>
+<p>使用<code>docker-compose up --force-recreate -d</code>重新创建容器，使上述的配置生效。再次使用<code>curl</code>命令：</p>
+<pre><code>curl http://localhost:5043/v2/
+</code></pre>
+<p>会看到如下内容：</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;&lt;title&gt;401 Authorization Required&lt;/title&gt;&lt;/head&gt;
+&lt;body bgcolor=&quot;white&quot;&gt;
+&lt;center&gt;&lt;h1&gt;401 Authorization Required&lt;/h1&gt;&lt;/center&gt;
+&lt;hr&gt;&lt;center&gt;nginx/1.9.7&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>使用如下命令：</p>
+<pre><code>curl http://USERNAME:PASSWORD@localhost:5043/v2/
+</code></pre>
+<p>如果看到：</p>
+<pre><code>&#123;&#125;
+</code></pre>
+<p>说明，设置认证服务已经生效。</p>
+<h4 id="设置SSL"><a href="#设置SSL" class="headerlink" title="设置SSL"></a>设置SSL</h4><p>首先，设置nginx配置文件，取消如下注释内容：</p>
+<pre><code>server &#123;
+  listen 443;
+  server_name myregistrydomain.com;
+
+  # SSL
+  ssl on;
+  ssl_certificate /etc/nginx/conf.d/domain.crt;
+  ssl_certificate_key /etc/nginx/conf.d/domain.key;
+</code></pre>
+<p>这个地方要注意一下，之前在<code>docker-compose.yml</code>配置文件中，宿主机的<code>~/docker-registry/nginx/</code>与Nginx容器的<code>/etc/nginx/conf.d/</code>映射关系，把相应的认证密钥与证书放置在宿主机的<code>~/docker-registry/nginx/</code>下，即Nginx容器可以访问了。</p>
+<p>两种获取SSL证书的方式：自签或者申请。</p>
+<p>申请有免费的DV证书，也有前面博客介绍的<a target="_blank" rel="noopener" href="https://toimc.com/2016/12/https-letsencrypt-acmesh-auto-renew/">使用Let’s Encrypt全站启用HTTPS协议</a>的方法申请Let’s Encrypt的免费证书。</p>
+<p>下面介绍一下自签证书的方法：</p>
+<pre><code>cd ~/docker-registry/nginx
+</code></pre>
+<p>使用<code>openssl</code>来自签证书：</p>
+<pre><code>openssl genrsa -out devdockerCA.key 2048
+
+openssl req -x509 -new -nodes -key devdockerCA.key -days 10000 -out devdockerCA.crt
+
+openssl genrsa -out domain.key 2048
+</code></pre>
+<blockquote>
+<p>重要：在<code>Common Name</code>处输入docker服务器的域名或者IP。</p>
+</blockquote>
+<pre><code>openssl req -new -key domain.key -out dev-docker-registry.com.csr
+</code></pre>
+<p>如果域名<code>www.toimc.com</code>，那么可以按照如下设置：</p>
+<pre><code>Country Name (2 letter code) [AU]:
+State or Province Name (full name) [Some-State]:
+Locality Name (eg, city) []:
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:www.toimc.com
+Email Address []:
+
+Please enter the following &#39;extra&#39; attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+</code></pre>
+<p>不需要设置challenge password。</p>
+<pre><code>openssl x509 -req -in dev-docker-registry.com.csr -CA devdockerCA.crt -CAkey devdockerCA.key -CAcreateserial -out domain.crt -days 10000
+</code></pre>
+<p>因为证书没有任何认证机构进行认证，所以需要给所有的客户机这是一个合法的证书。首先，在宿主机上设置，这样，可以在Docker容器中使用Docker仓库中的证书。</p>
+<pre><code>sudo mkdir /usr/local/share/ca-certificates/docker-dev-cert
+sudo cp devdockerCA.crt /usr/local/share/ca-certificates/docker-dev-cert
+sudo update-ca-certificates
+</code></pre>
+<p>重启Docker服务：</p>
+<pre><code>sudo service docker restart
+</code></pre>
+<h4 id="测试SSL证书"><a href="#测试SSL证书" class="headerlink" title="测试SSL证书"></a>测试SSL证书</h4><pre><code>cd ~/docker-registry
+docker-compose up --force-recreate -d
+</code></pre>
+<p>使用<code>curl</code>来测试HTTPS连接：</p>
+<pre><code>curl https://USERNAME:PASSWORD@[YOUR-DOMAIN]:5043/v2/
+</code></pre>
+<blockquote>
+<p>如果使用是自签的证书，可能看到如下错误：</p>
+<pre><code>curl: (60) SSL certificate problem: self signed certificate
+</code></pre>
+<p>使用<code>-k</code>选项，不认证peer：</p>
+<pre><code>curl -k https://USERNAME:PASSWORD@[YOUR-DOMAIN]:5043/v2/
+</code></pre>
+</blockquote>
+<p>如果域名是：<code>www.toimc.com</code></p>
+<pre><code>curl https://liwei:test@www.toimc.com:5043/v2/
+</code></pre>
+<p>收到<code>&#123;&#125;</code>，说明HTTPS工作正常。</p>
+<h4 id="设置SSL为443端口"><a href="#设置SSL为443端口" class="headerlink" title="设置SSL为443端口"></a>设置SSL为443端口</h4><p>打开<code>docker-compose.yml</code>的配置：</p>
+<pre><code>nano ~/docker-registry/docker-compose.yml
+</code></pre>
+<p>修改端口的映射关系：</p>
+<pre><code>nginx:
+  image: &quot;nginx:1.9&quot;
+  ports:
+    - 443:443
+  links:
+    - registry:registry
+  volumes:
+    - ./nginx/:/etc/nginx/conf.d:ro
+registry:
+  image: registry:2
+  ports:
+    - 5000:5000
+  environment:
+    REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
+  volumes:
+    - ./data:/data
+</code></pre>
+<p>使用<code>--force-recreate</code>来重新生成容器。</p>
+<p>现在可以使用:</p>
+<pre><code>docker login https://&lt;YOURDOMAIN&gt;
+</code></pre>
+<p>或者：</p>
+<pre><code>curl https://&lt;YOURUSERNAME&gt;:&lt;YOURPASSWORD&gt;@YOUR-DOMAIN/v2/
+</code></pre>
+<p>在客户机上进行测试。</p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>与docker.io的使用是一样的，只不过在commit镜像的时候，需要加上仓库地址，如：</p>
+<pre><code>docker login https://&lt;YOURDOMAIN&gt;
+</code></pre>
+<p>输入密码，然后：</p>
+<pre><code>docker commit &lt;容器ID&gt; &lt;YOURDOMAIN&gt;/&lt;容器名&gt;
+
+docker push &lt;YOURDOMAIN&gt;/&lt;容器名&gt;
+</code></pre>
+<p>使用镜像：</p>
+<pre><code>docker pull &lt;YOURDOMAIN&gt;/&lt;容器名&gt;
+</code></pre>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/使用docker快速搭建gitlab服务器" rel="bookmark">使用docker快速搭建gitlab服务器</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Gitlab+Jenkins+docker完成Maven项目的自动部署" rel="bookmark">Gitlab+Jenkins+docker完成Maven项目的自动部署</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Docker安装问题" rel="bookmark">Ubuntu上安装Docker卡在了“setting up docker-engine”</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/docker入门之安装教程" rel="bookmark">Docker入门之安装教程</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/使用harbor搭建私有docker仓库" rel="bookmark">使用harbor搭建私有docker仓库</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>var author='Brian'
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.toimc.com/%E5%A6%82%E4%BD%95%E5%9C%A8Ubuntu%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Docker%E4%BB%93%E5%BA%93" title="如何在Ubuntu上搭建私有Docker仓库">https://www.toimc.com/如何在Ubuntu上搭建私有Docker仓库</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Gitlab+Jenkins+docker%E5%AE%8C%E6%88%90Maven%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2" rel="prev" title="Gitlab+Jenkins+docker完成Maven项目的自动部署">
+                  <i class="fa fa-chevron-left"></i> Gitlab+Jenkins+docker完成Maven项目的自动部署
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Docker%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98" rel="next" title="Ubuntu上安装Docker卡在了“setting up docker-engine”">
+                  Ubuntu上安装Docker卡在了“setting up docker-engine” <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-disqusjs">Load Disqus</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqusjs" id="comment-disqusjs">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备19018123号-1 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">toimc前端技术</span>
+    <a href="https://bandwagonhost.com/aff.php?aff=6389" target="_blank" data-pjax-state="">搬瓦工Host</a>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+
+<script>
+var options = {
+  bottom: '32px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: '#fff',
+  backgroundColor: '#fff', 
+  buttonColorDark: '#100f2c', 
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true,
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+<script src="/js/code-unfold.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.8.5/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.15.0/dist/instantsearch.production.min.js"></script><script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+  
+
+
+<script data-pjax>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            const counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            const target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"YvgheVT82eRRYHM6xtvaEL6l-gzGzoHsz","app_key":"uwmRd9pGJeDmqKQNmalNsosO","server_url":"https://blog.toimc.com","security":true};
+    function fetchData(api_server) {
+      const Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+    <div class="pjax">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments('#disqus_thread', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
+      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
+      shortname : 'toimc',
+      url       : "https://www.toimc.com/%E5%A6%82%E4%BD%95%E5%9C%A8Ubuntu%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Docker%E4%BB%93%E5%BA%93",
+      identifier: "/如何在Ubuntu上搭建私有Docker仓库",
+      title     : "如何在Ubuntu上搭建私有Docker仓库",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'c2514f07e902bf3f9af6',
+      clientSecret: '4a1a05479a3ca34095cb13fccc48245674407ba7',
+      repo        : 'toimc.github.io',
+      owner       : 'toimc',
+      admin       : ['toimc'],
+      id          : 'f63e6f98d8fdf9e413e5a902659050f6',
+      proxy       : '/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>
