@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="Coding World">
 <meta property="og:description" content="本文介绍了在Centos6.5下离线安装Mysql的方法">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/centos6-5离线安装mysql/mysql.jpg">
-<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/centos6-5离线安装mysql/mysql1.jpg">
+<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/mysql.jpg">
+<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/mysql1.jpg">
 <meta property="article:published_time" content="2018-03-26T07:58:47.000Z">
-<meta property="article:modified_time" content="2019-12-27T08:58:30.000Z">
+<meta property="article:modified_time" content="2022-08-24T05:22:30.817Z">
 <meta property="article:author" content="var author&#x3D;&#39;Brian&#39;">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://static.www.toimc.com/blog/img/2019/centos6-5离线安装mysql/mysql.jpg">
+<meta name="twitter:image" content="https://static.www.toimc.com/blog/img/2019/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/mysql.jpg">
 
 
 <link rel="canonical" href="https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql">
@@ -354,8 +354,8 @@
 <ol>
 <li><p>先下载Mysql</p>
 <p> 首先说明下 ：1） Centos7将默认数据库mysql替换成了Mariadb，如果想继续使用mysql 需要卸载Mariadb 再安装mysql<br> 2） mysql 5.7版本的密码问题搞得人很头疼，所以干脆选择mysql5.6了</p>
- <img title="centos6-5离线安装mysql" alt="图片裂了，联系：admin@wayearn.com" src="https://static.www.toimc.com/blog/img/2019/centos6-5离线安装mysql/mysql.jpg">
- <img title="centos6-5离线安装mysql" alt="图片裂了，联系：admin@wayearn.com" src="https://static.www.toimc.com/blog/img/2019/centos6-5离线安装mysql/mysql1.jpg">
+<p> <img src="https://static.www.toimc.com/blog/img/2019/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/mysql.jpg" alt="mysql"></p>
+<p> <img src="https://static.www.toimc.com/blog/img/2019/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql/mysql1.jpg" alt="离线安装mysql"></p>
 </li>
 <li><p>卸载系统自带的Mariadb</p>
 <p> rpm -qa|grep mariadb         &#x2F;&#x2F;查询出已安装的mariadb<br> rpm -e –nodeps 文件名      &#x2F;&#x2F;卸载 ， 文件名为使用rpm -qa|grep mariadb 命令查出的所有文件</p>
@@ -686,23 +686,6 @@ document.addEventListener('pjax:success', () => {
     <div class="pjax">
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
-
-<script>
-NexT.utils.loadComments('#disqus_thread', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
-    window.dsqjs = new DisqusJS({
-      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
-      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
-      shortname : 'toimc',
-      url       : "https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql",
-      identifier: "/centos6-5离线安装mysql",
-      title     : "centos6.5离线安装mysql",
-    });
-  }, window.DisqusJS);
-});
-</script>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
@@ -721,6 +704,23 @@ NexT.utils.loadComments('.gitalk-container', () => {
     });
     gitalk.render(document.querySelector('.gitalk-container'));
   }, window.Gitalk);
+});
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments('#disqus_thread', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
+      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
+      shortname : 'toimc',
+      url       : "https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql",
+      identifier: "/centos6-5离线安装mysql",
+      title     : "centos6.5离线安装mysql",
+    });
+  }, window.DisqusJS);
 });
 </script>
 

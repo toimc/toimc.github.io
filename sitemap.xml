@@ -2,6 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E5%9F%BA%E7%A1%80%E9%9D%A2</loc>
+    
+    <lastmod>2022-08-24T05:28:31.033Z</lastmod>
+    
+    <date>1553933513000</date>
+    <title>慕课网《前端跳槽面试必备技巧》——关于基础面 | Coding World</title>
+    
+    <desc>本篇介绍的是面试的一&#x2F;二面，即基础面需要准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql</loc>
+    
+    <lastmod>2022-08-24T05:22:30.817Z</lastmod>
+    
+    <date>1522051127000</date>
+    <title>centos6.5离线安装mysql | Coding World</title>
+    
+    <desc>本文介绍了在Centos6.5下离线安装Mysql的方法</desc>
+  </url>
+  
+  <url>
     <loc>https://www.toimc.com/side-bussiness</loc>
     
     <lastmod>2022-08-24T04:01:22.010Z</lastmod>
@@ -299,17 +321,6 @@
   </url>
   
   <url>
-    <loc>https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E5%9F%BA%E7%A1%80%E9%9D%A2</loc>
-    
-    <lastmod>2021-03-02T15:35:31.000Z</lastmod>
-    
-    <date>1553933513000</date>
-    <title>慕课网《前端跳槽面试必备技巧》——关于基础面 | Coding World</title>
-    
-    <desc>本篇介绍的是面试的一&#x2F;二面，即基础面需要准备的内容。原课程链接：前端跳槽面试必备技巧</desc>
-  </url>
-  
-  <url>
     <loc>https://www.toimc.com/Redis%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C</loc>
     
     <lastmod>2021-03-02T14:48:20.000Z</lastmod>
@@ -340,17 +351,6 @@
     <title>Vue3中令人兴奋的新功能 | Coding World</title>
     
     <desc>在上一篇文章中，我们了解了Vue 3将带来的性能改进。我们已经知道用新的Vue编写的应用程序性能炸裂（运行非常好），但性能并不是最重要的部分。对我们开发人员而言最重要的是，新版本将如何影响我们编写代码的方式。 如今，Vue 3带来了许多令人兴奋的新功能。 值得庆幸的是，Vue团队主要介绍了对当前API的添加和改进，而不是进行重大更改，因此，已经了解Vue 2的大家应该会非常习惯这些变化。 让我们从</desc>
-  </url>
-  
-  <url>
-    <loc>https://www.toimc.com/centos6-5%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85mysql</loc>
-    
-    <lastmod>2019-12-27T08:58:30.000Z</lastmod>
-    
-    <date>1522051127000</date>
-    <title>centos6.5离线安装mysql | Coding World</title>
-    
-    <desc>本文介绍了在Centos6.5下离线安装Mysql的方法</desc>
   </url>
   
   <url>

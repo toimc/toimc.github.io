@@ -33,14 +33,14 @@
 <meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/布局1.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
 <meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/CSS盒模型-标准模型.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/500">
 <meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/CSS盒模型-IE模型.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/500">
-<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/CSS盒模型-实例.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
-<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/原型链.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
-<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/instanceof.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
-<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/new.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
-<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/CSRF.jpg?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/1200">
-<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/排序.png">
+<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/CSS%E7%9B%92%E6%A8%A1%E5%9E%8B-%E5%AE%9E%E4%BE%8B.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
+<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/%E5%8E%9F%E5%9E%8B%E9%93%BE.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
+<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/instanceof.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
+<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/new.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
+<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/CSRF.jpg?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/1200">
+<meta property="og:image" content="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/%E6%8E%92%E5%BA%8F.png">
 <meta property="article:published_time" content="2019-03-30T08:11:53.000Z">
-<meta property="article:modified_time" content="2021-03-02T15:35:31.000Z">
+<meta property="article:modified_time" content="2022-08-24T05:28:31.033Z">
 <meta property="article:author" content="var author&#x3D;&#39;Brian&#39;">
 <meta property="article:tag" content="前端面试">
 <meta property="article:tag" content="技巧总结">
@@ -381,7 +381,7 @@
 </li>
 </ol>
 <h2 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h2><p>题目：假设调试已知，请写出三栏布局，其中左栏、右栏宽度各为300px,中间自适应。</p>
-<img title="布局题" alt="图片裂了，联系：admin@wayearn.com" class="lazyload" width="400" src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/布局1.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
+<img src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/布局1.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800" alt="布局题" style="zoom:50%;" />
 
 <p>回答技巧：</p>
 <ol>
@@ -480,9 +480,9 @@
 <ol>
 <li>基本概念：</li>
 </ol>
-<img title="CSS盒模型-标准模型" alt="图片裂了，联系：admin@wayearn.com" class="lazyload" width="600" src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/CSS盒模型-标准模型.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/500">
+<img src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/CSS盒模型-标准模型.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/500" alt="标准模型" style="zoom:67%;" />
 
-<img title="CSS盒模型-IE模型" alt="图片裂了，联系：admin@wayearn.com" class="lazyload" width="600" src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/CSS盒模型-IE模型.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/500">
+<img src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/CSS盒模型-IE模型.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/500" alt="IE模型" style="zoom:67%;" />
 
 
 <ol>
@@ -495,8 +495,7 @@
  <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dom.<span class="built_in">style</span>.<span class="built_in">width</span>/<span class="built_in">height</span>，取的是内联属性，如果是link的样式取不到的。</span><br><span class="line"></span><br><span class="line">dom.currentStyle.<span class="built_in">width</span>/<span class="built_in">height</span> 只有IE支持</span><br><span class="line"></span><br><span class="line">window.getComputedStyle(dom).<span class="built_in">width</span>/<span class="built_in">height</span></span><br><span class="line"></span><br><span class="line">dom.getBoundingClientRect().<span class="built_in">width</span>/<span class="built_in">height</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>实例题：</p>
- <img title="实例题" alt="图片裂了，联系：admin@wayearn.com" class="lazyload" width="400" src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/CSS盒模型-实例.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
-
+<p> <img src="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/CSS%E7%9B%92%E6%A8%A1%E5%9E%8B-%E5%AE%9E%E4%BE%8B.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800"></p>
 <p> 元素重叠要注意：</p>
 <ul>
 <li>兄弟元素的重叠，重叠的原则取最大值</li>
@@ -683,8 +682,7 @@
 
 </li>
 <li><p>原型、构造函数、实例、原型链</p>
- <img title="原型链" alt="图片裂了，联系：admin@wayearn.com" class="lazyload" src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/原型链.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
-
+<p> <img src="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/%E5%8E%9F%E5%9E%8B%E9%93%BE.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800"></p>
 <ul>
 <li>任何函数都可以当作是构造函数</li>
 <li>只要是函数被new使用了，后面的就是一个构造函数</li>
@@ -700,14 +698,12 @@
 </blockquote>
 </li>
 <li><p>instanceof的原理</p>
- <img title="instanceof的原理" alt="图片裂了，联系：admin@wayearn.com" class="lazyload" src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/instanceof.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
-
+<p> <img src="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/instanceof.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800"></p>
 <p> 上面实例中的例子：</p>
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">o3 <span class="keyword">instanceof</span> M </span><br><span class="line">返回<span class="literal">true</span>，原因，o3是M的是一实例。</span><br><span class="line">o3 <span class="keyword">instanceof</span> <span class="title class_">Object</span></span><br><span class="line">返回<span class="literal">true</span>，原因，只要是原型链上的构造函数，都被看成是o3的一个构造函数</span><br><span class="line">o3.<span class="property">__proto</span> === M.<span class="property"><span class="keyword">prototype</span></span></span><br><span class="line">返回<span class="literal">true</span></span><br><span class="line">M.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">__proto__</span> === <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span></span><br><span class="line">返回<span class="literal">true</span></span><br><span class="line">o3.<span class="property">__proto__</span>.<span class="property">constructor</span> === M</span><br><span class="line">返回<span class="literal">true</span></span><br><span class="line">o3.<span class="property">__proto__</span>.<span class="property">contructor</span> === <span class="title class_">Object</span></span><br><span class="line">返回<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>new运算符</p>
- <img title="new的原理" alt="图片裂了，联系：admin@wayearn.com" class="lazyload" src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/new.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800">
-
+<p> <img src="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/new.png?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/800" alt="new原理"></p>
 <p> 按照New原理，写一个New2方法：</p>
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> new2 = <span class="keyword">function</span>(<span class="params">func</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> o = <span class="title class_">Object</span>.<span class="title function_">create</span>(func.<span class="property"><span class="keyword">prototype</span></span>)</span><br><span class="line">	<span class="keyword">var</span> k = func.<span class="title function_">call</span>(o)</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> k === <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> k</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> o</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -820,8 +816,7 @@
 <li>基本概念与缩写</li>
 <li>攻击原理</li>
 </ul>
-<img title="CSRF原理" alt="图片裂了，联系：admin@wayearn.com" class="lazyload" width="500" src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/CSRF.jpg?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/1200">
-
+<p><img src="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/CSRF.jpg?watermark/2/text/VG9pbWPlh7rlk4E=/fontsize/1200"></p>
 <ul>
 <li><p>防御措施</p>
 <p>(1)Token验证</p>
@@ -845,8 +840,7 @@
 <li>递归</li>
 <li>波兰式和逆波兰式</li>
 </ul>
-<img title="排序" alt="图片裂了，联系：admin@wayearn.com" class="lazyload" width="650" src="https://static.www.toimc.com/blog/img/2019/前端跳槽面试必备技巧/排序.png">
-
+<p><img src="https://static.www.toimc.com/blog/img/2019/%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7/%E6%8E%92%E5%BA%8F.png" alt="排序"></p>
 <ol>
 <li><p>排序相关资料：</p>
 <p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000009426421">快速排序</a></p>
@@ -1172,23 +1166,6 @@ document.addEventListener('pjax:success', () => {
     <div class="pjax">
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
-
-<script>
-NexT.utils.loadComments('#disqus_thread', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
-    window.dsqjs = new DisqusJS({
-      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
-      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
-      shortname : 'toimc',
-      url       : "https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E5%9F%BA%E7%A1%80%E9%9D%A2",
-      identifier: "/慕课网《前端跳槽面试必备技巧》——关于基础面",
-      title     : "慕课网《前端跳槽面试必备技巧》——关于基础面",
-    });
-  }, window.DisqusJS);
-});
-</script>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
@@ -1207,6 +1184,23 @@ NexT.utils.loadComments('.gitalk-container', () => {
     });
     gitalk.render(document.querySelector('.gitalk-container'));
   }, window.Gitalk);
+});
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments('#disqus_thread', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
+      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
+      shortname : 'toimc',
+      url       : "https://www.toimc.com/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E5%9F%BA%E7%A1%80%E9%9D%A2",
+      identifier: "/慕课网《前端跳槽面试必备技巧》——关于基础面",
+      title     : "慕课网《前端跳槽面试必备技巧》——关于基础面",
+    });
+  }, window.DisqusJS);
 });
 </script>
 
