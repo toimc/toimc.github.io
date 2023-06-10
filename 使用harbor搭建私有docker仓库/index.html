@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon-16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="preload" as="style" href="https://fonts.geekzu.org/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" onload="this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.toimc.com","root":"/","images":"/images","scheme":"Mist","version":"8.2.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-2},"disqusjs":{"text":"Load Disqus","order":-1}},"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"F0BT9J7IQF","apiKey":"fc8f8ea23cfb91aa998b6dd1ac6d2c87","indexName":"myblog","hits":{"per_page":10}}};
+  </script>
+<meta name="description" content="小伙伴们，想不想自己建立自己的 docker 私库。本篇介绍了什么是 Harbor，如何安装。来，动起手来。 本篇介绍了使用官方在线&#x2F;离线安装包，进行 Harbor 的安装的过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用harbor搭建私有docker仓库">
+<meta property="og:url" content="https://www.toimc.com/%E4%BD%BF%E7%94%A8harbor%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89docker%E4%BB%93%E5%BA%93/index.html">
+<meta property="og:site_name" content="Coding World">
+<meta property="og:description" content="小伙伴们，想不想自己建立自己的 docker 私库。本篇介绍了什么是 Harbor，如何安装。来，动起手来。 本篇介绍了使用官方在线&#x2F;离线安装包，进行 Harbor 的安装的过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-04-21T03:17:39.000Z">
+<meta property="article:modified_time" content="2021-03-12T03:40:01.000Z">
+<meta property="article:author" content="var author&#x3D;&#39;Brian&#39;">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.toimc.com/%E4%BD%BF%E7%94%A8harbor%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89docker%E4%BB%93%E5%BA%93/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>使用harbor搭建私有docker仓库 | Coding World</title>
+  
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1e336df3c9b33283b6b6067eae9dc201";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Coding World" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Coding World</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay hungry, stay foolish</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-lessons"><a href="/lessons/" rel="section"><i class="fa fa-book fa-fw"></i>我的课程</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Harbor"><span class="nav-number">1.</span> <span class="nav-text">什么是 Harbor?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Harbor"><span class="nav-number">2.</span> <span class="nav-text">安装 Harbor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">安装方法简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E7%8E%AF%E5%A2%83"><span class="nav-number">2.2.</span> <span class="nav-text">硬件环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83"><span class="nav-number">2.3.</span> <span class="nav-text">软件环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3"><span class="nav-number">2.4.</span> <span class="nav-text">网络端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.5.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">2.6.</span> <span class="nav-text">常见问题</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="var author='Brian'"
+      src="/assets/img/header.jpg">
+  <p class="site-author-name" itemprop="name">var author='Brian'</p>
+  <div class="site-description" itemprop="description">指尖改变世界</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/toimc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;toimc" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@wayearn.com" title="E-Mail → mailto:admin@wayearn.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/toimc" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.toimc.com/%E4%BD%BF%E7%94%A8harbor%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89docker%E4%BB%93%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/img/header.jpg">
+      <meta itemprop="name" content="var author='Brian'">
+      <meta itemprop="description" content="指尖改变世界">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用harbor搭建私有docker仓库
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-21 11:17:39" itemprop="dateCreated datePublished" datetime="2019-04-21T11:17:39+08:00">2019-04-21</time>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>小伙伴们，想不想自己建立自己的 docker 私库。本篇介绍了什么是 Harbor，如何安装。来，动起手来。</p>
+<p>本篇介绍了使用官方在线&#x2F;离线安装包，进行 Harbor 的安装的过程。</p>
+<span id="more"></span>
+
+<h2 id="什么是-Harbor"><a href="#什么是-Harbor" class="headerlink" title="什么是 Harbor?"></a>什么是 Harbor?</h2><blockquote>
+<p>Harbor——Manage and serve container images in a secure environment.</p>
+</blockquote>
+<p>这是关于 Harbor 的官方介绍，用来管理与服务容器，说白了就是私仓。</p>
+<p>Harbor 是一个开源的云容器仓库，用于存储、签名和扫描容器映像以查找漏洞。</p>
+<p>Harbor 通过提供信任、合规性、性能和互操作性来解决容器的共性问题。它填补了无法使用公有云、基于云容器或者是想获得跨云的一致体验的企业们和应用程序之间的空白。</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://goharbor.io/">Harbor 官网</a></p>
+<h2 id="安装-Harbor"><a href="#安装-Harbor" class="headerlink" title="安装 Harbor"></a>安装 Harbor</h2><h3 id="安装方法简介"><a href="#安装方法简介" class="headerlink" title="安装方法简介"></a>安装方法简介</h3><ul>
+<li><p>在线安装方式</p>
+<p>主要是从 Docker Hub 下载 Harbor 镜像，所以这种安装方式，对于空间的要求非常小。</p>
+</li>
+<li><p>离线安装方式</p>
+<p>当没有网络的时候，可以使用这种安装方法，离线包里面有预打包的容器，所以比较大。</p>
+</li>
+<li><p>Kubernetes 安装方式</p>
+<p>需要<strong>Kubernetes v1.6.5</strong> and <strong>Harbor v1.2.0</strong>，参考：<a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor/blob/master/docs/kubernetes_deployment.md">Integration with Kubernetes</a></p>
+</li>
+</ul>
+<h3 id="硬件环境"><a href="#硬件环境" class="headerlink" title="硬件环境"></a>硬件环境</h3><table>
+<thead>
+<tr>
+<th>资源</th>
+<th>最小配置</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CPU</td>
+<td>&gt;2 CPU</td>
+<td>4 CPU 最好</td>
+</tr>
+<tr>
+<td>Mem(内存)</td>
+<td>&gt;4GB</td>
+<td>8GB 最好</td>
+</tr>
+<tr>
+<td>Disk(硬盘)</td>
+<td>&gt;40GB</td>
+<td>160GB 最好</td>
+</tr>
+</tbody></table>
+<h3 id="软件环境"><a href="#软件环境" class="headerlink" title="软件环境"></a>软件环境</h3><table>
+<thead>
+<tr>
+<th>软件环境</th>
+<th>版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Python</td>
+<td>&gt;2.7</td>
+<td>有一些 Linux 发行版是没有默认安装 Python 的，需要自己手动安装</td>
+</tr>
+<tr>
+<td>Docker engine</td>
+<td>&gt;1.10</td>
+<td>安装 Docker，请参考我们的另一个博文：<a href="https://www.toimc.com/docker%E5%85%A5%E9%97%A8%E4%B9%8B%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">Docker 入门之安装教程</a>；官方教程：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/installation/">Install Docker CE</a></td>
+</tr>
+<tr>
+<td>Docker Compose</td>
+<td>&gt;1.6.0</td>
+<td>请参考安装教程：<a href="https://www.toimc.com/docker%E5%85%A5%E9%97%A8%E4%B9%8B%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/#Docker-compose%E9%9B%86%E5%90%88%E5%91%BD%E4%BB%A4">docker-compose 命令安装方法</a>；官方教程：<a target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/">Install Docker Compose</a></td>
+</tr>
+<tr>
+<td>Openssl</td>
+<td>lastest</td>
+<td>用于产生证书与密钥(一般 Linux 发行版会默认安装)</td>
+</tr>
+</tbody></table>
+<h3 id="网络端口"><a href="#网络端口" class="headerlink" title="网络端口"></a>网络端口</h3><table>
+<thead>
+<tr>
+<th>端口</th>
+<th>协议</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>443</td>
+<td>HTTPS</td>
+<td>Harbor portal 和 core API 将会使用 443 接口用于 HTTPS 协议</td>
+</tr>
+<tr>
+<td>4443</td>
+<td>HTTPS</td>
+<td>当 Notray 使用时，Harbor 使用这个端口用于 Docker 中可信任内容的传输。</td>
+</tr>
+<tr>
+<td>80</td>
+<td>HTTP</td>
+<td>Harbor portal 和 core API 将会使用 80 接口用于 HTTP 协议</td>
+</tr>
+</tbody></table>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><ol>
+<li><p>基本的安装步骤</p>
+<ul>
+<li>下载安装包，在<a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor/releases">release</a>页面进行下载</li>
+<li>配置<code>harbor.cfg</code></li>
+<li>运行<code>install.sh</code></li>
+</ul>
+</li>
+<li><p>使用如下命令进行解压</p>
+<p>Online installer:</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar xvf harbor-online-installer-&lt;<span class="keyword">version</span>&gt;<span class="string">.tgz</span></span><br></pre></td></tr></table></figure>
+
+<p>Offline installer:</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar xvf harbor-offline-installer-&lt;<span class="keyword">version</span>&gt;<span class="string">.tgz</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置 Harbor</p>
+<ul>
+<li>Required parameters</li>
+<li>Optional parameters</li>
+</ul>
+</li>
+</ol>
+<p><strong>其中，Required parameters 有：</strong></p>
+<ul>
+<li><p>hostname：使用 ip 或者域名，切忌使用<code>localhost</code>或者<code>127.0.0.1</code></p>
+</li>
+<li><p>ui_url_protocol：默认为<code>http</code>协议（可选<code>https</code>或者<code>http</code>），如果需要配置<code>SSL</code>证书，请参考<a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor/blob/master/docs/configure_https.md">HTTPS 配置</a></p>
+</li>
+<li><p>db_password：数据库 PostgreSQL 的 root 密码</p>
+</li>
+<li><p>max_job_workers：默认为<code>10</code>，根据现有的任务数量需要进行更改，每个任务会占用<code>network/CPU/IO</code>资源，所以分配了之后注意观察。</p>
+</li>
+<li><p>customize_crt：默认为<code>on</code>，可以设置成<code>off</code>。harbor 会自动生成证书与密钥对，如果需要自己生成，请参考：<a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor/blob/master/docs/customize_token_service.md">Customize Harbor token service with your key and certificate</a></p>
+</li>
+<li><p>ssl_cert：SSL 证书路径，只有当设置成 https 生效。</p>
+</li>
+<li><p>ssl_cert_key：SSL 密钥，同上。</p>
+</li>
+<li><p>secretkey_path：用于加密或者解密远程仓库的密钥路径(去访问其他仓库使用的密钥)</p>
+</li>
+<li><p>log_rotate_count：如果设置成<code>0</code>，则老旧的日志文件就会被清除掉，而不是进行滚动增加。</p>
+</li>
+<li><p>log_rotate_size：滚动日志的大小，默认单位是<code>kb</code>，可以设置成<code>100M</code>或者是<code>100G</code></p>
+</li>
+<li><p>http_proxy：http 代理路径</p>
+</li>
+<li><p>https_proxy：https 代理</p>
+</li>
+<li><p>no_proxy：不需要代理的地址或者域名，如：<code>127.0.0.1</code></p>
+</li>
+</ul>
+<blockquote>
+<p>使用<code>vi</code>命令对<code>harbor.cfg</code>文件进行编辑</p>
+</blockquote>
+<p><strong>其中，Optional parameters 有：</strong></p>
+<ul>
+<li><p>Email settings</p>
+<p>参考如下配置：</p>
+<ul>
+<li>email_server &#x3D; smtp.mydomain.com</li>
+<li>email_server_port &#x3D; 25</li>
+<li>email_identity &#x3D;</li>
+<li>email_username &#x3D; <a href="mailto:sample_admin@mydomain.com">sample_admin@mydomain.com</a></li>
+<li>email_password &#x3D; abc</li>
+<li>email_from &#x3D; admin <a href="mailto:sample_admin@mydomain.com">sample_admin@mydomain.com</a></li>
+<li>email_ssl &#x3D; false</li>
+<li>email_insecure &#x3D; false</li>
+</ul>
+</li>
+<li><p>harbor_admin_password：管理员密码</p>
+</li>
+<li><p>auth_mode：默认是<code>db_auth</code>，可选<code>ldap_auth</code>或者<code>db_auth</code></p>
+<blockquote>
+<p>重要提示：当从已有的 Harbor 进行升级时，要确保<code>auth_mode</code>与<code>harbor.cfg</code>中的配置是一样的。</p>
+</blockquote>
+</li>
+<li><p>ldap_url：LDAP 入口地址：e.g.<code>ldaps://ldap.mydomain.com</code>，只有<code>ldap_auth</code>模式下才有效</p>
+</li>
+<li><p>ldap_searchdn：DN 用户，e.g. <code>uid=admin,ou=people,dc=mydomain,dc=com</code></p>
+</li>
+<li><p>ldap_search_pwd：搜索用户的密码</p>
+</li>
+<li><p>ldap_basedn：基础用户，e.g. <code>ou=people,dc=mydomain,dc=com</code></p>
+</li>
+<li><p>ldap_filter：搜索过滤，e.g. <code>(objectClass=person)</code></p>
+</li>
+<li><p>ldap_uid：用于在搜索的时候，对用于进行匹配：可以是 uid, cn, email 或者是其他属性。</p>
+</li>
+<li><p>ldap_scope：搜索的范围：0-LDAP_SCOPE_BASE, 1-LDAP_SCOPE_ONELEVEL, 2-LDAP_SCOPE_SUBTREE. 默认是 2.</p>
+</li>
+<li><p>ldap_timeout：超时时长，默认是 5.</p>
+</li>
+<li><p>ldap_verify_cert：是否从 LDAP 服务器进行认证，默认是 true.</p>
+</li>
+<li><p>ldap_group_basedn：基础的搜索组， e.g. <code>ou=group,dc=mydomain,dc=com</code></p>
+</li>
+<li><p>ldap_group_filter：组过滤</p>
+</li>
+<li><p>ldap_group_gid：组属性，如 cn, name</p>
+</li>
+<li><p>ldap_group_scope：搜索的范围：0-LDAP_SCOPE_BASE, 1-LDAP_SCOPE_ONELEVEL, 2-LDAP_SCOPE_SUBTREE.默认是 2.</p>
+</li>
+<li><p>self_registration： (<strong>on</strong> or <strong>off</strong>. Default is <strong>on</strong>) 是否允许自注册，一般来说<code>auth_mode</code>被设置成<code>ldap_auth</code>模式的时候，自注册是被关闭的。</p>
+</li>
+<li><p>token_expiration：默认的 token 过期时长，默认 30 分钟。</p>
+</li>
+<li><p>project_creation_restriction：设置哪些用户可以创建项目，默认是允许所有的用户进行创建，当设置成<code>adminonly</code>时，只允许管理员进行创建。</p>
+</li>
+</ul>
+<p>以下是示例配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Configuration file of Harbor</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Configuration file of Harbor</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">This attribute is <span class="keyword">for</span> migrator to detect the version of the .cfg file, DO NOT MODIFY!</span></span><br><span class="line">_version = 1.5.0</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">The IP address or hostname to access admin UI and registry service.</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">DO NOT use localhost or 127.0.0.1, because Harbor needs to be accessed by external clients.</span></span><br><span class="line">hostname = test.wayearn.cn</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">The protocol <span class="keyword">for</span> accessing the UI and token/notification service, by default it is http.</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">It can be <span class="built_in">set</span> to https <span class="keyword">if</span> ssl is enabled on nginx.</span></span><br><span class="line">ui_url_protocol = https</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Maximum number of job workers <span class="keyword">in</span> job service</span></span><br><span class="line">max_job_workers = 50</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Determine whether or not to generate certificate <span class="keyword">for</span> the registry<span class="string">&#x27;s token.</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">If the value is on, the prepare script creates new root cert and private key</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">for generating token to access the registry. If the value is off the default key/cert will be used.</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">This flag also controls the creation of the notary signer&#x27;</span>s cert.</span></span><br><span class="line">customize_crt = off</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">The path of cert and key files <span class="keyword">for</span> nginx, they are applied only the protocol is <span class="built_in">set</span> to https</span></span><br><span class="line">ssl_cert = /home/ssh/fullchain.cer</span><br><span class="line">ssl_cert_key = /home/ssh/wayearn.cn.key</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">The path of secretkey storage</span></span><br><span class="line">secretkey_path = /data</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Admiral<span class="string">&#x27;s url, comment this attribute, or set its value to NA when Harbor is standalone</span></span></span><br><span class="line">admiral_url = NA</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">Log files are rotated log_rotate_count times before being removed. If count is 0, old versions are removed rather than rotated.</span></span></span><br><span class="line">log_rotate_count = 50</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">Log files are rotated only if they grow bigger than log_rotate_size bytes. If size is followed by k, the size is assumed to be in kilobytes.</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">If the M is used, the size is in megabytes, and if G is used, the size is in gigabytes. So size 100, size 100k, size 100M and size 100G</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">are all valid.</span></span></span><br><span class="line">log_rotate_size = 200M</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">Config http proxy for Clair, e.g. http://my.proxy.com:3128</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">Clair doesn&#x27;</span>t need to connect to harbor ui container via http proxy.</span></span><br><span class="line">http_proxy = socks5://192.168.4.250:2080</span><br><span class="line">https_proxy = socks5://192.168.4.250:2080</span><br><span class="line">no_proxy = 127.0.0.1,localhost,ui</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">NOTES: The properties between BEGIN INITIAL PROPERTIES and END INITIAL PROPERTIES</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">only take effect <span class="keyword">in</span> the first boot, the subsequent changes of these properties</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">should be performed on web ui</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">************************BEGIN INITIAL PROPERTIES************************</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Email account settings <span class="keyword">for</span> sending out password resetting emails.</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Email server uses the given username and password to authenticate on TLS connections to host and act as identity.</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Identity left blank to act as username.</span></span><br><span class="line">email_identity =</span><br><span class="line"></span><br><span class="line">email_server = email-smtp.us-east-1.amazonaws.com</span><br><span class="line">email_server_port = 587</span><br><span class="line">email_username = AKIAJ3A3D3R5NMUUEBJA</span><br><span class="line">email_password = Amz5jvLaeq13VLk5j4QtmTRJhZ/AnxEnmuHUB4DsQ+op</span><br><span class="line">email_from = liwei &lt;admin@wayearn.com&gt;</span><br><span class="line">email_ssl = true</span><br><span class="line">email_insecure = false</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">#The initial password of Harbor admin, only works for the first time when Harbor starts.</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">It has no effect after the first launch of Harbor.</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Change the admin password from UI after launching Harbor.</span></span><br><span class="line">harbor_admin_password = 2239hOb2tVgOSwoW123FDs23vs324hmuy7667ghfbv32FGDS43</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">#By default the auth mode is db_auth, i.e. the credentials are stored in a local database.</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Set it to ldap_auth <span class="keyword">if</span> you want to verify a user<span class="string">&#x27;s credentials against an LDAP server.</span></span></span><br><span class="line">auth_mode = db_auth</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">The url for an ldap endpoint.</span></span></span><br><span class="line">ldap_url = ldaps://ldap.mydomain.com</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">A user&#x27;</span>s DN <span class="built_in">who</span> has the permission to search the LDAP/AD server.</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">If your LDAP/AD server does not support anonymous search, you should configure this DN and ldap_search_pwd.</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ldap_searchdn = uid=searchuser,ou=people,dc=mydomain,dc=com</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">the password of the ldap_searchdn</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ldap_search_pwd = password</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">The base DN from <span class="built_in">which</span> to look up a user <span class="keyword">in</span> LDAP/AD</span></span><br><span class="line">ldap_basedn = ou=people,dc=mydomain,dc=com</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Search filter <span class="keyword">for</span> LDAP/AD, make sure the syntax of the filter is correct.</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ldap_filter = (objectClass=person)</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The attribute used <span class="keyword">in</span> a search to match a user, it could be uid, cn, email, sAMAccountName or other attributes depending on your LDAP/AD</span></span><br><span class="line">ldap_uid = uid</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">the scope to search <span class="keyword">for</span> <span class="built_in">users</span>, 0-LDAP_SCOPE_BASE, 1-LDAP_SCOPE_ONELEVEL, 2-LDAP_SCOPE_SUBTREE</span></span><br><span class="line">ldap_scope = 2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Timeout (<span class="keyword">in</span> seconds)  when connecting to an LDAP Server. The default value (and most reasonable) is 5 seconds.</span></span><br><span class="line">ldap_timeout = 5</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Verify certificate from LDAP server</span></span><br><span class="line">ldap_verify_cert = true</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">The base dn from <span class="built_in">which</span> to lookup a group <span class="keyword">in</span> LDAP/AD</span></span><br><span class="line">ldap_group_basedn = ou=group,dc=mydomain,dc=com</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">filter to search LDAP/AD group</span></span><br><span class="line">ldap_group_filter = objectclass=group</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">The attribute used to name a LDAP/AD group, it could be cn, name</span></span><br><span class="line">ldap_group_gid = cn</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">The scope to search <span class="keyword">for</span> ldap <span class="built_in">groups</span>. 0-LDAP_SCOPE_BASE, 1-LDAP_SCOPE_ONELEVEL, 2-LDAP_SCOPE_SUBTREE</span></span><br><span class="line">ldap_group_scope = 2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Turn on or off the self-registration feature</span></span><br><span class="line">self_registration = on</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">The expiration time (<span class="keyword">in</span> minute) of token created by token service, default is 30 minutes</span></span><br><span class="line">token_expiration = 30</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">The flag to control what <span class="built_in">users</span> have permission to create projects</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">The default value <span class="string">&quot;everyone&quot;</span> allows everyone to creates a project.</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Set to <span class="string">&quot;adminonly&quot;</span> so that only admin user can create project.</span></span><br><span class="line">project_creation_restriction = everyone</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">************************END INITIAL PROPERTIES************************</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">##### #Harbor DB configuration section#######</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The address of the Harbor database. Only need to change when using external db.</span></span><br><span class="line"></span><br><span class="line">db_host = mysql</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The password <span class="keyword">for</span> the root user of Harbor DB. Change this before any production use.</span></span><br><span class="line"></span><br><span class="line">db_password = root123</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The port of Harbor database host</span></span><br><span class="line"></span><br><span class="line">db_port = 3306</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The user name of Harbor database</span></span><br><span class="line"></span><br><span class="line">db_user = root</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">#### End of Harbor DB configuration#######</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The redis server address. Only needed <span class="keyword">in</span> HA installation.</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">address:port[,weight,password,db_index]</span></span><br><span class="line"></span><br><span class="line">redis_url = redis:6379</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">##### ####Clair DB configuration############</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Clair DB host address. Only change it when using an exteral DB.</span></span><br><span class="line"></span><br><span class="line">clair_db_host = postgres</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">The password of the Clair<span class="string">&#x27;s postgres database. Only effective when Harbor is deployed with Clair.</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Please update it before deployment. Subsequent update will cause Clair&#x27;</span>s API server and Harbor unable to access Clair<span class="string">&#x27;s database.</span></span></span><br><span class="line"></span><br><span class="line">clair_db_password = password</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Clair DB connect port</span></span></span><br><span class="line"></span><br><span class="line">clair_db_port = 5432</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Clair DB username</span></span></span><br><span class="line"></span><br><span class="line">clair_db_username = postgres</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Clair default database</span></span></span><br><span class="line"></span><br><span class="line">clair_db = postgres</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">##### ####End of Clair DB configuration############</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">The following attributes only need to be set when auth mode is uaa_auth</span></span></span><br><span class="line"></span><br><span class="line">uaa_endpoint = uaa.mydomain.org</span><br><span class="line">uaa_clientid = id</span><br><span class="line">uaa_clientsecret = secret</span><br><span class="line">uaa_verify_cert = true</span><br><span class="line">uaa_ca_cert = /path/to/ca.pem</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="string">## Docker Registry setting</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">registry_storage_provider can be: filesystem, s3, gcs, azure, etc.</span></span></span><br><span class="line"></span><br><span class="line">registry_storage_provider_name = filesystem</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">registry_storage_provider_config is a comma separated &quot;key: value&quot; pairs, e.g. &quot;key1: value, key2: value2&quot;.</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="string">Refer to https://docs.docker.com/registry/configuration/#storage for all available configuration.</span></span></span><br><span class="line"></span><br><span class="line">registry_storage_provider_config =</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>配置完成之后，在当前的解压缩的目录下，运行<code>sudo ./install.sh</code></p>
+<p>是否可以在解压缩的目录下找到相应的文件<code>install.sh</code>？如果找不到，可以使用<code>find</code>命令或者是<code>ls</code>命令。</p>
+<p>安装完成之后，就可以访问之前设置的域名或者 IP 地址了，比如上例中的<code>test.toimc.com</code></p>
+</li>
+</ol>
+<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
+<li><p>如何推送镜像？</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker login test.toimc.com</span><br><span class="line">docker <span class="keyword">push</span> test.toimc.com<span class="regexp">/myproject/my</span>repo:mytag</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如何申请证书，如何设置 SSL？</p>
+<p>有两个先决条件：(1)需要有一个域名； (2)使用 acme 或者 caddy 这种服务进行申请证书。</p>
+</li>
+<li><p>安装 Notary, 安装 Clair, 安装 chart repository service</p>
+<p>安装 Notary，使用如下命令：<code>sudo ./install.sh --with-notary</code></p>
+<p>安装 Clair，使用如下命令：<code>sudo ./install.sh --with-clair</code></p>
+<p>安装 Chart repository service，使用如下命令：<code>sudo ./install.sh --with-chartmuseum</code></p>
+<p>PS： 可以这样使用：<code>sudo ./install.sh --with-notary --with-clair --with-chartmuseum</code></p>
+</li>
+<li><p>Harbor 生命周期的管理：</p>
+<p>直接使用<code>docker-compose</code>管理命令进行管理(PS:需要<code>cd</code>到之前的 Harbor 的解压目录，即<code>install</code>目录)</p>
+<p>停止 Harbor:</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> sudo docker-compose stop</span><br><span class="line"><span class="function"><span class="title">Stopping</span></span> nginx              ... done</span><br><span class="line"><span class="function"><span class="title">Stopping</span></span> harbor-portal      ... done</span><br><span class="line"><span class="function"><span class="title">Stopping</span></span> harbor-jobservice  ... done</span><br><span class="line"><span class="function"><span class="title">Stopping</span></span> harbor-core        ... done</span><br><span class="line"><span class="function"><span class="title">Stopping</span></span> registry           ... done</span><br><span class="line"><span class="function"><span class="title">Stopping</span></span> redis              ... done</span><br><span class="line"><span class="function"><span class="title">Stopping</span></span> registryctl        ... done</span><br><span class="line"><span class="function"><span class="title">Stopping</span></span> harbor-db          ... done</span><br><span class="line"><span class="function"><span class="title">Stopping</span></span> harbor-<span class="built_in">log</span>         ... done</span><br></pre></td></tr></table></figure>
+
+<p>重启 Harbor：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> sudo docker-compose start</span><br><span class="line"><span class="function"><span class="title">Starting</span></span> <span class="built_in">log</span>         ... done</span><br><span class="line"><span class="function"><span class="title">Starting</span></span> registry    ... done</span><br><span class="line"><span class="function"><span class="title">Starting</span></span> registryctl ... done</span><br><span class="line"><span class="function"><span class="title">Starting</span></span> postgresql  ... done</span><br><span class="line"><span class="function"><span class="title">Starting</span></span> core        ... done</span><br><span class="line"><span class="function"><span class="title">Starting</span></span> portal      ... done</span><br><span class="line"><span class="function"><span class="title">Starting</span></span> redis       ... done</span><br><span class="line"><span class="function"><span class="title">Starting</span></span> jobservice  ... done</span><br><span class="line"><span class="function"><span class="title">Starting</span></span> proxy       ... done</span><br></pre></td></tr></table></figure>
+
+<p>当修改了 Harbor 的配置文件后，需要使用如下的方式更新镜像：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo docker-compose down -v</span><br><span class="line"><span class="variable">$ </span>vim harbor.cfg</span><br><span class="line"><span class="variable">$ </span>sudo prepare</span><br><span class="line"><span class="variable">$ </span>sudo docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>删除 Harbor 镜像，但是保留文件系统的做法：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo docker-compose down -v</span><br></pre></td></tr></table></figure>
+
+<p>需要全部删除时(包括镜像、文件、仓库)——重装需要&#x2F;卸载需要</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> <span class="built_in">rm</span> <span class="literal">-r</span> /<span class="keyword">data</span>/database</span><br><span class="line"><span class="variable">$</span> <span class="built_in">rm</span> <span class="literal">-r</span> /<span class="keyword">data</span>/registry</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>日志文件路径：<code>/var/log/harbor</code></p>
+</li>
+<li><p>自定义端口：</p>
+<ul>
+<li>修改<code>docker-compose.yml</code><br>修改”80”端口到一个指定的用户端口, e.g. 8888:80.</li>
+</ul>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">proxy</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">goharbor/nginx-photon:v1.6.0</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">always</span></span><br><span class="line">    <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./common/config/nginx:/etc/nginx:z</span></span><br><span class="line">    <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">8888:80</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">443:443</span></span><br><span class="line">    <span class="attribute">depends_on</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">postgresql</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">registry</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">core</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">portal</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">log</span></span><br><span class="line">    <span class="attribute">logging</span><span class="punctuation">:</span></span><br><span class="line">      <span class="attribute">driver</span><span class="punctuation">:</span> <span class="string">&quot;syslog&quot;</span></span><br><span class="line">      <span class="attribute">options</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">syslog-address</span><span class="punctuation">:</span> <span class="string">&quot;tcp://127.0.0.1:1514&quot;</span></span><br><span class="line">        <span class="attribute">tag</span><span class="punctuation">:</span> <span class="string">&quot;proxy&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改<code>harbor.cfg</code>文件中的 hostname 属性：</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hostname</span> = <span class="number">192.168</span>.<span class="number">0.2</span>:<span class="number">8888</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参考上面的管理 harbor 的生命周期的内容，对 Harbor 进行更新。</li>
+</ul>
+<p><strong>同理，对于 HTTPS 协议，参考：</strong></p>
+<ul>
+<li>打开 HTTPS 协议，并配置 SSL 证书：参考<a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor/blob/master/docs/configure_https.md">guide</a>.</li>
+<li>修改<code>docker-compose.yml</code><br>修改”443” 端口为用户自定义端口, e.g. 8888:443.</li>
+</ul>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">proxy</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">goharbor/nginx-photon:v1.6.0</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">always</span></span><br><span class="line">    <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./common/config/nginx:/etc/nginx:z</span></span><br><span class="line">    <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">80:80</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">8888:443</span></span><br><span class="line">    <span class="attribute">depends_on</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">postgresql</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">registry</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">core</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">portal</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">log</span></span><br><span class="line">    <span class="attribute">logging</span><span class="punctuation">:</span></span><br><span class="line">      <span class="attribute">driver</span><span class="punctuation">:</span> <span class="string">&quot;syslog&quot;</span></span><br><span class="line">      <span class="attribute">options</span><span class="punctuation">:</span></span><br><span class="line">        <span class="attribute">syslog-address</span><span class="punctuation">:</span> <span class="string">&quot;tcp://127.0.0.1:1514&quot;</span></span><br><span class="line">        <span class="attribute">tag</span><span class="punctuation">:</span> <span class="string">&quot;proxy&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改<code>harbor.cfg</code>文件中的 hostname 属性：</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hostname</span> = <span class="number">192.168</span>.<span class="number">0.2</span>:<span class="number">8888</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参考上面的管理 harbor 的生命周期的内容，对 Harbor 进行更新。</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/如何在Ubuntu上搭建私有Docker仓库/" rel="bookmark">如何在Ubuntu上搭建私有Docker仓库</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/docker入门之安装教程/" rel="bookmark">Docker入门之安装教程</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Docker安装问题/" rel="bookmark">Ubuntu上安装Docker卡在了“setting up docker-engine”</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/使用docker快速搭建gitlab服务器/" rel="bookmark">使用docker快速搭建gitlab服务器</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Gitlab+Jenkins+docker完成Maven项目的自动部署/" rel="bookmark">Gitlab+Jenkins+docker完成Maven项目的自动部署</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>var author='Brian'
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.toimc.com/%E4%BD%BF%E7%94%A8harbor%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89docker%E4%BB%93%E5%BA%93/" title="使用harbor搭建私有docker仓库">https://www.toimc.com/使用harbor搭建私有docker仓库/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E5%BC%95%E9%A2%86%E6%9C%AA%E6%9D%A5%EF%BC%8C%E8%B5%B0%E5%87%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%89%8D%E7%AB%AF%E4%B9%8B%E8%B7%AF/" rel="prev" title="引领未来，走出自己的前端之路">
+                  <i class="fa fa-chevron-left"></i> 引领未来，走出自己的前端之路
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E6%85%95%E8%AF%BE%E7%BD%91%E3%80%8A%E5%89%8D%E7%AB%AF%E8%B7%B3%E6%A7%BD%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E6%8A%80%E5%B7%A7%E3%80%8B%E2%80%94%E2%80%94%E6%80%BB%E7%BB%93/" rel="next" title="慕课网《前端跳槽面试必备技巧》——总结">
+                  慕课网《前端跳槽面试必备技巧》——总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-disqusjs">Load Disqus</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqusjs" id="comment-disqusjs">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备19018123号-1 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">toimc前端技术</span>
+    <a href="https://bandwagonhost.com/aff.php?aff=6389" target="_blank" data-pjax-state="">搬瓦工Host</a>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+
+<script>
+var options = {
+  bottom: '32px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: '#fff',
+  backgroundColor: '#fff', 
+  buttonColorDark: '#100f2c', 
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true,
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+<script src="/js/code-unfold.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.8.5/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.15.0/dist/instantsearch.production.min.js"></script><script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'c2514f07e902bf3f9af6',
+      clientSecret: '4a1a05479a3ca34095cb13fccc48245674407ba7',
+      repo        : 'toimc.github.io',
+      owner       : 'toimc',
+      admin       : ['toimc'],
+      id          : 'da0907772db990199c730f7ce64c6c21',
+      proxy       : '/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments('#disqus_thread', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
+      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
+      shortname : 'toimc',
+      url       : "https://www.toimc.com/%E4%BD%BF%E7%94%A8harbor%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89docker%E4%BB%93%E5%BA%93/",
+      identifier: "使用harbor搭建私有docker仓库/",
+      title     : "使用harbor搭建私有docker仓库",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+    </div>
+</body>
+</html>

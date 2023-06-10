@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon-16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="preload" as="style" href="https://fonts.geekzu.org/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext" onload="this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.toimc.com","root":"/","images":"/images","scheme":"Mist","version":"8.2.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":{"gitalk":{"order":-2},"disqusjs":{"text":"Load Disqus","order":-1}},"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"algolia":{"appID":"F0BT9J7IQF","apiKey":"fc8f8ea23cfb91aa998b6dd1ac6d2c87","indexName":"myblog","hits":{"per_page":10}}};
+  </script>
+<meta name="description" content="本文介绍了git的常用命令，如git clone、git pull、git push等等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git常用命令">
+<meta property="og:url" content="https://www.toimc.com/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Coding World">
+<meta property="og:description" content="本文介绍了git的常用命令，如git clone、git pull、git push等等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-03-09T16:26:48.000Z">
+<meta property="article:modified_time" content="2019-03-12T16:08:46.000Z">
+<meta property="article:author" content="var author&#x3D;&#39;Brian&#39;">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="版本控制">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.toimc.com/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>Git常用命令 | Coding World</title>
+  
+
+  <script data-pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1e336df3c9b33283b6b6067eae9dc201";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Coding World" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Coding World</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay hungry, stay foolish</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-lessons"><a href="/lessons/" rel="section"><i class="fa fa-book fa-fw"></i>我的课程</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#git-clone"><span class="nav-number">1.</span> <span class="nav-text">git clone</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-remote"><span class="nav-number">2.</span> <span class="nav-text">git remote</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-fetch"><span class="nav-number">3.</span> <span class="nav-text">git fetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-pull"><span class="nav-number">4.</span> <span class="nav-text">git pull</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-push"><span class="nav-number">5.</span> <span class="nav-text">git push</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="var author='Brian'"
+      src="/assets/img/header.jpg">
+  <p class="site-author-name" itemprop="name">var author='Brian'</p>
+  <div class="site-description" itemprop="description">指尖改变世界</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/toimc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;toimc" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@wayearn.com" title="E-Mail → mailto:admin@wayearn.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/toimc" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.toimc.com/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/img/header.jpg">
+      <meta itemprop="name" content="var author='Brian'">
+      <meta itemprop="description" content="指尖改变世界">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding World">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git常用命令
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-03-10 00:26:48" itemprop="dateCreated datePublished" datetime="2016-03-10T00:26:48+08:00">2016-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/git%E5%85%A5%E9%97%A8/" itemprop="url" rel="index"><span itemprop="name">git入门</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文介绍了git的常用命令，如git clone、git pull、git push等等。</p>
+<span id="more"></span>
+
+<h4 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h4><p>该命令会在本地主机生成一个目录，与远程主机的版本库同名。如果要指定不同的目录名，可以将目录名作为<code>git clone</code>命令的第二个参数。</p>
+<p>克隆仓库git clone的语法：</p>
+<pre><code>$ git clone &lt;版本库的网址&gt; &lt;本地目录名&gt;
+</code></pre>
+<p>git clone支持多种协议，除了HTTP(s)以外，还支持SSH、Git、本地文件协议等，下面是一些例子。</p>
+<pre><code>$ git clone http[s]://example.com/path/to/repo.git/
+$ git clone ssh://example.com/path/to/repo.git/
+$ git clone git://example.com/path/to/repo.git/
+$ git clone /opt/git/project.git 
+$ git clone file:///opt/git/project.git
+$ git clone ftp[s]://example.com/path/to/repo.git/
+$ git clone rsync://example.com/path/to/repo.git/
+</code></pre>
+<p>SSH协议还有另一种写法。</p>
+<pre><code>$ git clone [user@]example.com:path/to/repo.git/
+</code></pre>
+<p>还可以使用<code>-b</code>和标签名来克隆指定的分支和<code>tags</code>：</p>
+<pre><code>git clone -b r01 https://github.com/xxxx/xxxx.git
+</code></pre>
+<h4 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h4><p>为了便于管理，Git要求每个远程主机都必须指定一个主机名。<code>git remote</code>命令就用于管理主机名。<br>不带选项的时候，<code>git remote</code>命令列出所有远程主机。</p>
+<pre><code>$ git remote
+origin
+</code></pre>
+<p>使用-v选项，可以参看远程主机的网址。</p>
+<pre><code>$ git remote -v
+origin  git@github.com:jquery/jquery.git (fetch)
+origin  git@github.com:jquery/jquery.git (push)
+</code></pre>
+<p>上面命令表示，当前只有一台远程主机，叫做origin，以及它的网址。<br>克隆版本库的时候，所使用的远程主机自动被Git命名为origin。如果想用其他的主机名，需要用<code>git clone</code>命令的<code>-o</code>选项指定。</p>
+<pre><code>$ git clone -o jQuery https://github.com/jquery/jquery.git
+$ git remote
+jQuery
+</code></pre>
+<p>上面命令表示，克隆的时候，指定远程主机叫做jQuery。<br><code>git remote show</code>命令加上主机名，可以查看该主机的详细信息。</p>
+<pre><code>$ git remote show &lt;主机名&gt;
+git remote add命令用于添加远程主机。
+
+$ git remote add &lt;主机名&gt; &lt;网址&gt;
+git remote rm命令用于删除远程主机。
+
+$ git remote rm &lt;主机名&gt;
+git remote rename命令用于远程主机的改名。
+
+$ git remote rename &lt;原主机名&gt; &lt;新主机名&gt;
+</code></pre>
+<h4 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h4><p>一旦远程主机的版本库有了更新（Git术语叫做commit），需要将这些更新取回本地，这时就要用到git fetch命令。</p>
+<pre><code>$ git fetch &lt;远程主机名&gt;
+</code></pre>
+<p>上面命令将某个远程主机的更新，全部取回本地。<br><code>git fetch</code>命令通常用来查看其他人的进程，因为它取回的代码对你本地的开发代码没有影响。<br>默认情况下，git fetch取回所有分支（branch）的更新。如果只想取回特定分支的更新，可以指定分支名。</p>
+<pre><code>$ git fetch &lt;远程主机名&gt; &lt;分支名&gt;
+</code></pre>
+<p>比如，取回origin主机的master分支。</p>
+<pre><code>$ git fetch origin master
+</code></pre>
+<p>所取回的更新，在本地主机上要用”远程主机名&#x2F;分支名”的形式读取。比如origin主机的master，就要用origin&#x2F;master读取。<br><code>git branch</code>命令的<code>-r</code>选项，可以用来查看远程分支，<code>-a</code>选项查看所有分支。</p>
+<pre><code>$ git branch -r
+origin/master
+
+$ git branch -a
+* master
+  remotes/origin/master
+  
+</code></pre>
+<p>上面命令表示，本地主机的当前分支是master，远程分支是origin&#x2F;master。<br>取回远程主机的更新以后，可以在它的基础上，使用<code>git checkout</code>命令创建一个新的分支。</p>
+<pre><code>$ git checkout -b newBrach origin/master
+</code></pre>
+<p>上面命令表示，在origin&#x2F;master的基础上，创建一个新分支。<br>此外，也可以使用<code>git merge</code>命令或者<code>git rebase</code>命令，在本地分支上合并远程分支。</p>
+<pre><code>$ git merge origin/master
+# 或者
+$ git rebase origin/master
+</code></pre>
+<p>上面命令表示在当前分支上，合并origin&#x2F;master。</p>
+<h4 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h4><p><code>git pull</code>命令的作用是，取回远程主机某个分支的更新，再与本地的指定分支合并。它的完整格式稍稍有点复杂。</p>
+<pre><code>$ git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;
+</code></pre>
+<p>比如，取回origin主机的next分支，与本地的master分支合并，需要写成下面这样。</p>
+<pre><code>$ git pull origin next:master
+</code></pre>
+<p>如果远程分支是与当前分支合并，则冒号后面的部分可以省略。</p>
+<pre><code>$ git pull origin next
+</code></pre>
+<p>上面命令表示，取回origin&#x2F;next分支，再与当前分支合并。实质上，这等同于先做<code>git fetch</code>，再做<code>git merge</code>。</p>
+<pre><code>$ git fetch origin
+$ git merge origin/next
+</code></pre>
+<p>在某些场合，Git会自动在本地分支与远程分支之间，建立一种追踪关系（tracking）。比如，在<code>git clone</code>的时候，所有本地分支默认与远程主机的同名分支，建立追踪关系，也就是说，本地的master分支自动”追踪”origin&#x2F;master分支。<br>Git也允许手动建立追踪关系。</p>
+<pre><code>git branch --set-upstream master origin/next
+</code></pre>
+<p>上面命令指定master分支追踪origin&#x2F;next分支。<br>如果当前分支与远程分支存在追踪关系，git pull就可以省略远程分支名。</p>
+<pre><code>$ git pull origin
+</code></pre>
+<p>上面命令表示，本地的当前分支自动与对应的origin主机”追踪分支”（remote-tracking branch）进行合并。<br>如果当前分支只有一个追踪分支，连远程主机名都可以省略。</p>
+<pre><code>$ git pull
+</code></pre>
+<p>上面命令表示，当前分支自动与唯一一个追踪分支进行合并。<br>如果合并需要采用rebase模式，可以使用<code>--rebase</code>选项。</p>
+<pre><code>$ git pull --rebase &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;
+</code></pre>
+<p>如果远程主机删除了某个分支，默认情况下，<code>git pull</code> 不会在拉取远程分支的时候，删除对应的本地分支。这是为了防止，由于其他人操作了远程主机，导致git pull不知不觉删除了本地分支。<br>但是，你可以改变这个行为，加上参数 -p 就会在本地删除远程已经删除的分支。</p>
+<pre><code>$ git pull -p
+# 等同于下面的命令
+$ git fetch --prune origin 
+$ git fetch -p
+</code></pre>
+<h4 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h4><p><code>git push</code>命令用于将本地分支的更新，推送到远程主机。它的格式与<code>git pull</code>命令相仿。</p>
+<pre><code>$ git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;
+</code></pre>
+<p>注意，分支推送顺序的写法是&lt;来源地&gt;:&lt;目的地&gt;，所以git pull是&lt;远程分支&gt;:&lt;本地分支&gt;，而<code>git push</code>是<code>&lt;本地分支&gt;:&lt;远程分支&gt;</code>。<br>如果省略远程分支名，则表示将本地分支推送与之存在”追踪关系”的远程分支（通常两者同名），如果该远程分支不存在，则会被新建。</p>
+<pre><code>$ git push origin master
+</code></pre>
+<p>上面命令表示，将本地的master分支推送到origin主机的master分支。如果后者不存在，则会被新建。<br>如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支。</p>
+<pre><code>$ git push origin :master
+# 等同于
+$ git push origin --delete master
+</code></pre>
+<p>上面命令表示删除origin主机的master分支。<br>如果当前分支与远程分支之间存在追踪关系，则本地分支和远程分支都可以省略。</p>
+<pre><code>$ git push origin
+</code></pre>
+<p>上面命令表示，将当前分支推送到origin主机的对应分支。<br>如果当前分支只有一个追踪分支，那么主机名都可以省略。</p>
+<pre><code>$ git push
+</code></pre>
+<p>如果当前分支与多个主机存在追踪关系，则可以使用-u选项指定一个默认主机，这样后面就可以不加任何参数使用<code>git push</code>。</p>
+<pre><code>$ git push -u origin master
+</code></pre>
+<p>上面命令将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用<code>git push</code>了。<br>不带任何参数的<code>git push</code>，默认只推送当前分支，这叫做simple方式。此外，还有一种matching方式，会推送所有有对应的远程分支的本地分支。Git 2.0版本之前，默认采用matching方法，现在改为默认采用simple方式。如果要修改这个设置，可以采用git config命令。</p>
+<pre><code>$ git config --global push.default matching
+# 或者
+$ git config --global push.default simple
+</code></pre>
+<p>还有一种情况，就是不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机，这时需要使用–all选项。</p>
+<pre><code>$ git push --all origin
+</code></pre>
+<p>上面命令表示，将所有本地分支都推送到origin主机。<br>如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做<code>git pull</code>合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用<code>--force</code>选项。</p>
+<pre><code>$ git push --force origin 
+</code></pre>
+<p>上面命令使用<code>--force</code>选项，结果导致远程主机上更新的版本被覆盖。除非你很确定要这样做，否则应该尽量避免使用<code>--force</code>选项。<br>最后，<code>git push</code>不会推送标签（tag），除非使用<code>--tags</code>选项。</p>
+<pre><code>$ git push origin --tags
+</code></pre>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/git代码仓库转移/" rel="bookmark">git代码仓库转移</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/Git入门/" rel="bookmark">Git入门教程</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/git submodule/" rel="bookmark">git submodule</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/使用git subtree管理项目中的子库/" rel="bookmark">使用git subtree管理项目中的子库</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/git分支管理/" rel="bookmark">Git分支管理</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/github使用ssh密钥/" rel="bookmark">github使用ssh密钥</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>var author='Brian'
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.toimc.com/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Git常用命令">https://www.toimc.com/git常用命令/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag"># 版本控制</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/JavaSript%E9%97%AD%E5%8C%85%E5%AD%A6%E4%B9%A0/" rel="prev" title="JavaSript闭包学习">
+                  <i class="fa fa-chevron-left"></i> JavaSript闭包学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Git%E5%85%A5%E9%97%A8/" rel="next" title="Git入门教程">
+                  Git入门教程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-disqusjs">Load Disqus</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane disqusjs" id="comment-disqusjs">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备19018123号-1 </a>
+  </div>
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">toimc前端技术</span>
+    <a href="https://bandwagonhost.com/aff.php?aff=6389" target="_blank" data-pjax-state="">搬瓦工Host</a>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+
+<script>
+var options = {
+  bottom: '32px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: '#fff',
+  backgroundColor: '#fff', 
+  buttonColorDark: '#100f2c', 
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true,
+}
+const darkmode = new Darkmode(options);
+darkmode.showWidget();
+</script><script src="/js/utils.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+<script src="/js/code-unfold.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.8.5/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.15.0/dist/instantsearch.production.min.js"></script><script src="/js/algolia-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'c2514f07e902bf3f9af6',
+      clientSecret: '4a1a05479a3ca34095cb13fccc48245674407ba7',
+      repo        : 'toimc.github.io',
+      owner       : 'toimc',
+      admin       : ['toimc'],
+      id          : 'be608ca89941a651970d3dca4de81ddf',
+      proxy       : '/login/oauth/access_token',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments('#disqus_thread', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/disqusjs@1.3.0/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : 'c4oVAWQDzu35XGJjTl4tpVpmMhX36APj6M7KcaRhBpP7POvcMCCyDwUTgiixOfdh' || 'https://disqus.com/api/',
+      apikey    : 'jVI1IkXmmqKgD8aUBBlIUTRV8wHgAqBc6XT7ZC0OaZQJNtAy47G7pVuvB8yl9Iae',
+      shortname : 'toimc',
+      url       : "https://www.toimc.com/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/",
+      identifier: "git常用命令/",
+      title     : "Git常用命令",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+    </div>
+</body>
+</html>
