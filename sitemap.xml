@@ -2,6 +2,39 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.toimc.com/nestjs11/</loc>
+    
+    <lastmod>2025-02-07T16:24:21.366Z</lastmod>
+    
+    <date>1738941937000</date>
+    <title>Nestjs11更新了什么？ | 代码构建你的世界</title>
+    
+    <desc>NestJS 11 带来了 日志增强、微服务优化、启动速度提升 以及对 Express v5 &#x2F; Fastify v5 的支持。新增 JSON 日志 让容器化部署更高效，微服务 API 变得更灵活，应用启动速度显著提升。同时，最新的 Express v5 需要调整通配符路由。更多更新细节，请查看完整解析，让你的 NestJS 应用更加高效！🔥</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/migrate-nestjs11-from-nestjs10/</loc>
+    
+    <lastmod>2025-02-07T16:21:55.732Z</lastmod>
+    
+    <date>1738943624000</date>
+    <title>从Nestjs10迁移到Nestjs11 | 代码构建你的世界</title>
+    
+    <desc>本文提供了从 NestJS 10 迁移到 NestJS 11 的完整指南。NestJS 11 引入了许多新功能，同时包含了一些 轻微的不兼容更改，但 大多数用户不会受到影响。你可以查看完整的变更列表以获取详细信息。</desc>
+  </url>
+  
+  <url>
+    <loc>https://www.toimc.com/ubuntu-smtp-mail/</loc>
+    
+    <lastmod>2025-02-07T15:16:02.750Z</lastmod>
+    
+    <date>1726113634000</date>
+    <title>配置 Ubuntu 上发送 SMTP 邮件 | 代码构建你的世界</title>
+    
+    <desc>介绍了在 Ubuntu 系统上使用 mailx 和 Postfix 发送 SMTP 邮件的配置方法。步骤包括安装 mailx 和 Postfix，配置 Postfix 通过外部 SMTP 服务器（例如 Amazon SES）发送邮件，设置 TLS 加密和 SASL 认证，生成并保护认证文件，以及如何测试邮件发送。博客还介绍了如何通过 ~&#x2F;.mailrc 文件设置自定义发件人地址。</desc>
+  </url>
+  
+  <url>
     <loc>https://www.toimc.com/lessons/index.html</loc>
     
     <lastmod>2023-07-30T01:38:40.000Z</lastmod>
